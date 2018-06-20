@@ -1,0 +1,42 @@
+{
+  "name": "armada",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/concurrently \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "./node_modules/.bin/nodemon server/index.js",
+    "start:client": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@material-ui/core": "^1.2.2",
+    "@material-ui/icons": "^1.1.0",
+    "classnames": "^2.2.6",
+    "express": "^4.16.3",
+    "lodash.flow": "^3.5.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "typeface-roboto": "0.0.54"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "concurrently": "^3.6.0",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "nodemon": "^1.17.5",
+    "prop-types": "^15.6.2",
+    "react-hot-loader": "^4.3.3",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
