@@ -5,7 +5,7 @@ module.exports = function createRoutes(app, store) {
     fixtures.forEach(({ method, url }) => {
         app[method.toLowerCase()](url, (req, res) => {
             const state = store.getState();
-            const active = state.active[url];
+            const active = state.active[method][url];
 
             res.status(active.statusCode);
             res.json(active.data);
