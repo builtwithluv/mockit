@@ -3,14 +3,18 @@ module.exports = function loadFixtureRoutes(app, store) {
     const fixtures = state.fixtures;
 
     fixtures.forEach(({ method, url }) => {
-        app[method.toLowerCase()](url, (_, res) => {
+        app[method.toLowerCase()](url, (req, res) => {
             const state = store.getState();
             const latency = state.latency;
-            const active = state.active[method][url];
+            const { data, handler, statusCode } = state.active[method][url];
 
             setTimeout(() => {
-                res.status(active.statusCode);
-                res.json(active.data);
+                if (handler) {
+                    handler(req, res);
+                } else {
+                    res.status(statusCode);
+                    res.json(data);
+                }
             }, latency);
         });
     });

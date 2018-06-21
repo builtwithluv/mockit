@@ -8,10 +8,7 @@ module.exports = {
     method: 'GET',
     statusCode: 200,
 
-    // Data is the contract or the response to send
-    // Will be in JSON format
-    data: {
-        firstName: 'Cheng',
-        lastName: 'Ly',
+    handler: (req, res) => {
+        res.json({ firstName: 'Custom  handler' });
     },
 };
