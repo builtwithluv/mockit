@@ -3,9 +3,11 @@ const setActiveResponses = require('./helpers/setActiveResponses');
 
 module.exports = function createStore() {
     const fixtures = getFixtures();
+    const latency = 50;
 
     const store = {
         fixtures,
+        latency,
         active: setActiveResponses(fixtures),
     };
 
@@ -31,8 +33,25 @@ module.exports = function createStore() {
         return null;
     }
 
+    function updateLatency(action) {
+        const { latency } = action;
+
+        if (!latency) {
+            return { error: 'No latency specified' };
+        }
+
+        if (typeof latency !== 'number') {
+            return { error: 'Latency is not a number' };
+        }
+
+        store.latency = latency;
+
+        return null;
+    }
+
     return {
         getState,
         updateActiveResponse,
+        updateLatency,
     };
 }

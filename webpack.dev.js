@@ -49,7 +49,7 @@ module.exports = {
         hot: true,
         port: 3001,
         proxy: {
-            '/armada': 'http://localhost:3000',
+            '/testy': 'http://localhost:3000',
         },
     }
 };
