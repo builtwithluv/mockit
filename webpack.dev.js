@@ -40,7 +40,6 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Armada',
             template: './src/index.html',
             inject: false,
         }),

@@ -1,4 +1,4 @@
-module.exports = function createRoutes(app, store) {
+module.exports = function loadFixtureRoutes(app, store) {
     const state = store.getState();
     const fixtures = state.fixtures;
 

@@ -1,17 +1,26 @@
 {
-  "name": "armada",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@builtwithluv/testy",
+  "version": "0.0.1",
+  "description": "Framework for mocking",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "./node_modules/.bin/npx webpack --config ./webpack.prod.js -p",
-    "start": "./node_modules/.bin/concurrently --kill-others \"npm run start:server\" \"npm run start:client\"",
+    "build": "npx webpack --config ./webpack.prod.js -p",
+    "prepublishOnly": "npx cleandir node_modules && npm i && npm run build",
+    "start": "npx concurrently --kill-others \"npm run start:server\" \"npm run start:client\"",
     "start:server": "./node_modules/.bin/nodemon example/server/index.js",
-    "start:client": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js --mode development",
+    "start:client": "./node_modules/.bin/webpack-dev-server --config ./webpack.dev.js --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Cheng Ly",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chengsieuly/testy"
+  },
+  "files": [
+    "lib",
+    "example"
+  ],
   "dependencies": {
     "@material-ui/core": "^1.2.2",
     "@material-ui/icons": "^1.1.0",
@@ -30,6 +39,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "clean-dir": "^1.0.3",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.6.0",
     "copy-webpack-plugin": "^4.5.1",
@@ -43,5 +53,8 @@
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=5.0.0"
   }
 }

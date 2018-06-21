@@ -21,14 +21,14 @@ export class App extends React.PureComponent {
     };
 
     componentDidMount() {
-        fetch('/armada/api')
+        fetch('/testy/api')
             .then(data => data.json())
             .then(data => this.setState({ store: data }))
             .catch(err => console.error(err));
     }
 
     handleSelectionChange = e => {
-        fetch('/armada/api', {
+        fetch('/testy/api', {
             method: 'PUT',
             body: JSON.stringify({ id: e.target.value }),
             headers: {

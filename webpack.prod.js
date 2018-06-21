@@ -43,7 +43,6 @@ module.exports = {
             { from: 'src/index.js', to: 'index.js' },
         ]),
         new HtmlWebpackPlugin({
-            title: 'Armada',
             template: 'src/index.html',
             inject: false,
         }),
