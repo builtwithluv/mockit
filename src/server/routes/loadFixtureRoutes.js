@@ -3,7 +3,7 @@ module.exports = function createRoutes(app, store) {
     const fixtures = state.fixtures;
 
     fixtures.forEach(({ method, url }) => {
-        app[method.toLowerCase()](url, (req, res) => {
+        app[method.toLowerCase()](url, (_, res) => {
             const state = store.getState();
             const active = state.active[method][url];
 

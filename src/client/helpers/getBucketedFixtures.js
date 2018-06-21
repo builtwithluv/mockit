@@ -3,7 +3,10 @@ import flow from 'lodash.flow';
 const METHOD_ORDER = ['GET', 'POST', 'PUT', 'DELETE'];
 
 function sortMethods(fixtures) {
-    const ordering = {};
+    const ordering = METHOD_ORDER.reduce((order, method, i) => {
+        order[method] = i;
+        return order;
+    }, {});
 
     for (var i = 0; i < METHOD_ORDER.length; i++) {
         ordering[METHOD_ORDER[i]] = i;

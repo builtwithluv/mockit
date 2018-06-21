@@ -1,14 +1,10 @@
 module.exports = {
     default: true,
-    
-    // The id that represents this response
-    // Used to set active response
-    id: 'FIRST_CONTRACT',
 
-    description: "FIRST_CONTRACT",
+    description: "NESTED2_CONTRACT",
 
-    url: '/api/test',
-    
+    url: '/api/nested2',
+
     method: 'GET',
     statusCode: 200,
 

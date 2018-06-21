@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/concurrently \"npm run start:server\" \"npm run start:client\"",
-    "start:server": "./node_modules/.bin/nodemon server/index.js",
+    "build": "./node_modules/.bin/npx webpack --config ./webpack.prod.js -p",
+    "start": "./node_modules/.bin/concurrently --kill-others \"npm run start:server\" \"npm run start:client\"",
+    "start:server": "./node_modules/.bin/nodemon example/server/index.js",
     "start:client": "./node_modules/.bin/webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,7 +20,8 @@
     "lodash.flow": "^3.5.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "typeface-roboto": "0.0.54"
+    "typeface-roboto": "0.0.54",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -28,9 +30,12 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.6.0",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
     "nodemon": "^1.17.5",
     "prop-types": "^15.6.2",
     "react-hot-loader": "^4.3.3",

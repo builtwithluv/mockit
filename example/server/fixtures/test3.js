@@ -1,8 +1,4 @@
 module.exports = {
-    // The id that represents this response
-    // Used to set active response
-    id: 'THIRD_CONTRACT',
-
     description: "THIRD_CONTRACT",
 
     url: '/api/test',

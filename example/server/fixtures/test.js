@@ -1,13 +1,9 @@
 module.exports = {
     default: true,
 
-    // The id that represents this response
-    // Used to set active response
-    id: 'SIXTH_CONTRACT',
+    description: "FIRST_CONTRACT",
 
-    description: "SIXTH_CONTRACT",
-
-    url: '/api/abc',
+    url: '/api/test',
 
     method: 'GET',
     statusCode: 200,

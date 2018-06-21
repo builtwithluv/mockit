@@ -1,11 +1,11 @@
-const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: [
-        'react-hot-loader/patch',
-        './src/client/index.jsx',
-    ],
+    entry: {
+        'client/bundle': './src/client/index.jsx',
+    },
     module: {
         rules: [
             {
@@ -23,7 +23,7 @@ module.exports = {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: 'fonts/'
+                        outputPath: 'client/fonts'
                     }
                 }]
             }
@@ -33,24 +33,19 @@ module.exports = {
         extensions: ['*', '.js', '.jsx']
     },
     output: {
-        path: __dirname + '/dist',
-        publicPath: '/',
-        filename: 'bundle.js'
+        path: __dirname + '/lib',
+        filename: '[name].js'
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        new CleanWebpackPlugin(['lib']),
+        new CopyWebpackPlugin([
+            { from: 'src/server', to: 'server' },
+            { from: 'src/index.js', to: 'index.js' },
+        ]),
         new HtmlWebpackPlugin({
             title: 'Armada',
-            template: './src/index.html',
+            template: 'src/index.html',
             inject: false,
         }),
     ],
-    devServer: {
-        contentBase: './dist',
-        hot: true,
-        port: 3001,
-        proxy: {
-            '/armada': 'http://localhost:3000',
-        },
-    }
 };
