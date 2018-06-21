@@ -1,6 +1,6 @@
 {
   "name": "@builtwithluv/testy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Framework for mocking",
   "main": "lib/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chengsieuly/testy"
+    "url": "https://github.com/builtwithluv/testy"
   },
   "files": [
     "lib",

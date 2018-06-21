@@ -1,5 +1,5 @@
-installion:
-- need .armada file
-- pass app instance in
-- create fixture
-- allow application/json
+# Testy
+
+Brutally simple mock server setup with Express.
+
+https://builtwithluv.gitbook.io/testy/
