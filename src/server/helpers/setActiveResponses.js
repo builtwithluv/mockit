@@ -12,7 +12,6 @@ module.exports = function setActiveResponses(fixtures) {
                     ...map[method],
                     [url]: fixture,
                 }
-                return map;
             }
 
             return map;

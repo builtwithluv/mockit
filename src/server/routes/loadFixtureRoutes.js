@@ -14,6 +14,7 @@ module.exports = function loadFixtureRoutes(app, store) {
 
             const {
                 data,
+                description,
                 handler,
                 statusCode,
             } = active[method][url];
@@ -26,7 +27,11 @@ module.exports = function loadFixtureRoutes(app, store) {
                 }
 
                 if (handler) {
-                    return handler(req, res);
+                    if (typeof handler !== 'function') {
+                        console.error(`Handler for ${description} is not a function`);
+                    } else {
+                        return handler(req, res);
+                    }
                 }
 
                 res.status(statusCode);
