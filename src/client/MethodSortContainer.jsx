@@ -35,7 +35,7 @@ export function MethodSortContainer() {
                                                 activeFixture={activeFixture}
                                                 code={+code}
                                                 fixtures={fixtures}
-                                                handleSelectionChange={handlers.handleSelectionChange}
+                                                handleSelectionChange={handlers.updateTesty}
                                             />
                                         </Grid>
                                     ))}

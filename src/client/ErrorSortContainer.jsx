@@ -64,7 +64,7 @@ export class ErrorSortContainer extends React.PureComponent {
                             name={activeFixture.url}
                             className={classes.group}
                             value={activeFixture.id}
-                            onChange={e => handleSelectionChange(e.target.value)}
+                            onChange={e => handleSelectionChange({ id: e.target.value })}
                         >
                             {fixtures.map(({ id, description }) => (
                                 <FormControlLabel

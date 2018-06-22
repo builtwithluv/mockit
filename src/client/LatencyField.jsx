@@ -29,7 +29,7 @@ export class LatencyField extends React.PureComponent {
                         defaultValue={store.latency}
                         type="number"
                         margin="normal"
-                        onChange={e => handlers.handleLatencyChange(+e.target.value)}
+                        onChange={e => handlers.updateTestyDebounced({ latency: +e.target.value })}
                     />
                 )}
             </StoreContext.Consumer>

@@ -17,14 +17,12 @@ const theme = createMuiTheme({
 export class App extends React.PureComponent {
     constructor() {
         super();
-        this.handleLatencyChange = debounce(this.handleLatencyChange, 750);
         this.state = {
             isLoading: true,
             store: null,
             handlers: {
-                handleAlwaysErrorChange: this.handleAlwaysErrorChange,
-                handleLatencyChange: this.handleLatencyChange,
-                handleSelectionChange: this.handleSelectionChange,
+                updateTesty: this.updateTesty,
+                updateTestyDebounced: debounce(this.updateTesty, 750),
             },
         };
     }
@@ -36,40 +34,10 @@ export class App extends React.PureComponent {
             .catch(err => console.error(err));
     }
 
-    handleSelectionChange = val => {
-        return fetch('/testy/api', {
+    updateTesty = action => {
+        return fetch('testy/api', {
             method: 'PUT',
-            body: JSON.stringify({ id: val }),
-            headers: {
-                'content-type': 'application/json',
-            },
-        })
-            .then(data => data.json())
-            .then(data => this.setState({ store: data }))
-            .catch(err => console.error(err));
-    }
-
-    handleLatencyChange = val => {
-        if (!val) {
-            return;
-        }
-
-        return fetch('/testy/api/latency', {
-            method: 'PUT',
-            body: JSON.stringify({ latency: val }),
-            headers: {
-                'content-type': 'application/json',
-            },
-        })
-            .then(data => data.json())
-            .then(data => this.setState({ store: data }))
-            .catch(err => console.error(err));
-    }
-
-    handleAlwaysErrorChange = val => {
-        return fetch('/testy/api/alwaysError', {
-            method: 'PUT',
-            body: JSON.stringify({ alwaysError: val }),
+            body: JSON.stringify(action),
             headers: {
                 'content-type': 'application/json',
             },

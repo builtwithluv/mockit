@@ -3,13 +3,13 @@ const setActiveResponses = require('./helpers/setActiveResponses');
 
 module.exports = function createStore() {
     const fixtures = getFixtures();
-    const latency = 50;
-    const alwaysError = false;
+    const LATENCY = 50;
+    const ALWAYS_ERROR = false;
 
     const store = {
-        alwaysError,
         fixtures,
-        latency,
+        alwaysError: ALWAYS_ERROR,
+        latency: LATENCY,
         active: setActiveResponses(fixtures),
     };
 
@@ -17,56 +17,33 @@ module.exports = function createStore() {
         return store;
     }
 
-    function updateActiveResponse(action) {
-        const { id } = action;
+    function update(action) {
+        const {
+            id,
+            latency,
+            alwaysError,
+        } = action;
 
-        if (!id) {
-            return { error: 'Missing id' };
+        if (id !== undefined) {
+            const fixture = fixtures.find(fixture => fixture.id === id);
+            store.active[fixture.method][fixture.url] = fixture;
         }
 
-        if (!fixtures.find(fixture => fixture.id === id)) {
-            return { error: 'Cannot find a fixture with that id' };
+        if (latency !== undefined) {
+            if (!latency) {
+                store.latency = LATENCY;
+            } else {
+                store.latency = latency;
+            }
         }
 
-        const fixture = fixtures.find(fixture => fixture.id === id);
-
-        store.active[fixture.method][fixture.url] = fixture;
-
-        return null;
-    }
-
-    function updateLatency(action) {
-        const { latency } = action;
-
-        if (latency === undefined) {
-            return { error: 'No latency specified' };
+        if (alwaysError !== undefined) {
+            store.alwaysError = !!alwaysError;
         }
-
-        if (typeof latency !== 'number') {
-            return { error: 'Latency is not a number' };
-        }
-
-        store.latency = latency;
-
-        return null;
-    }
-
-    function updateAlwaysError(action) {
-        const { alwaysError } = action;
-
-        if (alwaysError === undefined) {
-            return { error: 'No property alwaysError found' };
-        }
-
-        store.alwaysError = !!alwaysError;
-
-        return null;
     }
 
     return {
         getState,
-        updateActiveResponse,
-        updateAlwaysError,
-        updateLatency,
+        update,
     };
 }

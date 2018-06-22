@@ -8,7 +8,6 @@ export const StoreContext = React.createContext({
         fixtures: [],
         latency: 50,
     },
-    handleAlwaysErrorChange: () => {},
-    handleLatencyChange: () => {},
-    handleSelectionChange: () => {},
+    updateTesty: () => {},
+    updateTestyDebounced: () => {},
 });

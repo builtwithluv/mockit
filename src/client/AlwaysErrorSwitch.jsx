@@ -12,7 +12,7 @@ export function AlwaysErrorSwitch() {
                     control={
                         <Switch
                             checked={store.alwaysError}
-                            onChange={e => handlers.handleAlwaysErrorChange(e.target.checked)}
+                            onChange={e => handlers.updateTesty({ alwaysError: e.target.checked })}
                         />
                     }
                     label="Always error"
