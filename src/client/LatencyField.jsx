@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 
+import { StoreContext } from './context/store-context';
+
 const styles = theme => ({
     textField: {
         marginRight: theme.spacing.unit,
@@ -13,27 +15,24 @@ const styles = theme => ({
 export class LatencyField extends React.PureComponent {
     static propTypes = {
         classes: PropTypes.object.isRequired,
-        handleLatencyChange: PropTypes.func.isRequired,
-        latency: PropTypes.number.isRequired,
     };
 
     render() {
-        const {
-            classes,
-            handleLatencyChange,
-            latency,
-        } = this.props;
-
+        const { classes } = this.props;
         return (
-            <TextField
-                id="latency-input"
-                label="Latency"
-                className={classes.textField}
-                defaultValue={latency}
-                type="number"
-                margin="normal"
-                onChange={e => handleLatencyChange(e.target.value)}
-            />
+            <StoreContext.Consumer>
+                {({ store, handlers }) => (
+                    <TextField
+                        id="latency-input"
+                        label="Latency"
+                        className={classes.textField}
+                        defaultValue={store.latency}
+                        type="number"
+                        margin="normal"
+                        onChange={e => handlers.handleLatencyChange(+e.target.value)}
+                    />
+                )}
+            </StoreContext.Consumer>
         );
     }
 }

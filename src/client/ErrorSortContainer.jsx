@@ -29,6 +29,14 @@ const styles = theme => ({
 });
 
 export class ErrorSortContainer extends React.PureComponent {
+    static propTypes = {
+        activeFixture: PropTypes.object.isRequired,
+        classes: PropTypes.object.isRequired,
+        code: PropTypes.number.isRequired,
+        fixtures: PropTypes.array.isRequired,
+        handleSelectionChange: PropTypes.func.isRequired,
+    };
+
     render() {
         const {
             activeFixture,
@@ -56,7 +64,7 @@ export class ErrorSortContainer extends React.PureComponent {
                             name={activeFixture.url}
                             className={classes.group}
                             value={activeFixture.id}
-                            onChange={handleSelectionChange}
+                            onChange={e => handleSelectionChange(e.target.value)}
                         >
                             {fixtures.map(({ id, description }) => (
                                 <FormControlLabel
@@ -73,13 +81,5 @@ export class ErrorSortContainer extends React.PureComponent {
         );
     }
 }
-
-ErrorSortContainer.propTypes = {
-    activeFixture: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
-    code: PropTypes.number.isRequired,
-    fixtures: PropTypes.array.isRequired,
-    handleSelectionChange: PropTypes.func.isRequired,
-};
 
 export default withStyles(styles)(ErrorSortContainer);

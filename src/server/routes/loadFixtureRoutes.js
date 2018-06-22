@@ -12,12 +12,6 @@ module.exports = function loadFixtureRoutes(app, store) {
                 latency,
             } = store.getState();
 
-            if (alwaysError) {
-                const alwaysErrorFixture = getAlwaysErrorFixture();
-                res.status(alwaysErrorFixture.statusCode);
-                return res.json(alwaysErrorFixture.data);
-            }
-
             const {
                 data,
                 handler,
@@ -25,12 +19,18 @@ module.exports = function loadFixtureRoutes(app, store) {
             } = active[method][url];
 
             setTimeout(() => {
-                if (handler) {
-                    handler(req, res);
-                } else {
-                    res.status(statusCode);
-                    res.json(data);
+                if (alwaysError) {
+                    const alwaysErrorFixture = getAlwaysErrorFixture();
+                    res.status(alwaysErrorFixture.statusCode);
+                    return res.json(alwaysErrorFixture.data);
                 }
+
+                if (handler) {
+                    return handler(req, res);
+                }
+
+                res.status(statusCode);
+                return res.json(data);
             }, latency);
         });
     });

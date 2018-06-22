@@ -17,6 +17,12 @@ const styles = theme => ({
 });
 
 export class MethodSortHeader extends React.PureComponent {
+    static propTypes = {
+        activeFixture: PropTypes.object.isRequired,
+        classes: PropTypes.object.isRequired,
+        method: PropTypes.string.isRequired,
+    };
+
     render() {
         const {
             activeFixture,
@@ -58,11 +64,5 @@ export class MethodSortHeader extends React.PureComponent {
         );
     }
 }
-
-MethodSortHeader.propTypes = {
-    activeFixture: PropTypes.object.isRequired,
-    classes: PropTypes.object.isRequired,
-    method: PropTypes.string.isRequired,
-};
 
 export default withStyles(styles)(MethodSortHeader);

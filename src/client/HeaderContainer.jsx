@@ -16,35 +16,18 @@ const styles = theme => ({
 export class HeaderContainer extends React.PureComponent {
     static propTypes = {
         classes: PropTypes.object.isRequired,
-        handleAlwaysErrorChange: PropTypes.func.isRequired,
-        handleLatencyChange: PropTypes.func.isRequired,
-        alwaysError: PropTypes.bool.isRequired,
-        latency: PropTypes.number.isRequired,
     };
 
     render() {
-        const {
-            alwaysError,
-            classes,
-            handleAlwaysErrorChange,
-            handleLatencyChange,
-            latency,
-        } = this.props;
-
+        const { classes } = this.props;
         return (
             <div className={classes.root}>
                 <Grid container justify="space-between" alignItems="center">
                     <Grid item>
-                        <AlwaysErrorSwitch
-                            handleAlwaysErrorChange={handleAlwaysErrorChange}
-                            isOn={alwaysError}
-                        />
+                        <AlwaysErrorSwitch />
                     </Grid>
                     <Grid item>
-                        <LatencyField
-                            handleLatencyChange={handleLatencyChange}
-                            latency={latency}
-                        />
+                        <LatencyField />
                     </Grid>
                 </Grid>
             </div>
