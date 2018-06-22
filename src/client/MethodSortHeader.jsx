@@ -25,7 +25,7 @@ export class MethodSortHeader extends React.PureComponent {
         } = this.props;
 
         const { description, statusCode, url } = activeFixture;
-        
+
         return (
             <Grid container>
                 <Grid item xs={1}>
@@ -44,12 +44,12 @@ export class MethodSortHeader extends React.PureComponent {
                         {statusCode}
                     </Typography>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={5}>
                     <Typography className={classes.secondaryHeading}>
                         {url}
                     </Typography>
                 </Grid>
-                <Grid>
+                <Grid item xs zeroMinWidth>
                     <Typography className={classes.secondaryHeading}>
                         {description}
                     </Typography>
