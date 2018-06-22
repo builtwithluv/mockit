@@ -23,4 +23,14 @@ module.exports = function loadTestys(app, store) {
 
         return res.json(store.getState());
     });
+    app.put('/testy/api/alwaysError', (req, res) => {
+        const err = store.updateAlwaysError(req.body);
+
+        if (err) {
+            res.status(400);
+            return res.send(err.error);
+        }
+
+        return res.json(store.getState());
+    });
 }

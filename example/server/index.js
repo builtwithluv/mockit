@@ -1,5 +1,5 @@
 const express = require('express');
-const testy = require('../../src');
+const testy = require('../../lib');
 
 const app = express();
 

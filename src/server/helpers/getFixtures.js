@@ -10,10 +10,18 @@ module.exports = function getFixtures(contents = [], filePath = defaultPath) {
     const files = fs.readdirSync(filePath);
 
     files.forEach(fileName => {
-        if (fs.statSync(path.join(filePath, fileName)).isDirectory()) {
-            getFixtures(contents, path.join(filePath, fileName));
+        const fullPath = path.join(filePath, fileName);
+
+        if (fs.statSync(fullPath).isDirectory()) {
+            getFixtures(contents, fullPath);
         } else {
-            const fixture = require(path.join(filePath, fileName));
+            // This is a unique fixture that should not show. It is used
+            // to default an error scenario. Skip this.
+            if (fullPath === path.join(defaultPath, '__alwaysError__.js')) {
+                return;
+            }
+
+            const fixture = require(fullPath);
             fixture.id = uuidv4();
             contents.push(fixture);
         }

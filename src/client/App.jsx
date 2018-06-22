@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import LatencyContainer from './LatencyContainer';
+import HeaderContainer from './HeaderContainer';
 import MethodSortContainer from './MethodSortContainer';
 
 import getBucketedFixtures from './helpers/getBucketedFixtures';
@@ -36,7 +36,7 @@ export class App extends React.PureComponent {
     }
 
     handleSelectionChange = e => {
-        fetch('/testy/api', {
+        return fetch('/testy/api', {
             method: 'PUT',
             body: JSON.stringify({ id: e.target.value }),
             headers: {
@@ -53,7 +53,7 @@ export class App extends React.PureComponent {
             return;
         }
 
-        fetch('/testy/api/latency', {
+        return fetch('/testy/api/latency', {
             method: 'PUT',
             body: JSON.stringify({ latency: +val }),
             headers: {
@@ -65,22 +65,35 @@ export class App extends React.PureComponent {
             .catch(err => console.error(err));
     }
 
+    handleAlwaysErrorChange = val => {
+        return fetch('/testy/api/alwaysError', {
+            method: 'PUT',
+            body: JSON.stringify({ alwaysError: val }),
+            headers: {
+                'content-type': 'application/json',
+            },
+        });
+    }
+
     render() {
         const {
             isLoading,
             store: {
-                active: activeFixtures,
+                alwaysError,
                 fixtures,
                 latency,
+                active: activeFixtures,
             },
         } = this.state;
 
         return !isLoading && (
             <MuiThemeProvider theme={theme}>
                 <CssBaseline>
-                    <LatencyContainer
-                        handleLatencyChange={this.handleLatencyChange}
+                    <HeaderContainer
+                        alwaysError={alwaysError}
                         latency={latency}
+                        handleAlwaysErrorChange={this.handleAlwaysErrorChange}
+                        handleLatencyChange={this.handleLatencyChange}
                     />
                     <MethodSortContainer
                         activeFixtures={activeFixtures}

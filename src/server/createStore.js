@@ -4,8 +4,10 @@ const setActiveResponses = require('./helpers/setActiveResponses');
 module.exports = function createStore() {
     const fixtures = getFixtures();
     const latency = 50;
+    const alwaysError = false;
 
     const store = {
+        alwaysError,
         fixtures,
         latency,
         active: setActiveResponses(fixtures),
@@ -36,7 +38,7 @@ module.exports = function createStore() {
     function updateLatency(action) {
         const { latency } = action;
 
-        if (!latency) {
+        if (latency === undefined) {
             return { error: 'No latency specified' };
         }
 
@@ -49,9 +51,22 @@ module.exports = function createStore() {
         return null;
     }
 
+    function updateAlwaysError(action) {
+        const { alwaysError } = action;
+
+        if (alwaysError === undefined) {
+            return { error: 'No property alwaysError found' };
+        }
+
+        store.alwaysError = !!alwaysError;
+
+        return null;
+    }
+
     return {
         getState,
         updateActiveResponse,
+        updateAlwaysError,
         updateLatency,
     };
 }
