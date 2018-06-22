@@ -5,7 +5,9 @@ module.exports = function setActiveResponses(fixtures) {
         // Only overwrite current existing if the fixture is the default.
         // Otherwise, leave as is.
         if (map[method] && map[method][url]) {
-            if (fixture.default) {
+            const currentFixture = map[method][url];
+
+            if (fixture.default && !currentFixture.default) {
                 map[method] = {
                     ...map[method],
                     [url]: fixture,
