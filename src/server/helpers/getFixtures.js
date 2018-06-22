@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const uuidv4 = require('uuid/v4');
 
-const config = require('./getConfig')();
+const config = require('../../helpers/getConfig')();
 
 const DEFAULT_PATH = path.resolve(config.fixturesPath);
 
@@ -22,7 +22,15 @@ module.exports = function getFixtures(contents = [], filePath = DEFAULT_PATH) {
             }
 
             const fixture = require(fullPath);
-            fixture.id = uuidv4();
+
+            if (!fixture.hasOwnProperty('id')) {
+                fixture.id = uuidv4();
+            }
+
+            if (!fixture.hasOwnProperty('method')) {
+                fixture.method = 'GET';
+            }
+
             contents.push(fixture);
         }
     });

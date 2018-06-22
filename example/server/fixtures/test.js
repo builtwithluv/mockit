@@ -3,9 +3,8 @@ module.exports = {
 
     description: "hello world my name is cheng. hello world my name is cheng. hello world my name is cheng. hello world my name is cheng. ",
 
-    url: '/api/test',
+    url: '/api/test?a=2',
 
-    method: 'GET',
     statusCode: 200,
 
     handler: (req, res) => {

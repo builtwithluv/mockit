@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const getConfig = require('./getConfig');
+const getConfig = require('../../helpers/getConfig');
 
 module.exports = function getAlwaysErrorFixture() {
     const config = getConfig();

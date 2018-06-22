@@ -3,7 +3,7 @@ module.exports = {
 
     description: "SEVENTH_CONTRACT",
 
-    url: '/api/test',
+    url: '/api/test?a=3',
 
     method: 'GET',
     statusCode: 400,

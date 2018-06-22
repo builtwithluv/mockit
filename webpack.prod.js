@@ -40,7 +40,9 @@ module.exports = {
         new CleanWebpackPlugin(['lib']),
         new CopyWebpackPlugin([
             { from: 'src/server', to: 'server' },
+            { from: 'src/helpers', to: 'helpers' },
             { from: 'src/index.js', to: 'index.js' },
+            { from: 'src/generate.js', to: 'generate.js' },
         ]),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
