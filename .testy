@@ -1,5 +1,6 @@
 {
     "fixturesPath": "example/server/fixtures",
+    "harFilePath": "localhost.har",
     "alwaysErrorFixture": {
         "statusCode": 400,
         "data": {
