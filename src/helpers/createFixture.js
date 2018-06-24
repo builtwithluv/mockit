@@ -7,9 +7,9 @@ const { fixturesPath } = require('./getConfig')();
 
 module.exports = function createFixture({
     data,
-    description,
     filename,
     url,
+    description = 'No description added.',
     id = uuidv4(),
     method = 'GET',
     status = 200,

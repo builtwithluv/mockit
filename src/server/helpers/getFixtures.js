@@ -29,6 +29,10 @@ module.exports = function getFixtures(contents = [], filePath = DEFAULT_PATH) {
                 fixture.status = 200;
             }
 
+            if (!fixture.hasOwnProperty('description')) {
+                fixture.description = 'No description added.';
+            }
+
             contents.push(fixture);
         }
     });

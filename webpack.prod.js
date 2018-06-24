@@ -42,7 +42,7 @@ module.exports = {
             { from: 'src/server', to: 'server' },
             { from: 'src/helpers', to: 'helpers' },
             { from: 'src/index.js', to: 'index.js' },
-            { from: 'src/generate.js', to: 'generate.js' },
+            { from: 'src/.bin', to: '.bin' },
         ]),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
