@@ -25,6 +25,10 @@ module.exports = function getFixtures(contents = [], filePath = DEFAULT_PATH) {
                 fixture.method = 'GET';
             }
 
+            if (!fixture.hasOwnProperty('status')) {
+                fixture.status = 200;
+            }
+
             contents.push(fixture);
         }
     });

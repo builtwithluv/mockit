@@ -16,13 +16,13 @@ module.exports = function loadFixtureRoutes(app, store) {
                 data,
                 description,
                 handler,
-                statusCode,
+                status,
             } = active[method][url];
 
             setTimeout(() => {
                 if (alwaysError) {
                     const alwaysErrorFixture = getAlwaysErrorFixture();
-                    res.status(alwaysErrorFixture.statusCode);
+                    res.status(alwaysErrorFixture.status);
                     return res.json(alwaysErrorFixture.data);
                 }
 
@@ -34,7 +34,7 @@ module.exports = function loadFixtureRoutes(app, store) {
                     }
                 }
 
-                res.status(statusCode);
+                res.status(status);
                 return res.json(data);
             }, latency);
         });

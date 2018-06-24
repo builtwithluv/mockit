@@ -2,17 +2,17 @@ import brown from '@material-ui/core/colors/brown';
 import green from '@material-ui/core/colors/green';
 import red from '@material-ui/core/colors/red';
 
-export default function getStatusCodeColor(statusCode) {
-    if (statusCode < 200) {
+export default function getStatusCodeColor(status) {
+    if (status < 200) {
         return brown[200];
     }
-    if (statusCode < 300) {
+    if (status < 300) {
         return green[200];
     }
-    if (statusCode < 400) {
+    if (status < 400) {
         return brown[200];
     }
-    if (statusCode < 500) {
+    if (status < 500) {
         return red[200];
     }
     return brown[200];

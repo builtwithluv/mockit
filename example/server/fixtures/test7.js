@@ -6,7 +6,7 @@ module.exports = {
     url: '/api/test?a=3',
 
     method: 'GET',
-    statusCode: 400,
+    status: 400,
 
     data: 'error'
 };

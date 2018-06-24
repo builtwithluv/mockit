@@ -4,7 +4,7 @@ module.exports = {
     url: '/api/test2',
 
     method: 'DELETE',
-    statusCode: 200,
+    status: 200,
 
     // Data is the contract or the response to send
     // Will be in JSON format

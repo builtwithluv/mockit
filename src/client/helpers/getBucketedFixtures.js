@@ -49,11 +49,11 @@ function sortStatusCodes(sortedUrls) {
         const errors = urls.map(urlMap => {
             const [url, fixtures] = urlMap;
             const errs = fixtures.reduce((bucket, fixture) => {
-                if (!bucket[fixture.statusCode]) {
-                    bucket[fixture.statusCode] = [];
+                if (!bucket[fixture.status]) {
+                    bucket[fixture.status] = [];
                 }
 
-                bucket[fixture.statusCode].push(fixture);
+                bucket[fixture.status].push(fixture);
 
                 return bucket;
             }, {});

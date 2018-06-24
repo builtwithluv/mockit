@@ -1,7 +1,7 @@
 module.exports = {
     url: '/api/nested',
     method: 'GET',
-    statusCode: 200,
+    status: 200,
     description: "NESTED_CONTRACT",
     default: true,
     data: {

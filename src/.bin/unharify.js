@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+
 const createFixture = require('../helpers/createFixture');
 const config = require('../helpers/getConfig')();
 

@@ -8,7 +8,7 @@ module.exports = function getAlwaysErrorFixture() {
     }
 
     const defaultAlwaysErrorFixture = {
-        statusCode: 400,
+        status: 400,
         data: { error: 'No custom fixture loaded. Add one in the configuration file. See docs.' },
     };
 

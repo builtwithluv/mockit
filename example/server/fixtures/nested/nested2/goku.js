@@ -6,7 +6,6 @@ module.exports = {
     url: '/api/nested2',
 
     method: 'GET',
-    statusCode: 200,
 
     // Data is the contract or the response to send
     // Will be in JSON format

@@ -5,8 +5,6 @@ module.exports = {
 
     url: '/api/test?a=2',
 
-    statusCode: 200,
-
     handler: (req, res) => {
         res.json({ firstName: 'Custom  handler' });
     },

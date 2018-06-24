@@ -4,7 +4,7 @@ module.exports = {
     url: '/api/test',
 
     method: 'GET',
-    statusCode: 400,
+    status: 400,
 
     // Data is the contract or the response to send
     // Will be in JSON format

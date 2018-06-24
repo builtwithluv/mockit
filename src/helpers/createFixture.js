@@ -21,8 +21,8 @@ module.exports = function createFixture({
         method,
         description,
         data,
+        status,
         url: _url.parse(url).pathname,
-        statusCode: status,
     };
 
     const beautifyOptions = {
