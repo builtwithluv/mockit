@@ -1,5 +1,11 @@
 {
     "fixturesPath": "example/server/fixtures",
+    "alwaysErrorFixture": {
+        "statusCode": 400,
+        "data": {
+            "error": "My custom error!"
+        }
+    },
     "generate": [
         {
             "url": "https://api.github.com/users/github"

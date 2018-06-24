@@ -1,19 +1,15 @@
-const fs = require('fs');
-const path = require('path');
 const getConfig = require('../../helpers/getConfig');
 
 module.exports = function getAlwaysErrorFixture() {
-    const config = getConfig();
-    const fixturesPath = config.fixturesPath;
-    const alwaysErrorFixtureFilePath = path.resolve(path.join(fixturesPath, '__alwaysError__.js'));
+    const { alwaysErrorFixture } = getConfig();
 
-    if (fs.existsSync(alwaysErrorFixtureFilePath)) {
-        return require(alwaysErrorFixtureFilePath);
+    if (alwaysErrorFixture) {
+        return alwaysErrorFixture;
     }
 
     const defaultAlwaysErrorFixture = {
         statusCode: 400,
-        data: { error: 'No custom fixture loaded. Set one by creating a fixture call "__alwaysError__.js." under the fixtures root.' },
+        data: { error: 'No custom fixture loaded. Add one in the configuration file. See docs.' },
     };
 
     return defaultAlwaysErrorFixture;
