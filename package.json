@@ -1,6 +1,6 @@
 {
   "name": "@builtwithluv/testy",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Framework for mocking",
   "main": "lib/index.js",
   "scripts": {
