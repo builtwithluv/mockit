@@ -1,4 +1,4 @@
-#!/usr/.bin/env node
+#!/usr/bin/env node
 
 const generate = require('../commands/generate');
 const unharify = require('../commands/unharify');
