@@ -11,6 +11,7 @@
     "start:client": "./node_modules/.bin/webpack-dev-server --config ./webpack.dev.js --mode development",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": "lib/.bin/testy",
   "author": "Cheng Ly",
   "license": "ISC",
   "repository": {
@@ -29,6 +30,7 @@
     "js-beautify": "^1.7.5",
     "lodash.debounce": "^4.0.8",
     "lodash.flow": "^3.5.0",
+    "minimist": "^1.2.0",
     "node-fetch": "^2.1.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",

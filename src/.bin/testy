@@ -1,0 +1,22 @@
+#!/usr/.bin/env node
+
+const generate = require('../commands/generate');
+const unharify = require('../commands/unharify');
+
+const argv = require('minimist')(process.argv.slice(2));
+
+const command = argv._[0];
+
+switch (command) {
+    case 'generate': {
+        return generate();
+    }
+
+    case 'unharify': {
+        return unharify();
+    }
+
+    default: {
+        console.error('Not a valid command');
+    }
+}
