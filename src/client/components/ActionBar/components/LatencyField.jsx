@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 
-import { StoreContext } from './context/store-context';
+import { StoreContext } from 'Context';
 
 const styles = theme => ({
     textField: {
         marginRight: theme.spacing.unit,
-        width: 200,
+        width: 100,
     },
 });
 
@@ -30,6 +31,9 @@ export class LatencyField extends React.PureComponent {
                         type="number"
                         margin="normal"
                         onChange={e => handlers.updateTestyDebounced({ latency: +e.target.value })}
+                        InputProps={{
+                            endAdornment: <InputAdornment position="end">ms</InputAdornment>,
+                        }}
                     />
                 )}
             </StoreContext.Consumer>

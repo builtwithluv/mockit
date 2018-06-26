@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import AlwaysErrorSwitch from './AlwaysErrorSwitch';
-import LatencyField from './LatencyField';
+
+import AlwaysErrorSwitch from './components/AlwaysErrorSwitch';
+import LatencyField from './components/LatencyField';
 
 const styles = theme => ({
     root: {
-        marginRight: theme.spacing.unit,
-        marginBottom: theme.spacing.unit,
-        marginLeft: theme.spacing.unit,
+        margin: theme.spacing.unit,
     },
 });
 
-export class HeaderContainer extends React.PureComponent {
+export class ActionBar extends React.PureComponent {
     static propTypes = {
         classes: PropTypes.object.isRequired,
     };
@@ -24,10 +23,14 @@ export class HeaderContainer extends React.PureComponent {
             <div className={classes.root}>
                 <Grid container justify="space-between" alignItems="center">
                     <Grid item>
-                        <AlwaysErrorSwitch />
+                        <LatencyField />
                     </Grid>
                     <Grid item>
-                        <LatencyField />
+                        <Grid container>
+                            <Grid item>
+                                <AlwaysErrorSwitch />
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Grid>
             </div>
@@ -35,4 +38,4 @@ export class HeaderContainer extends React.PureComponent {
     }
 }
 
-export default withStyles(styles)(HeaderContainer);
+export default withStyles(styles)(ActionBar);

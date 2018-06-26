@@ -3,10 +3,10 @@ import debounce from 'lodash.debounce';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import { StoreContext } from './context/store-context';
+import { StoreContext } from 'Context';
 
-import HeaderContainer from './HeaderContainer';
-import MethodSortContainer from './MethodSortContainer';
+import ActionBar from 'Components/ActionBar';
+import FixtureOrganizer from 'Components/FixtureOrganizer';
 
 const theme = createMuiTheme({
     palette: {
@@ -52,8 +52,8 @@ export class App extends React.PureComponent {
             <MuiThemeProvider theme={theme}>
                 <CssBaseline>
                     <StoreContext.Provider value={this.state}>
-                        <HeaderContainer />
-                        <MethodSortContainer />
+                        <ActionBar />
+                        <FixtureOrganizer />
                     </StoreContext.Provider>
                 </CssBaseline>
             </MuiThemeProvider>

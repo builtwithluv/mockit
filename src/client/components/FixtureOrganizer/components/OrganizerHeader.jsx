@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import getMethodColor from './helpers/getMethodColor';
-import getStatusCodeColor from './helpers/getStatusCodeColor';
+import getMethodColor from 'Helpers/getMethodColor';
+import getStatusCodeColor from 'Helpers/getStatusCodeColor';
 
 const styles = theme => ({
     heading: {
@@ -16,7 +16,7 @@ const styles = theme => ({
     },
 });
 
-export class MethodSortHeader extends React.PureComponent {
+export class OrganizerHeader extends React.PureComponent {
     static propTypes = {
         activeFixture: PropTypes.object.isRequired,
         classes: PropTypes.object.isRequired,
@@ -65,4 +65,4 @@ export class MethodSortHeader extends React.PureComponent {
     }
 }
 
-export default withStyles(styles)(MethodSortHeader);
+export default withStyles(styles)(OrganizerHeader);

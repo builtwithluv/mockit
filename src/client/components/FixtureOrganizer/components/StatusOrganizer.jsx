@@ -12,7 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from '@material-ui/core/Typography';
 
-import getStatusCodeColor from './helpers/getStatusCodeColor';
+import getStatusCodeColor from 'Helpers/getStatusCodeColor';
 
 const styles = theme => ({
     heading: {
@@ -28,7 +28,7 @@ const styles = theme => ({
     },
 });
 
-export class ErrorSortContainer extends React.PureComponent {
+export class StatusOrganizer extends React.PureComponent {
     static propTypes = {
         activeFixture: PropTypes.object.isRequired,
         classes: PropTypes.object.isRequired,
@@ -82,4 +82,4 @@ export class ErrorSortContainer extends React.PureComponent {
     }
 }
 
-export default withStyles(styles)(ErrorSortContainer);
+export default withStyles(styles)(StatusOrganizer);

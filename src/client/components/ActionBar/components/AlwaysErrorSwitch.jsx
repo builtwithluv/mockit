@@ -2,7 +2,7 @@ import React from 'react';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-import { StoreContext } from './context/store-context';
+import { StoreContext } from 'Context';
 
 export function AlwaysErrorSwitch() {
     return (

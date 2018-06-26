@@ -5,14 +5,14 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Grid from '@material-ui/core/Grid';
 
-import { StoreContext } from './context/store-context';
+import { StoreContext } from 'Context';
 
-import getBucketedFixtures from './helpers/getBucketedFixtures';
+import getBucketedFixtures from 'Helpers/getBucketedFixtures';
 
-import ErrorSortContainer from './ErrorSortContainer';
-import MethodSortHeader from './MethodSortHeader';
+import StatusOrganizer from './components/StatusOrganizer';
+import OrganizerHeader from './components/OrganizerHeader';
 
-export function MethodSortContainer() {
+export function FixtureOrganizer() {
     return (
         <StoreContext.Consumer>
             {({ store, handlers }) => {
@@ -22,7 +22,7 @@ export function MethodSortContainer() {
                     return (
                         <ExpansionPanel key={url}>
                             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                                <MethodSortHeader
+                                <OrganizerHeader
                                     activeFixture={activeFixture}
                                     method={method}
                                 />
@@ -31,7 +31,7 @@ export function MethodSortContainer() {
                                 <Grid container>
                                     {statusCodes.map(([code, fixtures]) => (
                                         <Grid key={code} item xs={12}>
-                                            <ErrorSortContainer
+                                            <StatusOrganizer
                                                 activeFixture={activeFixture}
                                                 code={+code}
                                                 fixtures={fixtures}
@@ -49,4 +49,4 @@ export function MethodSortContainer() {
     );
 }
 
-export default MethodSortContainer;
+export default FixtureOrganizer;
