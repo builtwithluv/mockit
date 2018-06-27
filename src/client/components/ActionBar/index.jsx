@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import AlwaysErrorSwitch from './components/AlwaysErrorSwitch';
+import FileUploader from './components/FileUploader';
 import LatencyField from './components/LatencyField';
 
 const styles = theme => ({
@@ -29,6 +30,9 @@ export class ActionBar extends React.PureComponent {
                         <Grid container>
                             <Grid item>
                                 <AlwaysErrorSwitch />
+                            </Grid>
+                            <Grid item>
+                                <FileUploader />
                             </Grid>
                         </Grid>
                     </Grid>

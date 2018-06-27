@@ -1,13 +1,18 @@
 const fs = require('fs');
 const path = require('path');
+const createFixture = require('../helpers/createFixture');
+const config = require('../helpers/getConfig')();
 
-module.exports = function unharify() {
-    const createFixture = require('../helpers/createFixture');
-    const config = require('../helpers/getConfig')();
+module.exports = function unharify(har) {
+    let entries;
 
-    const harFilePath = path.resolve(config.harFilePath);
-    const harContent = JSON.parse(fs.readFileSync(harFilePath, 'utf8'));
-    const entries = harContent.log.entries;
+    if (!har) {
+        const harFilePath = path.resolve(config.harFilePath);
+        const harContent = JSON.parse(fs.readFileSync(harFilePath, 'utf8'));
+        entries = harContent.log.entries;
+    } else {
+        entries = har.log.entries;
+    }
 
     const supportedEntries = entries.filter(entry => {
         const mimeType = entry.response.content.mimeType;

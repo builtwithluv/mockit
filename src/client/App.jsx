@@ -7,6 +7,7 @@ import { StoreContext } from 'Context';
 
 import ActionBar from 'Components/ActionBar';
 import FixtureOrganizer from 'Components/FixtureOrganizer';
+import Snackbar from 'Components/Snackbar';
 
 const theme = createMuiTheme({
     palette: {
@@ -19,8 +20,11 @@ export class App extends React.PureComponent {
         super();
         this.state = {
             isLoading: true,
+            isSnackbarOpen: false,
+            snackbarMessage: '',
             store: null,
             handlers: {
+                toggleSnackbar: this.toggleSnackbar,
                 updateTesty: this.updateTesty,
                 updateTestyDebounced: debounce(this.updateTesty, 750),
             },
@@ -34,8 +38,13 @@ export class App extends React.PureComponent {
             .catch(err => console.error(err));
     }
 
+    toggleSnackbar = (msg = this.state.snackbarMessage) => {
+        const { isSnackbarOpen } = this.state;
+        this.setState({ isSnackbarOpen: !isSnackbarOpen, snackbarMessage: msg });
+    }
+
     updateTesty = action => {
-        return fetch('testy/api', {
+        return fetch('/testy/api', {
             method: 'PUT',
             body: JSON.stringify(action),
             headers: {
@@ -54,6 +63,7 @@ export class App extends React.PureComponent {
                     <StoreContext.Provider value={this.state}>
                         <ActionBar />
                         <FixtureOrganizer />
+                        <Snackbar />
                     </StoreContext.Provider>
                 </CssBaseline>
             </MuiThemeProvider>
