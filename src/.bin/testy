@@ -2,7 +2,6 @@
 
 const generate = require('../commands/generate');
 const start = require('../commands/start');
-const unharify = require('../commands/unharify');
 
 const argv = require('minimist')(process.argv.slice(2));
 
@@ -15,10 +14,6 @@ switch (command) {
 
     case 'start': {
         return start();
-    }
-
-    case 'unharify': {
-        return unharify();
     }
 
     default: {
