@@ -5,6 +5,13 @@ module.exports = {
 
     method: 'GET',
 
+    validate: {
+        url: 'http://localhost:3000/validation',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    },
+
     // Data is the contract or the response to send
     // Will be in JSON format
     data: {
