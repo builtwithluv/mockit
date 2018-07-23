@@ -9,7 +9,7 @@ export default function validateResponse(fixture) {
     return fetch(url, options)
         .then(response => {
             if (!response.ok) {
-                throw('Unable to fetch');
+                throw({ error: 'Unable to fetch' });
             }
 
             return response;

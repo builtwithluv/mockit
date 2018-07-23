@@ -10,6 +10,8 @@ export const StoreContext = React.createContext({
         fixtures: [],
         latency: 50,
     },
+    validations: {},
+    setValidations: () => {},
     toggleLoading: () => {},
     toggleSnackbar: () => {},
     updateTesty: () => {},

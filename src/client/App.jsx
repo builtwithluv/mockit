@@ -23,7 +23,9 @@ export class App extends React.PureComponent {
             isSnackbarOpen: false,
             snackbarMessage: '',
             store: null,
+            validations: {},
             handlers: {
+                setValidation: this.setValidation,
                 toggleSnackbar: this.toggleSnackbar,
                 updateTesty: this.updateTesty,
                 updateTestyDebounced: debounce(this.updateTesty, 750),
@@ -36,6 +38,11 @@ export class App extends React.PureComponent {
             .then(data => data.json())
             .then(data => this.setState(prevState => ({ ...prevState, isLoading: false, store: data })))
             .catch(err => console.error(err));
+    }
+
+    setValidation = ({ id, errors }) => {
+        const { validations } = this.state;
+        this.setState({ validations: { ...validations, [id]: errors } });
     }
 
     toggleSnackbar = (msg = this.state.snackbarMessage) => {
@@ -53,7 +60,7 @@ export class App extends React.PureComponent {
         })
             .then(data => data.json())
             .then(data => this.setState({ store: data }))
-            .catch(err => console.error(err));
+            .catch(err => console.log(err));
     }
 
     render() {

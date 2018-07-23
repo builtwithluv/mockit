@@ -1,29 +1,36 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import NetworkCheck from '@material-ui/icons/NetworkCheck';
 import PriorityHigh from '@material-ui/icons/PriorityHigh';
 
 import validateResponse from 'Helpers/validateResponse';
 
-class AlertDialog extends React.Component {
+class AlertDialog extends React.PureComponent {
+    static propTypes = {
+        setValidation: PropTypes.func.isRequired,
+        validation: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    };
+
     state = {
-        errors: null,
         open: false,
     };
 
     componentDidMount() {
-        this.checkDataSameness();
+        const { validation } = this.props;
+
+        if (!validation) {
+            this.checkDataSameness();
+        }
     }
 
     checkDataSameness() {
-        const { fixture } = this.props;
+        const { fixture, setValidation } = this.props;
 
         validateResponse(fixture)
-            .then(errors => this.setState({ errors }))
-            .catch(errors => this.setState({ errors }));
+            .then(errors => setValidation({ id: fixture.id, errors }))
     }
 
     handleClickOpen = (e) => {
@@ -37,33 +44,27 @@ class AlertDialog extends React.Component {
     };
 
     render() {
-        const { errors } = this.state;
+        const { validation } = this.props;
 
-        return errors && (
-            // TODO Assuming string errors are network
-            typeof errors === 'string' ? (
-                <NetworkCheck />
-            ) : (
-                <div>
-                    <PriorityHigh onClick={this.handleClickOpen} />
-                    <Dialog
-                        open={this.state.open}
-                        onClose={this.handleClose}
-                        aria-labelledby="alert-dialog-title"
-                    >
-                        <DialogTitle id="alert-dialog-title">Discrepancies Found</DialogTitle>
-                        <DialogContent>
-                            {Object.entries(errors).map(([key, reason], i) => (
-                                <DialogContentText key={i}>
-                                    {key}: {reason}
-                                </DialogContentText>
-                            ))}
-                        </DialogContent>
-                    </Dialog>
-
-                </div>
-            )
-        );
+        return validation ? (
+            <div>
+                <PriorityHigh onClick={this.handleClickOpen} />
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                >
+                    <DialogTitle id="alert-dialog-title">Discrepancies Found</DialogTitle>
+                    <DialogContent>
+                        {Object.entries(validation).map(([key, reason], i) => (
+                            <DialogContentText key={i}>
+                                {key}: {reason}
+                            </DialogContentText>
+                        ))}
+                    </DialogContent>
+                </Dialog>
+            </div>
+        ) : null
     }
 }
 

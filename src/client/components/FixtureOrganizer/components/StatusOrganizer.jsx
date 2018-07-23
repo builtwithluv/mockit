@@ -12,6 +12,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from '@material-ui/core/Typography';
 
+import Description from './Description';
+
 import getStatusCodeColor from 'Helpers/getStatusCodeColor';
 
 const styles = theme => ({
@@ -66,12 +68,12 @@ export class StatusOrganizer extends React.PureComponent {
                             value={activeFixture.id}
                             onChange={e => handleSelectionChange({ id: e.target.value })}
                         >
-                            {fixtures.map(({ id, description }) => (
+                            {fixtures.map(fixture => (
                                 <FormControlLabel
-                                    key={id}
-                                    value={id}
+                                    key={fixture.id}
+                                    value={fixture.id}
                                     control={<Radio color="primary" />}
-                                    label={description}
+                                    label={<Description fixture={fixture} />}
                                 />
                             ))}
                         </RadioGroup>

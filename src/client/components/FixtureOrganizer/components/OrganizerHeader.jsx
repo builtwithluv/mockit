@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import ErrorInfo from 'Components/ErrorInfo';
+import Description from './Description';
 
 import getMethodColor from 'Helpers/getMethodColor';
 import getStatusCodeColor from 'Helpers/getStatusCodeColor';
@@ -31,7 +31,7 @@ export class OrganizerHeader extends React.PureComponent {
             method,
         } = this.props;
 
-        const { description, status, url } = activeFixture;
+        const { status, url } = activeFixture;
 
         return (
             <Grid container>
@@ -56,13 +56,8 @@ export class OrganizerHeader extends React.PureComponent {
                         {url}
                     </Typography>
                 </Grid>
-                <Grid item xs={1}>
-                    <ErrorInfo fixture={activeFixture} />
-                </Grid>
                 <Grid item xs zeroMinWidth>
-                    <Typography className={classes.secondaryHeading}>
-                        {description}
-                    </Typography>
+                    <Description fixture={activeFixture} />
                 </Grid>
             </Grid>
         );
