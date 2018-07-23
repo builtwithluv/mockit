@@ -3,7 +3,7 @@ const path = require('path');
 const uuidv4 = require('uuid/v4');
 const _url = require('url');
 const beautify = require('js-beautify');
-const { fixturesPath } = require('./getConfig')();
+const { fixturesPath } = require('./getConfig');
 
 module.exports = function createFixture({
     data,

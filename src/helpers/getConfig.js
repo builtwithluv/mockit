@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const defaultConfig = require('./getDefaultConfig')();
+const defaultConfig = require('./getDefaultConfig');
 
-module.exports = function getConfig() {
+function getConfig() {
     const testyConfigurationFilePath = path.resolve('.testy');
 
     if (fs.existsSync(testyConfigurationFilePath)) {
@@ -15,3 +15,5 @@ module.exports = function getConfig() {
 
     return defaultConfiguration;
 }
+
+module.exports = getConfig();

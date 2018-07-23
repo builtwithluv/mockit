@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const uuidv4 = require('uuid/v4');
 
-const config = require('../../helpers/getConfig')();
+const { fixturesPath } = require('../../helpers/getConfig');
 
-const DEFAULT_PATH = path.resolve(config.fixturesPath);
+const DEFAULT_PATH = path.resolve(fixturesPath);
 
 module.exports = function getFixtures(contents = [], filePath = DEFAULT_PATH) {
     const files = fs.readdirSync(filePath);

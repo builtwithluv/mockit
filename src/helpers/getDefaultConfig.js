@@ -1,7 +1,4 @@
-module.exports = function getDefaultConfig() {
-    return {
-        fixturesPath: 'server/fixtures',
-        harFilePath: 'har.har',
-        port: 3000,
-    };
-}
+module.exports = {
+    fixturesPath: 'server/fixtures',
+    port: 3000,
+};

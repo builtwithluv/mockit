@@ -5,28 +5,5 @@
         "data": {
             "error": "My custom error!"
         }
-    },
-    "generate": [
-        {
-            "url": "https://api.github.com/users/github"
-        },
-        {
-            "url": "https://api.github.com/users/github",
-            "id": "github-users-contract",
-            "filename": "github-users.js",
-            "description": "Get github user"
-        },
-        {
-            "url": "https://api.github.com/users/github",
-            "id": "github-users-contract-more",
-            "filename": "github-users-advance.js",
-            "description": "Get github user more",
-            "options": {
-                "method": "GET",
-                "headers": {
-                    "content-type": "application/json"
-                }
-            }
-        }
-    ]
+    }
 }
