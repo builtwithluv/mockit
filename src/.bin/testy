@@ -9,7 +9,8 @@ const command = argv._[0];
 
 switch (command) {
     case 'generate': {
-        return generate();
+        const { url } = argv;
+        return generate(url);
     }
 
     case 'start': {
