@@ -1,14 +1,17 @@
 module.exports = {
-    description: "THIRD_CONTRACT",
+    default: true,
+
+    description: "Gives you Cheng Ly",
 
     url: '/api/test',
 
     method: 'GET',
-    status: 400,
+    status: 200,
 
     // Data is the contract or the response to send
     // Will be in JSON format
     data: {
-        error: 'No data',
+        firstName: 'Cheng',
+        lastName: 'Ly',
     },
 };

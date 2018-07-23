@@ -1,5 +1,5 @@
 module.exports = {
-    description: "SECOND_CONTRACT",
+    description: "Gives you Bhakti Patel with failed validation",
 
     url: '/api/test',
 

@@ -1,12 +1,11 @@
 module.exports = {
     default: true,
 
-    description: "SIXTH_CONTRACT",
+    description: "Nested level 2 contract set as default",
 
-    url: '/api/abc',
+    url: '/api/nested',
 
     method: 'GET',
-    status: 200,
 
     // Data is the contract or the response to send
     // Will be in JSON format

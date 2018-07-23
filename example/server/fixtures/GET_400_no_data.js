@@ -1,16 +1,14 @@
 module.exports = {
-    default: true,
+    description: "Failed request to retrieve a person",
 
-    description: "NESTED2_CONTRACT",
-
-    url: '/api/nested2',
+    url: '/api/test',
 
     method: 'GET',
+    status: 400,
 
     // Data is the contract or the response to send
     // Will be in JSON format
     data: {
-        firstName: 'Cheng',
-        lastName: 'Ly',
+        error: 'No data',
     },
 };

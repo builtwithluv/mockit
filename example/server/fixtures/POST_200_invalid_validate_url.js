@@ -1,5 +1,5 @@
 module.exports = {
-    description: 'FIVTH_CONTRACT',
+    description: 'Endpoint does not exist',
     url: '/api/test2',
     method: 'POST',
     validate: {
