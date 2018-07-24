@@ -1,7 +1,7 @@
 const getAlwaysErrorFixture = require('../helpers/getAlwaysErrorFixture');
 
-module.exports = function loadFixtureRoutes(app, store) {
-    const state = store.getState();
+module.exports = function loadFixtureRoutes(app, testy) {
+    const state = testy.getState();
     const fixtures = state.fixtures;
 
     fixtures.forEach(({ method, url }) => {
@@ -10,7 +10,7 @@ module.exports = function loadFixtureRoutes(app, store) {
                 active,
                 alwaysError,
                 latency,
-            } = store.getState();
+            } = testy.getState();
 
             const {
                 data,

@@ -1,12 +1,12 @@
 const path = require('path');
 const unharify = require('../../commands/unharify');
 
-module.exports = function loadTestys(app, store) {
+module.exports = function loadTestys(app, testy) {
     app.get('/testy', (_, res) => res.sendFile(path.join(__dirname, '../../index.html')));
-    app.get('/testy/api', (_, res) => res.json(store.getState()));
+    app.get('/testy/api', (_, res) => res.json(testy.getState()));
     app.put('/testy/api', (req, res) => {
-        store.update(req.body);
-        return res.json(store.getState());
+        testy.update(req.body);
+        return res.json(testy.getState());
     });
     app.post('/testy/api/harUpload', (req, res) => {
         const content = req.body;
