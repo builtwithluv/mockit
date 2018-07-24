@@ -1,4 +1,6 @@
 module.exports = {
+    id: 'GET_200_CHENG',
+
     default: true,
 
     description: "Gives you Cheng Ly",

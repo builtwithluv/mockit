@@ -1,4 +1,6 @@
 module.exports = {
+    id: 'GET_200_BHAKTI_FAILED',
+
     description: "Gives you Bhakti Patel with failed validation",
 
     url: '/api/test',

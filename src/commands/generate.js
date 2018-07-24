@@ -5,7 +5,7 @@ const createFixture = require('../helpers/createFixture');
 module.exports = function generate(url, options = {}) {
     let status;
 
-    fetch(url, options)
+    return fetch(url, options)
         .then(d => {
             status = d.status;
             return d.json();
