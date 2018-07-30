@@ -9,11 +9,16 @@ module.exports = function createFixture({
     data,
     filename,
     url,
-    description = 'No description added.',
-    id = uuidv4(),
-    method = 'GET',
-    status = 200,
+    description,
+    id,
+    method,
+    status,
 }) {
+    id = id || uuidv4(),
+    description = description || 'No description added.';
+    method = (method && method.toUpperCase()) || 'GET';
+    status = Number(status) || 200;
+
     const fileName = `${method}-${status}-${filename || id}.js`;
 
     const fixture = {

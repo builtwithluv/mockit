@@ -2,14 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Alignment, Navbar, NavbarGroup } from '@blueprintjs/core';
 import { withStyles } from '@material-ui/core/styles';
+
+import CreateNewFixture from './components/CreateNewFixture';
 import FileUploader from './components/FileUploader';
 import LatencyField from './components/LatencyField';
 
 const styles = theme => ({
     root: {
-        paddingTop: 25,
-        paddingBottom: 25,
-        height: 100,
+        paddingTop: 15,
+        paddingBottom: 15,
+        height: 80,
+    },
+    buttons: {
+        marginRight: theme.spacing.unit,
     },
 });
 
@@ -23,6 +28,9 @@ export class ActionBar extends React.PureComponent {
         return (
             <Navbar className={classes.root}>
                 <NavbarGroup align={Alignment.LEFT}>
+                    <div className={classes.buttons}>
+                        <CreateNewFixture />
+                    </div>
                     <FileUploader />
                 </NavbarGroup>
                 <NavbarGroup align={Alignment.RIGHT}>

@@ -18,7 +18,7 @@ import Viewer from 'Components/Viewer';
 
 const styles = theme => ({
     container: {
-        height: 'calc(100% - 100px)',
+        height: 'calc(100% - 80px)',
     },
     main: {
         height: '100vh',

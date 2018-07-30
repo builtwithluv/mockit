@@ -1,4 +1,5 @@
 const path = require('path');
+const createFixture = require('../../helpers/createFixture');
 const unharify = require('../../commands/unharify');
 
 module.exports = function loadTestys(app, testy) {
@@ -13,6 +14,18 @@ module.exports = function loadTestys(app, testy) {
 
         try {
             unharify(content);
+            testy.reloadFixtures();
+            return res.json(testy.getState());
+        } catch (e) {
+            res.status(400);
+            return res.send({ message: e });
+        }
+    });
+    app.post('/testy/api/new', (req, res) => {
+        const content = req.body;
+
+        try {
+            createFixture(content);
             testy.reloadFixtures();
             return res.json(testy.getState());
         } catch (e) {

@@ -14,10 +14,10 @@ const styles = theme => ({
         height: '100%',
         padding: theme.spacing.unit,
         overflow: 'hidden',
-        overflowY: 'auto',
     },
     tree: {
-        height: '100vh',
+        height: '100%',
+        overflowY: 'auto',
     },
 });
 

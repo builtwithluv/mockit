@@ -69,6 +69,10 @@ export class Viewer extends React.Component {
 
         this.fixture = findFixture(selectedNode.id, fixtures);
 
+        if (!this.fixture) {
+            return null;
+        }
+
         const {
             id,
             data,
