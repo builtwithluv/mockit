@@ -17,7 +17,7 @@ const styles = theme => ({
         overflowY: 'auto',
     },
     tree: {
-        height: '100%',
+        height: '100vh',
     },
 });
 
@@ -31,6 +31,8 @@ export class Sidebar extends React.Component {
             nodeList: getBucketedFixtures(props.fixtures, props.activeFixtures),
         }
     }
+
+    state = {};
 
     componentDidMount() {
         this.selectFirstItem();
@@ -72,7 +74,7 @@ export class Sidebar extends React.Component {
 
         nodeData.isSelected = originallySelected == null ? true : !originallySelected;
 
-        updateGlobalContext({ selectedFixture: nodeData });
+        updateGlobalContext({ selectedNode: nodeData });
 
         this.setState({ nodeList: cloneDeep(nodeList) });
     };

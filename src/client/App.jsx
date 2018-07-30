@@ -41,7 +41,7 @@ export class App extends React.PureComponent {
         this.state = {
             isLoading: true,
             isSnackbarOpen: false,
-            selectedFixture: null,
+            selectedNode: null,
             snackbarMessage: '',
             store: null,
             validations: {},
@@ -61,7 +61,12 @@ export class App extends React.PureComponent {
 
     render() {
         const { classes } = this.props;
-        const { isLoading, store } = this.state;
+        const {
+            isLoading,
+            selectedNode,
+            store,
+            validations,
+        } = this.state;
 
         return !isLoading && (
             <main className={classNames('bp3-light', classes.main)}>
@@ -73,11 +78,17 @@ export class App extends React.PureComponent {
                                 <Sidebar
                                     activeFixtures={store.active}
                                     fixtures={store.fixtures}
-                                    globalUpdater={this.updateGlobalContext}
+                                    updateGlobalContext={this.updateGlobalContext}
                                 />
                             </Grid>
                             <Grid item xs className={classes.viewer}>
-                                <Viewer />
+                                <Viewer
+                                    fixtures={store.fixtures}
+                                    selectedNode={selectedNode}
+                                    updateTesty={this.updateTesty}
+                                    updateGlobalContext={this.updateGlobalContext}
+                                    validations={validations}
+                                />
                             </Grid>
                         </Grid>
                         <Snackbar />

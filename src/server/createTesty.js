@@ -19,6 +19,7 @@ module.exports = function createTesty() {
 
     function reloadFixtures() {
         testy.fixtures = getFixtures();
+        testy.active = setActiveResponses(testy.fixtures);
     }
 
     function update(next) {

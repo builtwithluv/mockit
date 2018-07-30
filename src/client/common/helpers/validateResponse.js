@@ -7,7 +7,7 @@ export function validator(obj, compartee, errors = {}) {
         try {
             if (compartee.hasOwnProperty(key)) {
                 if (typeof obj[key] !== typeof compartee[key]) {
-                    errors[key] = 'Data type does not match.';
+                    errors[key] = `Data type does not match. Received ${typeof compartee[key]}.`;
                 }
             } else {
                 errors[key] = 'Expected property is missing.';

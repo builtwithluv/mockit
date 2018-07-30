@@ -3,7 +3,7 @@ import React from 'react';
 export const StoreContext = React.createContext({
     isLoading: false,
     isSnackbarOpen: false,
-    selectedFixture: null,
+    selectedNode: null,
     sidebarBuckets: [],
     snackbarMessage: '',
     store: {

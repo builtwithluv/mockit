@@ -11,15 +11,18 @@ import {
     NavbarGroup,
     NavbarDivider,
     NavbarHeading,
-    Text,
-    Tooltip,
+    Spinner,
 } from '@blueprintjs/core';
 import PriorityHigh from '@material-ui/icons/PriorityHigh';
 import { withStyles } from '@material-ui/core';
 import Code from 'react-code-prettify';
-import { StoreContext } from 'Context';
 
-import validateResponse from 'Helpers/validateResponse';
+import {
+    findFixture,
+    generateDataString,
+    generateHandlerString,
+    validateResponse,
+} from 'Helpers';
 
 const styles = theme => ({
     url: {
@@ -30,82 +33,92 @@ const styles = theme => ({
 export class Viewer extends React.Component {
     static propTypes = {
         classes: PropTypes.object,
+        fixtures: PropTypes.arrayOf(PropTypes.object),
+        selectedNode: PropTypes.object,
+        updateGlobalContext: PropTypes.func,
+        updateTesty: PropTypes.func,
+        validations: PropTypes.object,
     };
 
-    updater;
-    updateTesty;
+    errors;
+    fixture;
 
-    setActive = id => {
-        this.updateTesty({ id });
-    }
+    componentDidUpdate() {
+        const { selectedNode, validations } = this.props;
+        const validation = validations[selectedNode.id];
 
-    checkDataSameness = fixture => {
-        validateResponse(fixture)
-            .then(errors => this.updater({ validations: { ...this.validations, [fixture.id]: errors }}))
-            .catch(errors => this.updater({ validations: { ...this.validations, [fixture.id]: errors }}));
-    }
+        if (validation === null || validation) {
+            return;
+        }
 
-    hasBeenValidated = validation => {
-        return validation || validation === null;
-    }
-
-    isValid = errors => {
-        return errors === null;
+        this.checkDataSameness();
     }
 
     render() {
-        const { classes } = this.props;
+        const {
+            classes,
+            fixtures,
+            selectedNode,
+            updateTesty,
+            validations,
+        } = this.props;
+
+        if (!selectedNode) {
+            return null;
+        }
+
+        this.fixture = findFixture(selectedNode.id, fixtures);
+
+        const {
+            id,
+            data,
+            handler,
+            method,
+            url,
+        } = this.fixture;
+
+        this.errors = validations[id];
 
         return (
-            <StoreContext.Consumer>
-                {({ selectedFixture, store, updateTesty, updateGlobalContext, validations }) => {
-                    if (!selectedFixture) {
-                        return null;
-                    }
-
-                    this.updateTesty = updateTesty;
-                    this.validations = validations;
-                    this.updater = updateGlobalContext;
-
-                    const fixture = store.fixtures.find(fixture => fixture.id === selectedFixture.id);
-                    const data = fixture.data;
-                    const handler = fixture.handler;
-                    const validation = validations[fixture.id];
-
-                    if (!this.hasBeenValidated(validation)) {
-                        this.checkDataSameness(fixture);
-                    }
-
-                    const validationErrorString = `${!this.isValid(validation) ? `const validationErrors = ${JSON.stringify(validation)};` : ''} \n\n const data = ${JSON.stringify(data)}`;
-                    const handlerString = `const handler = ${handler}`;
-                    return (
-                        <div>
-                            <div className={Classes.ELEVATION_2}>
-                                <Navbar>
-                                    {!this.isValid(validation) && (
-                                        <NavbarGroup>
-                                            <PriorityHigh style={{ color: Colors.RED4 }} />
-                                        </NavbarGroup>
-                                    )}
-                                    <NavbarGroup align={Alignment.RIGHT}>
-                                        <NavbarHeading>{fixture.method} <span className={classes.url}>{fixture.url}</span></NavbarHeading>
-                                        <NavbarDivider />
-                                        <Button text="Set Active" onClick={() => this.setActive(fixture.id)} />
-                                    </NavbarGroup>
-                                </Navbar>
-                            </div>
-                            <div className={Classes.ELEVATION_2}>
-                                {data ? (
-                                    <Code language="javascript" codeString={beautify(validationErrorString)} />
-                                ) : (
-                                    <Code language="javascript" codeString={handlerString} />
-                                )}
-                            </div>
-                        </div>
-                    );
-                }}
-            </StoreContext.Consumer>
+            <div>
+                <div className={Classes.ELEVATION_2}>
+                    <Navbar>
+                        <NavbarGroup>
+                            {this.renderErrorStatus()}
+                        </NavbarGroup>
+                        <NavbarGroup align={Alignment.RIGHT}>
+                            <NavbarHeading>{method} <span className={classes.url}>{url}</span></NavbarHeading>
+                            <NavbarDivider />
+                            <Button text="Set Active" onClick={() => updateTesty({ id })} />
+                        </NavbarGroup>
+                    </Navbar>
+                </div>
+                <div className={Classes.ELEVATION_2}>
+                    {data ? (
+                        <Code language="javascript" codeString={beautify(generateDataString(data, this.errors))} />
+                    ) : (
+                        <Code language="javascript" codeString={generateHandlerString(handler)} />
+                    )}
+                </div>
+            </div>
         );
+    }
+
+    renderErrorStatus = () => {
+        if (this.errors === undefined) {
+            return <Spinner size={Spinner.SIZE_SMALL} />;
+        } else if (this.errors) {
+            return <PriorityHigh style={{ color: Colors.RED4 }} />;
+        } else {
+            return null;
+        }
+    }
+
+    checkDataSameness = () => {
+        const { updateGlobalContext, validations } = this.props;
+        validateResponse(this.fixture)
+            .then(errors => updateGlobalContext({ validations: { ...validations, [this.fixture.id]: errors } }))
+            .catch(errors => updateGlobalContext({ validations: { ...validations, [this.fixture.id]: errors } }));
     }
 }
 
