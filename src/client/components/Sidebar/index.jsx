@@ -27,7 +27,7 @@ export class Sidebar extends React.Component {
     };
 
     items;
-    updateStoreContext;
+    updateGlobalContext;
 
     componentDidMount() {
         this.selectFirstItem();
@@ -38,9 +38,9 @@ export class Sidebar extends React.Component {
 
         return (
             <StoreContext.Consumer>
-                {({ sidebarBuckets, updateStoreContext }) => {
+                {({ sidebarBuckets, updateGlobalContext }) => {
                     this.items = sidebarBuckets;
-                    this.updateStoreContext = updateStoreContext;
+                    this.updateGlobalContext = updateGlobalContext;
 
                     return (
                         <div className={classes.treeContainer}>
@@ -67,17 +67,17 @@ export class Sidebar extends React.Component {
             this.forEachNode(this.items, n => (n.isSelected = false));
         }
         nodeData.isSelected = originallySelected == null ? true : !originallySelected;
-        this.updateStoreContext({ sidebarBuckets: cloneDeep(this.items), selectedFixture: nodeData });
+        this.updateGlobalContext({ sidebarBuckets: cloneDeep(this.items), selectedFixture: nodeData });
     };
 
     handleNodeCollapse = nodeData => {
         nodeData.isExpanded = false;
-        this.updateStoreContext(cloneDeep(this.items));
+        this.updateGlobalContext(cloneDeep(this.items));
     }
 
     handleNodeExpand = nodeData => {
         nodeData.isExpanded = true;
-        this.updateStoreContext(cloneDeep(this.items));
+        this.updateGlobalContext(cloneDeep(this.items));
     }
 
     forEachNode(nodes, callback) {

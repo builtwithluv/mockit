@@ -53,7 +53,8 @@ export class App extends React.PureComponent {
                 updateTestyDebounced: debounce(this.updateTesty, 750),
             },
             nextStoreData: (nextStore) => this.nextStoreData(nextStore),
-            updateStoreContext: (nextState) => this.setState(nextState),
+            toggleSnackbar: this.toggleSnackbar,
+            updateGlobalContext: (nextState) => this.setState(nextState),
             updateTesty: this.updateTesty,
         };
     }

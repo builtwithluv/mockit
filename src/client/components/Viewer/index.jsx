@@ -58,14 +58,14 @@ export class Viewer extends React.Component {
 
         return (
             <StoreContext.Consumer>
-                {({ selectedFixture, store, updateTesty, updateStoreContext, validations }) => {
+                {({ selectedFixture, store, updateTesty, updateGlobalContext, validations }) => {
                     if (!selectedFixture) {
                         return null;
                     }
 
                     this.updateTesty = updateTesty;
                     this.validations = validations;
-                    this.updater = updateStoreContext;
+                    this.updater = updateGlobalContext;
 
                     const fixture = store.fixtures.find(fixture => fixture.id === selectedFixture.id);
                     const data = fixture.data;

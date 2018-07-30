@@ -13,8 +13,8 @@ module.exports = function loadTestys(app, testy) {
 
         try {
             unharify(content);
-            store.reloadFixtures();
-            return res.json(store.getState());
+            testy.reloadFixtures();
+            return res.json(testy.getState());
         } catch (e) {
             res.status(400);
             return res.send({ message: e });

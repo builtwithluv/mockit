@@ -1,5 +1,5 @@
-module.exports = function loadFixtureRoutes(app, store) {
-    const state = store.getState();
+module.exports = function loadFixtureRoutes(app, testy) {
+    const state = testy.getState();
     const fixtures = state.fixtures;
 
     fixtures.forEach(({ method, url }) => {

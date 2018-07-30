@@ -18,7 +18,7 @@ module.exports = function createTesty() {
     }
 
     function reloadFixtures() {
-        store.fixtures = getFixtures();
+        testy.fixtures = getFixtures();
     }
 
     function update(next) {

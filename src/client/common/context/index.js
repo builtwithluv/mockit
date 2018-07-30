@@ -12,5 +12,5 @@ export const StoreContext = React.createContext({
         latency: 50,
     },
     validations: {},
-    updateStoreContext: () => {},
+    updateGlobalContext: () => {},
 });
