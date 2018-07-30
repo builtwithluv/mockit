@@ -77,7 +77,7 @@ export class Viewer extends React.Component {
                     }
 
                     const validationErrorString = `${!this.isValid(validation) ? `const validationErrors = ${JSON.stringify(validation)};` : ''} \n\n const data = ${JSON.stringify(data)}`;
-
+                    const handlerString = `const handler = ${handler}`;
                     return (
                         <div>
                             <div className={Classes.ELEVATION_2}>
@@ -98,7 +98,7 @@ export class Viewer extends React.Component {
                                 {data ? (
                                     <Code language="javascript" codeString={beautify(validationErrorString)} />
                                 ) : (
-                                    <Code language="javascript" codeString={handler} />
+                                    <Code language="javascript" codeString={handlerString} />
                                 )}
                             </div>
                         </div>

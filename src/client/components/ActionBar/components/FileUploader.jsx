@@ -49,10 +49,10 @@ export class FileUploader extends React.PureComponent {
                     if (!res.ok) {
                         throw 'Failed to upload har file';
                     }
-                    toggleSnackbar('Successfully created fixtures from har file');
                     return res.json();
                 })
                 .then(data => updateStoreContext(nextStoreData(data)))
+                .then(() => toggleSnackbar('Successfully created fixtures from .har file'))
                 .then(() => this.setState({ isUploading: false }))
                 .catch(err => toggleSnackbar(err))
                 .catch(() => this.setState({ isUploading: false }));

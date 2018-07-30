@@ -23,7 +23,7 @@ module.exports = function createTesty() {
 
     function update(next) {
         // ! All the next functions will modify testy directly
-        setNextActive(next);
+        setNextActive(next, getState());
         setNextLatency(next);
     }
 

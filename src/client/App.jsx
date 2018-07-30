@@ -13,6 +13,7 @@ import { StoreContext } from 'Context';
 
 import ActionBar from 'Components/ActionBar';
 import Sidebar from 'Components/Sidebar';
+import Snackbar from 'Components/Snackbar';
 import Viewer from 'Components/Viewer';
 
 import getBucketedFixtures from 'Helpers/getBucketedFixtures';
@@ -105,6 +106,7 @@ export class App extends React.PureComponent {
                                 <Viewer />
                             </Grid>
                         </Grid>
+                        <Snackbar />
                     </StoreContext.Provider>
                 </CssBaseline>
             </main>
