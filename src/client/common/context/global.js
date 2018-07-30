@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const StoreContext = React.createContext({
+export const GlobalContext = React.createContext({
     isLoading: false,
     isSnackbarOpen: false,
     selectedNode: null,

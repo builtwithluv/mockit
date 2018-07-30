@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import { StoreContext } from 'Context';
+import { GlobalContext } from 'Context';
 
 const styles = theme => ({
 
@@ -11,7 +11,7 @@ const styles = theme => ({
 export class SimpleSnackbar extends React.PureComponent {
     render() {
         return (
-            <StoreContext.Consumer>
+            <GlobalContext.Consumer>
                 {({ isSnackbarOpen, snackbarMessage, toggleSnackbar }) => (
                     <Snackbar
                         anchorOrigin={{
@@ -32,7 +32,7 @@ export class SimpleSnackbar extends React.PureComponent {
                         message={<span id="snackbar-message">{snackbarMessage}</span>}
                     />
                 )}
-            </StoreContext.Consumer>
+            </GlobalContext.Consumer>
         );
     }
 }

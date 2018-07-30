@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 
-import { StoreContext } from 'Context';
+import { GlobalContext } from 'Context';
 
 const styles = theme => ({
     textField: {
@@ -21,7 +21,7 @@ export class LatencyField extends React.PureComponent {
     render() {
         const { classes } = this.props;
         return (
-            <StoreContext.Consumer>
+            <GlobalContext.Consumer>
                 {({ store, updateTestyDebounced }) => (
                     <TextField
                         id="latency-input"
@@ -36,7 +36,7 @@ export class LatencyField extends React.PureComponent {
                         }}
                     />
                 )}
-            </StoreContext.Consumer>
+            </GlobalContext.Consumer>
         );
     }
 }

@@ -1,1 +1,1 @@
-export { StoreContext } from './global';
+export { GlobalContext } from './global';

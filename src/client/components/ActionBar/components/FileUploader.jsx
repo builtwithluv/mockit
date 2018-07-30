@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button, Spinner } from '@blueprintjs/core';
 import Input from '@material-ui/core/Input';
 
-import { StoreContext } from 'Context';
+import { GlobalContext } from 'Context';
 
 const styles = theme => ({
     rightIcon: {
@@ -66,7 +66,7 @@ export class FileUploader extends React.PureComponent {
         const { isUploading } = this.state;
 
         return (
-            <StoreContext.Consumer>
+            <GlobalContext.Consumer>
                 {({ toggleSnackbar, updateGlobalContext }) => (
                     <div>
                         {isUploading ? (
@@ -88,7 +88,7 @@ export class FileUploader extends React.PureComponent {
                         />
                     </div>
                 )}
-            </StoreContext.Consumer>
+            </GlobalContext.Consumer>
         );
     }
 }

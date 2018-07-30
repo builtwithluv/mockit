@@ -9,7 +9,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
-import { StoreContext } from 'Context';
+import { GlobalContext } from 'Context';
 
 import ActionBar from 'Components/ActionBar';
 import Sidebar from 'Components/Sidebar';
@@ -71,7 +71,7 @@ export class App extends React.PureComponent {
         return !isLoading && (
             <main className={classNames('bp3-light', classes.main)}>
                 <CssBaseline>
-                    <StoreContext.Provider value={this.state}>
+                    <GlobalContext.Provider value={this.state}>
                         <ActionBar />
                         <Grid container className={classes.container}>
                             <Grid item className={classes.sidebar}>
@@ -92,7 +92,7 @@ export class App extends React.PureComponent {
                             </Grid>
                         </Grid>
                         <Snackbar />
-                    </StoreContext.Provider>
+                    </GlobalContext.Provider>
                 </CssBaseline>
             </main>
         );
