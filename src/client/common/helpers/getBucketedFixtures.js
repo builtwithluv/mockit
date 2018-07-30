@@ -75,7 +75,7 @@ function createNodeList(buckets, active) {
     return nodes;
 }
 
-export default function getBucketedFixtures(store) {
-    const buckets = flow(createBuckets, sortByMethod)(store.fixtures);
-    return createNodeList(buckets, store.active);
+export default function getBucketedFixtures(fixtures, activeFixtures) {
+    const buckets = flow(createBuckets, sortByMethod)(fixtures);
+    return createNodeList(buckets, activeFixtures);
 }

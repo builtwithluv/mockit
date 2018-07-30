@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Classes, Tree } from '@blueprintjs/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import { StoreContext } from 'Context';
+import getBucketedFixtures from 'Helpers/getBucketedFixtures';
 
 const styles = theme => ({
     treeContainer: {
@@ -26,58 +26,71 @@ export class Sidebar extends React.Component {
         classes: PropTypes.object,
     };
 
-    items;
-    updateGlobalContext;
+    static getDerivedStateFromProps = props => {
+        return {
+            nodeList: getBucketedFixtures(props.fixtures, props.activeFixtures),
+        }
+    }
 
     componentDidMount() {
         this.selectFirstItem();
     }
 
     render() {
-        const { classes } = this.props;
+        const {
+            activeFixtures,
+            classes,
+            fixtures,
+        } = this.props;
 
         return (
-            <StoreContext.Consumer>
-                {({ sidebarBuckets, updateGlobalContext }) => {
-                    this.items = sidebarBuckets;
-                    this.updateGlobalContext = updateGlobalContext;
-
-                    return (
-                        <div className={classes.treeContainer}>
-                            <Tree
-                                contents={sidebarBuckets}
-                                onNodeClick={this.handleNodeClick}
-                                onNodeCollapse={this.handleNodeCollapse}
-                                onNodeExpand={this.handleNodeExpand}
-                                className={classNames(classes.tree, Classes.ELEVATION_3)}
-                            />
-                        </div>
-                    );
-                }}
-            </StoreContext.Consumer>
+            <div className={classes.treeContainer}>
+                <Tree
+                    contents={getBucketedFixtures(fixtures, activeFixtures)}
+                    onNodeClick={this.handleNodeClick}
+                    onNodeCollapse={this.handleNodeCollapse}
+                    onNodeExpand={this.handleNodeExpand}
+                    className={classNames(classes.tree, Classes.ELEVATION_3)}
+                />
+            </div>
         );
     }
 
     handleNodeClick = (nodeData, _nodePath, e) => {
+        const { updateGlobalContext } = this.props;
+        const { nodeList } = this.state;
+
         if (nodeData.hasCaret) {
             return;
         }
+
         const originallySelected = nodeData.isSelected;
+
         if (!e.shiftKey) {
-            this.forEachNode(this.items, n => (n.isSelected = false));
+            this.forEachNode(nodeList, n => (n.isSelected = false));
         }
+
         nodeData.isSelected = originallySelected == null ? true : !originallySelected;
-        this.updateGlobalContext({ sidebarBuckets: cloneDeep(this.items), selectedFixture: nodeData });
+
+        updateGlobalContext({ selectedFixture: nodeData });
+
+        this.setState({ nodeList: cloneDeep(nodeList) });
     };
 
     handleNodeCollapse = nodeData => {
+        const { nodeList } = this.state;
+
         nodeData.isExpanded = false;
-        this.updateGlobalContext(cloneDeep(this.items));
+
+        this.setState(cloneDeep(nodeList));
     }
 
     handleNodeExpand = nodeData => {
+        const { nodeList } = this.state;
+
         nodeData.isExpanded = true;
-        this.updateGlobalContext(cloneDeep(this.items));
+
+        this.setState(cloneDeep(nodeList));
     }
 
     forEachNode(nodes, callback) {
@@ -92,7 +105,9 @@ export class Sidebar extends React.Component {
     }
 
     selectFirstItem = () => {
-        this.handleNodeClick(this.items[0].childNodes[0], _, {});
+        const { nodeList } = this.state;
+
+        this.handleNodeClick(nodeList[0].childNodes[0], _, {});
     }
 }
 

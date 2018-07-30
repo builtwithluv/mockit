@@ -16,8 +16,6 @@ import Sidebar from 'Components/Sidebar';
 import Snackbar from 'Components/Snackbar';
 import Viewer from 'Components/Viewer';
 
-import getBucketedFixtures from 'Helpers/getBucketedFixtures';
-
 const styles = theme => ({
     container: {
         height: 'calc(100% - 100px)',
@@ -44,13 +42,11 @@ export class App extends React.PureComponent {
             isLoading: true,
             isSnackbarOpen: false,
             selectedFixture: null,
-            sidebarBuckets: [],
             snackbarMessage: '',
             store: null,
             validations: {},
-            nextStoreData: (nextStore) => this.nextStoreData(nextStore),
             toggleSnackbar: this.toggleSnackbar,
-            updateGlobalContext: (nextState) => this.setState(nextState),
+            updateGlobalContext: this.updateGlobalContext,
             updateTesty: this.updateTesty,
             updateTestyDebounced: debounce(this.updateTesty, 750),
         };
@@ -59,8 +55,36 @@ export class App extends React.PureComponent {
     componentDidMount() {
         fetch('/testy/api')
             .then(data => data.json())
-            .then(data => this.setState(prevState => ({ ...prevState, isLoading: false, ...this.nextStoreData(data) })))
+            .then(data => this.setState(prevState => ({ ...prevState, isLoading: false, store: data })))
             .catch(err => console.error(err));
+    }
+
+    render() {
+        const { classes } = this.props;
+        const { isLoading, store } = this.state;
+
+        return !isLoading && (
+            <main className={classNames('bp3-light', classes.main)}>
+                <CssBaseline>
+                    <StoreContext.Provider value={this.state}>
+                        <ActionBar />
+                        <Grid container className={classes.container}>
+                            <Grid item className={classes.sidebar}>
+                                <Sidebar
+                                    activeFixtures={store.active}
+                                    fixtures={store.fixtures}
+                                    globalUpdater={this.updateGlobalContext}
+                                />
+                            </Grid>
+                            <Grid item xs className={classes.viewer}>
+                                <Viewer />
+                            </Grid>
+                        </Grid>
+                        <Snackbar />
+                    </StoreContext.Provider>
+                </CssBaseline>
+            </main>
+        );
     }
 
     toggleSnackbar = (msg = this.state.snackbarMessage) => {
@@ -68,11 +92,8 @@ export class App extends React.PureComponent {
         this.setState({ isSnackbarOpen: !isSnackbarOpen, snackbarMessage: msg });
     }
 
-    nextStoreData = nextStore => {
-        return {
-            store: nextStore,
-            sidebarBuckets: getBucketedFixtures(nextStore),
-        };
+    updateGlobalContext = nextState => {
+        this.setState(nextState)
     }
 
     updateTesty = action => {
@@ -84,32 +105,8 @@ export class App extends React.PureComponent {
             },
         })
             .then(data => data.json())
-            .then(data => this.setState({ store: data, sidebarBuckets: getBucketedFixtures(data) }))
+            .then(data => this.setState({ store: data }))
             .catch(err => console.log(err));
-    }
-
-    render() {
-        const { classes } = this.props;
-        const { isLoading } = this.state;
-
-        return !isLoading && (
-            <main className={classNames('bp3-light', classes.main)}>
-                <CssBaseline>
-                    <StoreContext.Provider value={this.state}>
-                        <ActionBar />
-                        <Grid container className={classes.container}>
-                            <Grid item className={classes.sidebar}>
-                                <Sidebar />
-                            </Grid>
-                            <Grid item xs className={classes.viewer}>
-                                <Viewer />
-                            </Grid>
-                        </Grid>
-                        <Snackbar />
-                    </StoreContext.Provider>
-                </CssBaseline>
-            </main>
-        );
     }
 }
 

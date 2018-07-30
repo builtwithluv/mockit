@@ -30,7 +30,7 @@ export class FileUploader extends React.PureComponent {
         this.input.click();
     }
 
-    handleUpload = (evt, toggleSnackbar, updateGlobalContext, nextStoreData) => {
+    handleUpload = (evt, toggleSnackbar, updateGlobalContext) => {
         this.setState({ isUploading: true });
 
         const file = evt.target.files[0];
@@ -51,7 +51,7 @@ export class FileUploader extends React.PureComponent {
                     }
                     return res.json();
                 })
-                .then(data => updateGlobalContext(nextStoreData(data)))
+                .then(data => updateGlobalContext({ store: data }))
                 .then(() => toggleSnackbar('Successfully created fixtures from .har file'))
                 .then(() => this.setState({ isUploading: false }))
                 .catch(err => toggleSnackbar(err))
@@ -67,7 +67,7 @@ export class FileUploader extends React.PureComponent {
 
         return (
             <StoreContext.Consumer>
-                {({ nextStoreData, toggleSnackbar, updateGlobalContext }) => (
+                {({ toggleSnackbar, updateGlobalContext }) => (
                     <div>
                         {isUploading ? (
                             <Spinner size={Spinner.SIZE_SMALL} />
@@ -80,7 +80,7 @@ export class FileUploader extends React.PureComponent {
                             className={classes.input}
                             inputRef={ref => { this.input = ref; }}
                             type="file"
-                            onChange={e => this.handleUpload(e, toggleSnackbar, updateGlobalContext, nextStoreData)}
+                            onChange={e => this.handleUpload(e, toggleSnackbar, updateGlobalContext)}
                             inputProps={{
                                 'accept': '.har',
                                 'aria-hidden': true,
