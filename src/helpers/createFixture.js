@@ -30,14 +30,14 @@ module.exports = function createFixture({
         end_with_newline: true,
     };
 
-    fs.writeFile(
+    const errs = fs.writeFileSync(
         path.resolve(path.join(fixturesPath, fileName)),
         beautify(`module.exports = ${JSON.stringify(fixture)}`, beautifyOptions),
-        (err) => {
-            if (err) {
-                throw err;
-            }
-            console.log(`Saved file: ${fileName}`);
-        }
     );
+
+    if (!errs) {
+        console.log(`Saved file: ${fileName}`);
+    } else {
+        console.log(errs);
+    }
 }

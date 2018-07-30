@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import FileUpload from '@material-ui/icons/FileUpload';
+import { Button, Spinner } from '@blueprintjs/core';
 import Input from '@material-ui/core/Input';
 
 import { StoreContext } from 'Context';
@@ -21,13 +20,19 @@ export class FileUploader extends React.PureComponent {
         classes: PropTypes.object.isRequired,
     };
 
+    state = {
+        isUploading: false,
+    };
+
     input;
 
     handleClick = () => {
         this.input.click();
     }
 
-    handleUpload = (evt, toggleSnackbar) => {
+    handleUpload = (evt, toggleSnackbar, updateStoreContext, nextStoreData) => {
+        this.setState({ isUploading: true });
+
         const file = evt.target.files[0];
 
         if (file) {
@@ -45,8 +50,12 @@ export class FileUploader extends React.PureComponent {
                         throw 'Failed to upload har file';
                     }
                     toggleSnackbar('Successfully created fixtures from har file');
+                    return res.json();
                 })
-                .catch(err => toggleSnackbar(err));
+                .then(data => updateStoreContext(nextStoreData(data)))
+                .then(() => this.setState({ isUploading: false }))
+                .catch(err => toggleSnackbar(err))
+                .catch(() => this.setState({ isUploading: false }));
             }
             r.readAsText(file);
         }
@@ -54,23 +63,24 @@ export class FileUploader extends React.PureComponent {
 
     render() {
         const { classes } = this.props;
+        const { isUploading } = this.state;
+
         return (
             <StoreContext.Consumer>
-                {({ handlers }) => (
+                {({ handlers, updateStoreContext, nextStoreData }) => (
                     <div>
-                        <Button
-                            variant="contained"
-                            color="default"
-                            onClick={this.handleClick}
-                        >
-                            Upload har file
-                            <FileUpload className={classes.rightIcon} />
-                        </Button>
+                        {isUploading ? (
+                            <Spinner size={Spinner.SIZE_SMALL} />
+                        ) : (
+                            <Button onClick={this.handleClick}>
+                                UPLOAD HAR FILE
+                            </Button>
+                        )}
                         <Input
                             className={classes.input}
                             inputRef={ref => { this.input = ref; }}
                             type="file"
-                            onChange={e => this.handleUpload(e, handlers.toggleSnackbar)}
+                            onChange={e => this.handleUpload(e, handlers.toggleSnackbar, updateStoreContext, nextStoreData)}
                             inputProps={{
                                 'accept': '.har',
                                 'aria-hidden': true,

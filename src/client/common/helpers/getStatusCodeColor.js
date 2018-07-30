@@ -1,19 +1,17 @@
-import brown from '@material-ui/core/colors/brown';
-import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
+import { Colors } from '@blueprintjs/core';
 
 export default function getStatusCodeColor(status) {
     if (status < 200) {
-        return brown[200];
+        return Colors.COBALT2;
     }
     if (status < 300) {
-        return green[200];
+        return Colors.GREEN2;
     }
     if (status < 400) {
-        return brown[200];
+        return Colors.GOLD2;
     }
     if (status < 500) {
-        return red[200];
+        return Colors.RED2;
     }
-    return brown[200];
+    return Colors.GRAY2;
 }

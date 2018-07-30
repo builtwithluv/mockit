@@ -1,9 +1,3 @@
 {
-    "fixturesPath": "example/server/fixtures",
-    "alwaysErrorFixture": {
-        "status": 400,
-        "data": {
-            "error": "My custom error!"
-        }
-    }
+    "fixturesPath": "example/server/fixtures"
 }

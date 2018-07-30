@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Alignment, Navbar, NavbarGroup } from '@blueprintjs/core';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-
-import AlwaysErrorSwitch from './components/AlwaysErrorSwitch';
 import FileUploader from './components/FileUploader';
 import LatencyField from './components/LatencyField';
 
 const styles = theme => ({
     root: {
-        margin: theme.spacing.unit,
+        paddingTop: 25,
+        paddingBottom: 25,
+        height: 100,
     },
 });
 
@@ -21,23 +21,14 @@ export class ActionBar extends React.PureComponent {
     render() {
         const { classes } = this.props;
         return (
-            <div className={classes.root}>
-                <Grid container justify="space-between" alignItems="center">
-                    <Grid item>
-                        <LatencyField />
-                    </Grid>
-                    <Grid item>
-                        <Grid container>
-                            <Grid item>
-                                <AlwaysErrorSwitch />
-                            </Grid>
-                            <Grid item>
-                                <FileUploader />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </div>
+            <Navbar className={classes.root}>
+                <NavbarGroup align={Alignment.LEFT}>
+                    <FileUploader />
+                </NavbarGroup>
+                <NavbarGroup align={Alignment.RIGHT}>
+                    <LatencyField />
+                </NavbarGroup>
+            </Navbar>
         );
     }
 }

@@ -13,7 +13,8 @@ module.exports = function loadTestys(app, testy) {
 
         try {
             unharify(content);
-            return res.send({ message: 'Successfully created fixtures from har' });
+            store.reloadFixtures();
+            return res.json(store.getState());
         } catch (e) {
             res.status(400);
             return res.send({ message: e });

@@ -3,17 +3,14 @@ import React from 'react';
 export const StoreContext = React.createContext({
     isLoading: false,
     isSnackbarOpen: false,
+    selectedFixture: null,
+    sidebarBuckets: [],
     snackbarMessage: '',
     store: {
         active: {},
-        alwaysError: false,
         fixtures: [],
         latency: 50,
     },
     validations: {},
-    setValidations: () => {},
-    toggleLoading: () => {},
-    toggleSnackbar: () => {},
-    updateTesty: () => {},
-    updateTestyDebounced: () => {},
+    updateStoreContext: () => {},
 });

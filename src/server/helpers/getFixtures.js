@@ -33,6 +33,10 @@ module.exports = function getFixtures(contents = [], filePath = DEFAULT_PATH) {
                 fixture.description = 'No description added.';
             }
 
+            if (fixture.handler) {
+                fixture.handler = fixture.handler.toString();
+            }
+
             contents.push(fixture);
         }
     });

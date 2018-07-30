@@ -3,11 +3,11 @@ module.exports = {
 
     default: true,
 
-    description: "Gives you Cheng Ly",
+    description: "Sets name",
 
     url: '/api/test',
 
-    method: 'GET',
+    method: 'POST',
     status: 200,
 
     // Data is the contract or the response to send

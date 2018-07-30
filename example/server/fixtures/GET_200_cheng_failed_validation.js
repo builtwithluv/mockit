@@ -1,11 +1,12 @@
 module.exports = {
-    id: 'GET_200_BHAKTI_FAILED',
+    default: true,
 
-    description: "Gives you Bhakti Patel with failed validation",
+    description: "Gives you Cheng Ly with failed validation",
 
     url: '/api/test',
 
     method: 'GET',
+    status: 200,
 
     validate: {
         url: 'http://localhost:3000/validation',
@@ -14,10 +15,12 @@ module.exports = {
         },
     },
 
-    // Data is the contract or the response to send
-    // Will be in JSON format
     data: {
-        firstName: 'Bhakti',
-        lastName: 'Patel',
+        firstName: 'Cheng',
+        lastName: 'Ly',
+        hair: {
+            color: 'black',
+            length: 3,
+        }
     },
 };

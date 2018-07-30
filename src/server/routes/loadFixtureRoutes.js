@@ -1,14 +1,11 @@
-const getAlwaysErrorFixture = require('../helpers/getAlwaysErrorFixture');
-
-module.exports = function loadFixtureRoutes(app, testy) {
-    const state = testy.getState();
+module.exports = function loadFixtureRoutes(app, store) {
+    const state = store.getState();
     const fixtures = state.fixtures;
 
     fixtures.forEach(({ method, url }) => {
         app[method.toLowerCase()](url, (req, res) => {
             const {
                 active,
-                alwaysError,
                 latency,
             } = testy.getState();
 
@@ -20,12 +17,6 @@ module.exports = function loadFixtureRoutes(app, testy) {
             } = active[method][url];
 
             setTimeout(() => {
-                if (alwaysError) {
-                    const alwaysErrorFixture = getAlwaysErrorFixture();
-                    res.status(alwaysErrorFixture.status);
-                    return res.json(alwaysErrorFixture.data);
-                }
-
                 if (handler) {
                     if (typeof handler !== 'function') {
                         console.error(`Handler for ${description} is not a function`);
