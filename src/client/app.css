@@ -8,3 +8,7 @@
 .prettyprint {
     padding: 16px;
 }
+
+.sidebar-tooltip--width {
+    max-width: 350px;
+}

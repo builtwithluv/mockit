@@ -2,7 +2,13 @@ import { flow } from 'lodash';
 
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import { Classes, Colors, Icon, Tooltip } from '@blueprintjs/core';
+import {
+    Classes,
+    Colors,
+    Icon,
+    Position,
+    Tooltip,
+} from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 
 import getMethodColor from 'Helpers/getMethodColor';
@@ -37,7 +43,12 @@ function createNodeList(buckets, active) {
         node.childNodes = fixtures.map(({ id, method, status, description }) => ({
             id,
             label: (
-                <Tooltip hoverOpenDelay={450} content={description}>
+                <Tooltip
+                    content={description}
+                    hoverOpenDelay={450}
+                    popoverClassName="sidebar-tooltip--width"
+                    position={Position.BOTTOM}
+                >
                     <Grid container wrap="nowrap" alignItems="center">
                         <Grid container style={{ width: 15 }}>
                             {active[method][url].id === id && <Icon icon={IconNames.SELECTION} iconSize={10} />}

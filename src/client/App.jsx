@@ -48,14 +48,11 @@ export class App extends React.PureComponent {
             snackbarMessage: '',
             store: null,
             validations: {},
-            handlers: {
-                updateTesty: this.updateTesty,
-                updateTestyDebounced: debounce(this.updateTesty, 750),
-            },
             nextStoreData: (nextStore) => this.nextStoreData(nextStore),
             toggleSnackbar: this.toggleSnackbar,
             updateGlobalContext: (nextState) => this.setState(nextState),
             updateTesty: this.updateTesty,
+            updateTestyDebounced: debounce(this.updateTesty, 750),
         };
     }
 
@@ -93,9 +90,10 @@ export class App extends React.PureComponent {
 
     render() {
         const { classes } = this.props;
+        const { isLoading } = this.state;
 
-        return !this.state.isLoading && (
-            <main className={classNames("bp3-light", classes.main)}>
+        return !isLoading && (
+            <main className={classNames('bp3-light', classes.main)}>
                 <CssBaseline>
                     <StoreContext.Provider value={this.state}>
                         <ActionBar />

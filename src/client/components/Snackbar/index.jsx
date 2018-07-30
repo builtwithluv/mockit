@@ -12,7 +12,7 @@ export class SimpleSnackbar extends React.PureComponent {
     render() {
         return (
             <StoreContext.Consumer>
-                {({ isSnackbarOpen, snackbarMessage, toggleSnackbar}) => (
+                {({ isSnackbarOpen, snackbarMessage, toggleSnackbar }) => (
                     <Snackbar
                         anchorOrigin={{
                             vertical: 'bottom',

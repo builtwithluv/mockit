@@ -22,7 +22,7 @@ export class LatencyField extends React.PureComponent {
         const { classes } = this.props;
         return (
             <StoreContext.Consumer>
-                {({ store, handlers }) => (
+                {({ store, updateTestyDebounced }) => (
                     <TextField
                         id="latency-input"
                         label="Latency"
@@ -30,7 +30,7 @@ export class LatencyField extends React.PureComponent {
                         defaultValue={store.latency}
                         type="number"
                         margin="normal"
-                        onChange={e => handlers.updateTestyDebounced({ latency: +e.target.value })}
+                        onChange={e => updateTestyDebounced({ latency: +e.target.value })}
                         InputProps={{
                             endAdornment: <InputAdornment position="end">ms</InputAdornment>,
                         }}
