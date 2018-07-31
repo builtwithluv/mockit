@@ -68,6 +68,7 @@ export class CreateNewFixture extends React.Component {
                                             labelInfo="(required)"
                                         >
                                             <InputGroup
+                                                required
                                                 id="url-input"
                                                 placeholder="/"
                                                 value={values.url}
@@ -80,6 +81,7 @@ export class CreateNewFixture extends React.Component {
                                             labelInfo="(required)"
                                         >
                                             <TextArea
+                                                required
                                                 id="data-input"
                                                 className={classes.data}
                                                 placeholder="{ }"
