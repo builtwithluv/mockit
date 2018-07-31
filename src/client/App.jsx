@@ -9,6 +9,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
+import getNodeList from 'Helpers/getNodeList';
+
 import { GlobalContext } from 'Context';
 
 import ActionBar from 'Components/ActionBar';
@@ -76,8 +78,7 @@ export class App extends React.PureComponent {
                         <Grid container className={classes.container}>
                             <Grid item className={classes.sidebar}>
                                 <Sidebar
-                                    activeFixtures={store.active}
-                                    fixtures={store.fixtures}
+                                    nodeList={getNodeList(store.fixtures, store.active)}
                                     updateGlobalContext={this.updateGlobalContext}
                                 />
                             </Grid>

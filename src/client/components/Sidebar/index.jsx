@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import { Classes, Tree } from '@blueprintjs/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import getBucketedFixtures from 'Helpers/getBucketedFixtures';
-
 const styles = theme => ({
     treeContainer: {
         display: 'relative',
@@ -28,27 +26,26 @@ export class Sidebar extends React.Component {
 
     static getDerivedStateFromProps = props => {
         return {
-            nodeList: getBucketedFixtures(props.fixtures, props.activeFixtures),
-        }
+            nodeList: props.nodeList,
+        };
     }
 
-    state = {};
+    state = {
+        nodeList: [],
+    };
 
     componentDidMount() {
         this.selectFirstItem();
     }
 
     render() {
-        const {
-            activeFixtures,
-            classes,
-            fixtures,
-        } = this.props;
+        const { classes } = this.props;
+        const { nodeList } = this.state;
 
         return (
             <div className={classes.treeContainer}>
                 <Tree
-                    contents={getBucketedFixtures(fixtures, activeFixtures)}
+                    contents={nodeList}
                     onNodeClick={this.handleNodeClick}
                     onNodeCollapse={this.handleNodeCollapse}
                     onNodeExpand={this.handleNodeExpand}
@@ -58,7 +55,7 @@ export class Sidebar extends React.Component {
         );
     }
 
-    handleNodeClick = (nodeData, _nodePath, e) => {
+    handleNodeClick = nodeData => {
         const { updateGlobalContext } = this.props;
         const { nodeList } = this.state;
 
@@ -66,17 +63,13 @@ export class Sidebar extends React.Component {
             return;
         }
 
-        const originallySelected = nodeData.isSelected;
+        this.forEachNode(nodeList, n => (n.isSelected = false));
 
-        if (!e.shiftKey) {
-            this.forEachNode(nodeList, n => (n.isSelected = false));
-        }
-
-        nodeData.isSelected = originallySelected == null ? true : !originallySelected;
+        nodeData.isSelected = true;
 
         updateGlobalContext({ selectedNode: nodeData });
 
-        this.setState({ nodeList: cloneDeep(nodeList) });
+        this.setState({ nodeList });
     };
 
     handleNodeCollapse = nodeData => {
@@ -84,7 +77,7 @@ export class Sidebar extends React.Component {
 
         nodeData.isExpanded = false;
 
-        this.setState(cloneDeep(nodeList));
+        this.setState({ nodeList: cloneDeep(nodeList) });
     }
 
     handleNodeExpand = nodeData => {
@@ -92,7 +85,7 @@ export class Sidebar extends React.Component {
 
         nodeData.isExpanded = true;
 
-        this.setState(cloneDeep(nodeList));
+        this.setState({ nodeList: cloneDeep(nodeList) });
     }
 
     forEachNode(nodes, callback) {
@@ -109,7 +102,7 @@ export class Sidebar extends React.Component {
     selectFirstItem = () => {
         const { nodeList } = this.state;
 
-        this.handleNodeClick(nodeList[0].childNodes[0], _, {});
+        this.handleNodeClick(nodeList[0].childNodes[0]);
     }
 }
 

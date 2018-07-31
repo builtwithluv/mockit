@@ -31,8 +31,8 @@ function createBuckets(fixtures) {
     }, {});
 }
 
-function createNodeList(buckets, active) {
-    const nodes = Object.entries(buckets).reduce((nodeList, [url, fixtures]) => {
+function createNodeList(buckets, activeFixtures) {
+    return Object.entries(buckets).reduce((nodeList, [url, fixtures]) => {
         const node = {
             id: url,
             hasCaret: true,
@@ -51,7 +51,7 @@ function createNodeList(buckets, active) {
                 >
                     <Grid container wrap="nowrap" alignItems="center">
                         <Grid container style={{ width: 15 }}>
-                            {active[method][url].id === id && <Icon icon={IconNames.SELECTION} iconSize={10} />}
+                            {activeFixtures[method][url].id === id && <Icon icon={IconNames.SELECTION} iconSize={10} />}
                         </Grid>
                         <Grid item style={{ width: 40, color: getMethodColor(method), fontSize: '0.75em', textAlign: 'center', marginRight: 8 }}>
                             {method}
@@ -71,11 +71,9 @@ function createNodeList(buckets, active) {
 
         return nodeList;
     }, []);
-
-    return nodes;
 }
 
-export default function getBucketedFixtures(fixtures, activeFixtures) {
+export default function getNodeList(fixtures, activeFixtures) {
     const buckets = flow(createBuckets, sortByMethod)(fixtures);
     return createNodeList(buckets, activeFixtures);
 }
