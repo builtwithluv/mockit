@@ -7,6 +7,7 @@ import {
     Button,
     Classes,
     Colors,
+    Intent,
     Navbar,
     NavbarGroup,
     NavbarDivider,
@@ -76,7 +77,7 @@ export class Viewer extends React.Component {
         const {
             id,
             data,
-            handler,
+            _handler,
             method,
             url,
         } = this.fixture;
@@ -93,7 +94,11 @@ export class Viewer extends React.Component {
                         <NavbarGroup align={Alignment.RIGHT}>
                             <NavbarHeading>{method} <span className={classes.url}>{url}</span></NavbarHeading>
                             <NavbarDivider />
-                            <Button text="Set Active" onClick={() => updateTesty({ id })} />
+                            <Button
+                                intent={Intent.PRIMARY}
+                                text="Set Active"
+                                onClick={() => updateTesty({ id })}
+                            />
                         </NavbarGroup>
                     </Navbar>
                 </div>
@@ -101,7 +106,7 @@ export class Viewer extends React.Component {
                     {data ? (
                         <Code language="javascript" codeString={beautify(generateDataString(data, this.errors))} />
                     ) : (
-                        <Code language="javascript" codeString={generateHandlerString(handler)} />
+                        <Code language="javascript" codeString={generateHandlerString(_handler)} />
                     )}
                 </div>
             </div>
