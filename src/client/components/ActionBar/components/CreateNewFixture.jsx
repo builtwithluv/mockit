@@ -44,7 +44,10 @@ export class CreateNewFixture extends React.Component {
                     this.updateGlobalContext = updateGlobalContext;
                     return (
                         <div>
-                            <Button onClick={this.toggleDialog}>
+                            <Button
+                                intent={Intent.SUCCESS}
+                                onClick={this.toggleDialog}
+                            >
                                 NEW
                             </Button>
                             <Dialog

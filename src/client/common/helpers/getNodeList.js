@@ -53,13 +53,36 @@ function createNodeList(buckets, activeFixtures) {
                         <Grid container style={{ width: 15 }}>
                             {activeFixtures[method][url].id === id && <Icon icon={IconNames.SELECTION} iconSize={10} />}
                         </Grid>
-                        <Grid item style={{ width: 40, color: getMethodColor(method), fontSize: '0.75em', textAlign: 'center', marginRight: 8 }}>
+                        <Grid
+                            item
+                            style={{
+                                width: 40,
+                                color: getMethodColor(method),
+                                fontSize: '0.75em',
+                                fontWeight: 800,
+                                textAlign: 'center',
+                                marginRight: 8,
+                            }}
+                        >
                             {method}
                         </Grid>
-                        <Grid item style={{ width: 30, color: getStatusColor(status), fontSize: '0.75em' }}>
+                        <Grid
+                            item
+                            style={{
+                                width: 30,
+                                color: getStatusColor(status),
+                                fontSize: '0.75em',
+                                fontWeight: 600,
+                            }}
+                        >
                             {status}
                         </Grid>
-                        <Grid item xs zeroMinWidth className={Classes.TEXT_OVERFLOW_ELLIPSIS}>
+                        <Grid
+                            item
+                            xs
+                            zeroMinWidth
+                            className={Classes.TEXT_OVERFLOW_ELLIPSIS}
+                        >
                             {description}
                         </Grid>
                     </Grid>
