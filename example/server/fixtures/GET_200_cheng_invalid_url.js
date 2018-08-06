@@ -1,6 +1,4 @@
 module.exports = {
-    default: true,
-
     description: "Gives you Cheng Ly using invalid validation url",
 
     url: '/api/test',
