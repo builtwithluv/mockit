@@ -4,7 +4,7 @@
   "description": "Framework for mocking",
   "main": "lib/index.js",
   "scripts": {
-    "build": "npx webpack --config ./webpack.prod.js -p",
+    "build": "npx webpack --config ./webpack.prod.js -p && npx babel src/server -d lib/server && npx babel src/index.js --out-file lib/index.js",
     "prepublishOnly": "npx cleandir node_modules && npm i && npm run build",
     "start": "npx concurrently --kill-others --exec babel-node \"npm run start:server\" \"npm run start:client\"",
     "start:server": "./node_modules/.bin/nodemon example/server/index.js --exec babel-node",
@@ -63,7 +63,6 @@
     "clean-dir": "^1.0.3",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.6.0",
-    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "cypress": "^3.0.3",
     "file-loader": "^1.1.11",
