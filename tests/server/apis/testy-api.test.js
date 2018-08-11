@@ -1,4 +1,5 @@
 import request from 'supertest';
+import fixture from '@/example/server/fixtures/GET_200_bhakti';
 import app from '@/example/server/server';
 
 describe('Test the api path', () => {
@@ -10,6 +11,37 @@ describe('Test the api path', () => {
                 .expect('Content-Type', /json/)
                 .end(done);
         });
+
+        test('respond with store data', (done) => {
+            request(app)
+                .get('/testy/api')
+                .then(response => {
+                    expect(response.body).toHaveProperty(
+                        'active',
+                        'fixtures',
+                        'latency',
+                    );
+                    done();
+                });
+        });
+
+        test('respond with all available fixtures', (done) => {
+            request(app)
+                .get('/testy/api')
+                .then(response => {
+                    expect(response.body.fixtures).toHaveLength(12);
+                    response.body.fixtures.forEach(fixture => {
+                        expect(fixture).toHaveProperty(
+                            'id',
+                            'description',
+                            'method',
+                            'status',
+                            'url',
+                        );
+                    });
+                    done();
+                });
+        });
     });
 
     describe('PUT', () => {
@@ -20,6 +52,29 @@ describe('Test the api path', () => {
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end(done);
+        });
+
+        test('should be able to set another fixture as active', (done) => {
+            request(app)
+                .put('/testy/api')
+                .send({ id: 'GET_200_bhakti' })
+                .then(response => {
+                    expect(response.body.active.GET['/api/test']).toEqual({
+                        ...fixture,
+                        handler: undefined,
+                    });
+                    done();
+                });
+        });
+
+        test('should be able to set latency', (done) => {
+            request(app)
+                .put('/testy/api')
+                .send({ latency: 100 })
+                .then(response => {
+                    expect(response.body.latency).toBe(100);
+                    done();
+                });
         });
     });
 });

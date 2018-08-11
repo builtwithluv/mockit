@@ -1,29 +1,34 @@
-import fs from 'fs';
-import path from 'path';
 import request from 'supertest';
 import app from '@/example/server/server';
+import removeFile from '@/src/utils/removeFile';
 
 describe('/testy/api/new', () => {
     describe('POST', () => {
-        test('respond with 200 and json', (done) => {
+        test('should be able to create a new fixture', (done) => {
             request(app)
                 .post('/testy/api/new')
                 .send({ id: 'supertest', url: '/supertest', data: 10 })
                 .set('Accept', 'application/json')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .end((err) => {
-                    if (err) return done(err);
-                    const file = path.resolve('example', 'server', 'fixtures', 'GET-200-supertest.js');
-                    fs.unlink(
-                        file,
-                        (err) => {
-                            if (err) throw err;
-                            console.log(`${file} was deleted`);
-                            done();
-                        }
-                    );
-                });
+                .then(() => removeFile('example/server/fixtures/GET-200-supertest.js', done));
+        });
+
+        test('should respond with the new state after creation of new fixture', (done) => {
+            request(app)
+                .post('/testy/api/new')
+                .send({ id: 'supertest', url: '/supertest', data: 10 })
+                .set('Accept', 'application/json')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .then(response => {
+                    expect(response.body.fixtures).toContainEqual(expect.objectContaining({
+                        id: 'supertest',
+                        url: '/supertest',
+                        data: 10,
+                    }));
+                })
+                .then(() => removeFile('example/server/fixtures/GET-200-supertest.js', done));
         });
 
         test('respond with 400', (done) => {
