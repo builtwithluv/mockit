@@ -23,7 +23,7 @@ import {
     generateDataString,
     generateHandlerString,
     validateResponse,
-} from 'Helpers';
+} from '@client/common/helpers';
 
 const styles = theme => ({
     url: {

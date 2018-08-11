@@ -9,14 +9,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
-import getNodeList from 'Helpers/getNodeList';
+import getNodeList from '@client/common/helpers/getNodeList';
 
-import { GlobalContext } from 'Context';
+import { GlobalContext } from '@client/common/context';
 
-import ActionBar from 'Components/ActionBar';
-import Sidebar from 'Components/Sidebar';
-import Snackbar from 'Components/Snackbar';
-import Viewer from 'Components/Viewer';
+import ActionBar from '@client/components/ActionBar';
+import Sidebar from '@client/components/Sidebar';
+import Snackbar from '@client/components/Snackbar';
+import Viewer from '@client/components/Viewer';
 
 const styles = theme => ({
     container: {

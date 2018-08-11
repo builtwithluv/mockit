@@ -1,7 +1,7 @@
-const path = require('path');
-const express = require('express');
+import path from 'path';
+import express from 'express';
 
-module.exports = function loadMiddlewares(app) {
+export default function loadMiddlewares(app) {
     app.use(function (req, res, next) {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');

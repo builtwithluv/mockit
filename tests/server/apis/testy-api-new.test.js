@@ -1,6 +1,6 @@
 import request from 'supertest';
 import app from '@/example/server/server';
-import removeFile from '@/src/utils/removeFile';
+import removeFile from '@/tests/helpers/removeFile';
 
 describe('/testy/api/new', () => {
     describe('POST', () => {

@@ -33,9 +33,9 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx'],
         alias: {
-            Components: path.resolve('src', 'client', 'components'),
-            Context: path.resolve('src', 'client', 'common', 'context'),
-            Helpers: path.resolve('src', 'client', 'common', 'helpers'),
+            '@': path.resolve('src'),
+            '@client': path.resolve('src', 'client'),
+            '@server': path.resolve('src', 'server'),
         },
     },
     output: {
@@ -47,9 +47,6 @@ module.exports = {
         new CopyWebpackPlugin([
             { from: 'src/index.js', to: 'index.js' },
             { from: 'src/server', to: 'server' },
-            { from: 'src/helpers', to: 'helpers' },
-            { from: 'src/commands', to: 'commands' },
-            { from: 'src/.bin', to: '.bin' },
         ]),
         new HtmlWebpackPlugin({
             template: 'src/index.html',

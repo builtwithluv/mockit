@@ -1,8 +1,8 @@
-const path = require('path');
-const createFixture = require('../../helpers/createFixture');
-const unharify = require('../../commands/unharify');
+import path from 'path';
+import createFixture from '../helpers/createFixture';
+import unharify from '../helpers/unharify';
 
-module.exports = function loadTestys(app, testy) {
+export default function loadTestys(app, testy) {
     app.get('/testy', (_, res) => res.sendFile(path.join(__dirname, '../../index.html')));
     app.get('/testy/api', (_, res) => res.json(testy.getState()));
     app.put('/testy/api', (req, res) => {

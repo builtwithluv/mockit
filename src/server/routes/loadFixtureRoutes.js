@@ -1,4 +1,4 @@
-module.exports = function loadFixtureRoutes(app, testy) {
+export default function loadFixtureRoutes(app, testy) {
     const state = testy.getState();
     const fixtures = state.fixtures;
 

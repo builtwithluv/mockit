@@ -33,9 +33,9 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx'],
         alias: {
-            Components: path.resolve('src', 'client', 'components'),
-            Context: path.resolve('src', 'client', 'common', 'context'),
-            Helpers: path.resolve('src', 'client', 'common', 'helpers'),
+            '@': path.resolve('src'),
+            '@client': path.resolve('src', 'client'),
+            '@server': path.resolve('src', 'server'),
         },
     },
     output: {

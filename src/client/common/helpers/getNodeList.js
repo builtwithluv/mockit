@@ -11,8 +11,8 @@ import {
 } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 
-import getMethodColor from 'Helpers/getMethodColor';
-import getStatusColor from 'Helpers/getStatusCodeColor';
+import getMethodColor from '@client/common/helpers/getMethodColor';
+import getStatusColor from '@client/common/helpers/getStatusCodeColor';
 
 function sortByMethod(buckets) {
    Object.values(buckets).forEach(bucket => bucket.sort((a, b) => a.method > b.method));

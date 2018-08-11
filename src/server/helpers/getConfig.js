@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const defaultConfig = require('./getDefaultConfig');
+import fs from 'fs';
+import path from 'path';
+import defaultConfig from './getDefaultConfig';
 
 function getConfig() {
     const testyConfigurationFilePath = path.resolve('.testy');
@@ -16,4 +16,4 @@ function getConfig() {
     return defaultConfiguration;
 }
 
-module.exports = getConfig();
+export default getConfig();

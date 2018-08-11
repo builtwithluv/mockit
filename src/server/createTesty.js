@@ -1,9 +1,9 @@
-const setNextActive = require('./helpers/setNextActive');
-const setNextLatency = require('./helpers/setNextLatency');
-const getFixtures = require('./helpers/getFixtures');
-const setActiveResponses = require('./helpers/setActiveResponses');
+import setNextActive from'./helpers/setNextActive';
+import setNextLatency from'./helpers/setNextLatency';
+import getFixtures from'./helpers/getFixtures';
+import setActiveResponses from'./helpers/setActiveResponses';
 
-module.exports = function createTesty() {
+export default function createTesty() {
     const fixtures = getFixtures();
     const LATENCY = 50;
 

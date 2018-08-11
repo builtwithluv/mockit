@@ -1,5 +1,5 @@
-const express = require('express');
-const testy = require('../../lib');
+import express from 'express';
+import testy from '../../lib';
 
 const app = express();
 
@@ -7,4 +7,4 @@ testy(app);
 
 app.get('/validation', (req, res) => res.json({ firstName: 'No', lastName: 'No', hair: { length: '3' } }));
 
-module.exports = app;
+export default app;

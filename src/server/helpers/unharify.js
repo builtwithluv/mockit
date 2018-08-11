@@ -1,6 +1,6 @@
-const createFixture = require('../helpers/createFixture');
+import createFixture from './createFixture';
 
-module.exports = function unharify(har) {
+export default function unharify(har) {
     const entries = har.log.entries;
 
     const supportedEntries = entries.filter(entry => {

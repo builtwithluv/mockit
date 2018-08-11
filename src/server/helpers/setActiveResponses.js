@@ -1,4 +1,4 @@
-module.exports = function setActiveResponses(fixtures) {
+export default function setActiveResponses(fixtures) {
     return fixtures.reduce((map, fixture) => {
         const { method, url } = fixture;
 

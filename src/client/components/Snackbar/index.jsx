@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 
-import { GlobalContext } from 'Context';
+import { GlobalContext } from '@client/common/context';
 
 const styles = theme => ({
 

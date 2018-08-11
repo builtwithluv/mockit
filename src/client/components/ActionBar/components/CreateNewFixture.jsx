@@ -12,7 +12,7 @@ import {
     TextArea,
 } from '@blueprintjs/core';
 
-import { GlobalContext } from 'Context';
+import { GlobalContext } from '@client/common/context';
 
 const styles = theme => ({
     description: {

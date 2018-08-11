@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 
-import { GlobalContext } from 'Context';
+import { GlobalContext } from '@client/common/context';
 
 const styles = theme => ({
     textField: {

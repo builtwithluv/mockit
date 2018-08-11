@@ -1,11 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const uuidv4 = require('uuid/v4');
-const _url = require('url');
-const beautify = require('js-beautify');
-const { fixturesPath } = require('./getConfig');
+import fs from 'fs';
+import path from 'path';
+import uuidv4 from 'uuid/v4';
+import _url from 'url';
+import beautify from 'js-beautify';
+import config from './getConfig';
 
-module.exports = function createFixture({
+export default function createFixture({
     data,
     filename,
     url,
@@ -36,7 +36,7 @@ module.exports = function createFixture({
     };
 
     const errs = fs.writeFileSync(
-        path.resolve(path.join(fixturesPath, fileName)),
+        path.resolve(path.join(config.fixturesPath, fileName)),
         beautify(`module.exports = ${JSON.stringify(fixture)}`, beautifyOptions),
     );
 
