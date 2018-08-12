@@ -19,13 +19,12 @@ import { withStyles } from '@material-ui/core';
 import Code from 'react-code-prettify';
 
 import {
-    findFixture,
     generateDataString,
     generateHandlerString,
     validateResponse,
 } from '@client/common/helpers';
 
-const styles = theme => ({
+const styles = () => ({
     url: {
         fontWeight: 600,
     },
@@ -34,45 +33,30 @@ const styles = theme => ({
 export class Viewer extends React.Component {
     static propTypes = {
         classes: PropTypes.object,
-        fixtures: PropTypes.arrayOf(PropTypes.object),
-        selectedNode: PropTypes.object,
-        updateGlobalContext: PropTypes.func,
+        fixture: PropTypes.object,
+        updateValidations: PropTypes.func,
         updateTesty: PropTypes.func,
-        validations: PropTypes.object,
+        validation: PropTypes.object,
     };
 
-    errors;
-    fixture;
+    componentDidMount() {
+        this.checkDataSameness();
+    }
 
     componentDidUpdate() {
-        const { selectedNode, validations } = this.props;
-        const validation = validations[selectedNode.id];
-
-        if (validation === null || validation) {
-            return;
+        const { validation } = this.props;
+        if (validation === undefined) {
+            this.checkDataSameness();
         }
-
-        this.checkDataSameness();
     }
 
     render() {
         const {
             classes,
-            fixtures,
-            selectedNode,
+            fixture,
             updateTesty,
-            validations,
+            validation,
         } = this.props;
-
-        if (!selectedNode) {
-            return null;
-        }
-
-        this.fixture = findFixture(selectedNode.id, fixtures);
-
-        if (!this.fixture) {
-            return null;
-        }
 
         const {
             id,
@@ -80,9 +64,7 @@ export class Viewer extends React.Component {
             _handler,
             method,
             url,
-        } = this.fixture;
-
-        this.errors = validations[id];
+        } = fixture;
 
         return (
             <div>
@@ -92,7 +74,9 @@ export class Viewer extends React.Component {
                             {this.renderErrorStatus()}
                         </NavbarGroup>
                         <NavbarGroup align={Alignment.RIGHT}>
-                            <NavbarHeading>{method} <span className={classes.url}>{url}</span></NavbarHeading>
+                            <NavbarHeading>
+                                {method} <span className={classes.url}>{url}</span>
+                            </NavbarHeading>
                             <NavbarDivider />
                             <Button
                                 intent={Intent.PRIMARY}
@@ -104,9 +88,9 @@ export class Viewer extends React.Component {
                 </div>
                 <div className={Classes.ELEVATION_2}>
                     {data ? (
-                        <Code language="javascript" codeString={beautify(generateDataString(data, this.errors))} />
+                        <Code language="javascript" codeString={beautify(generateDataString(data, validation))} />
                     ) : (
-                        <Code language="javascript" codeString={generateHandlerString(_handler)} />
+                        <Code language="javascript" codeString={beautify(generateHandlerString(_handler))} />
                     )}
                 </div>
             </div>
@@ -114,9 +98,10 @@ export class Viewer extends React.Component {
     }
 
     renderErrorStatus = () => {
-        if (this.errors === undefined) {
+        const { validation } = this.props;
+        if (validation === undefined) {
             return <Spinner size={Spinner.SIZE_SMALL} />;
-        } else if (this.errors) {
+        } else if (validation) {
             return <PriorityHigh style={{ color: Colors.RED4 }} />;
         } else {
             return null;
@@ -124,10 +109,10 @@ export class Viewer extends React.Component {
     }
 
     checkDataSameness = () => {
-        const { updateGlobalContext, validations } = this.props;
-        validateResponse(this.fixture)
-            .then(errors => updateGlobalContext({ validations: { ...validations, [this.fixture.id]: errors } }))
-            .catch(errors => updateGlobalContext({ validations: { ...validations, [this.fixture.id]: errors } }));
+        const { fixture, updateValidations } = this.props;
+        validateResponse(fixture)
+            .then(errors => updateValidations(fixture.id, errors))
+            .catch(errors => updateValidations(fixture.id, errors));
     }
 }
 

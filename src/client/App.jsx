@@ -1,6 +1,6 @@
-import './app.css';
+import './styles.css';
 
-import { debounce } from 'lodash';
+import { debounce, get } from 'lodash';
 import classNames from 'classnames';
 
 import React from 'react';
@@ -12,6 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 import getNodeList from '@client/common/helpers/getNodeList';
 
 import { GlobalContext } from '@client/common/context';
+import { findFixture } from '@client/common/helpers';
 
 import ActionBar from '@client/components/ActionBar';
 import Sidebar from '@client/components/Sidebar';
@@ -70,6 +71,10 @@ export class App extends React.PureComponent {
             validations,
         } = this.state;
 
+        const selectedNodeId = get(selectedNode, 'id');
+        const fixtures = get(store, 'fixtures');
+        const selectedFixture = findFixture(selectedNodeId, fixtures);
+
         return !isLoading && (
             <main className={classNames('bp3-light', classes.main)}>
                 <CssBaseline>
@@ -78,18 +83,19 @@ export class App extends React.PureComponent {
                         <Grid container className={classes.container}>
                             <Grid item className={classes.sidebar}>
                                 <Sidebar
-                                    nodeList={getNodeList(store.fixtures, store.active)}
+                                    nodeList={getNodeList(fixtures, store.active)}
                                     updateGlobalContext={this.updateGlobalContext}
                                 />
                             </Grid>
                             <Grid item xs className={classes.viewer}>
-                                <Viewer
-                                    fixtures={store.fixtures}
-                                    selectedNode={selectedNode}
-                                    updateTesty={this.updateTesty}
-                                    updateGlobalContext={this.updateGlobalContext}
-                                    validations={validations}
-                                />
+                                {selectedFixture && (
+                                    <Viewer
+                                        fixture={selectedFixture}
+                                        updateTesty={this.updateTesty}
+                                        updateValidations={this.updateValidations}
+                                        validation={validations[selectedNodeId]}
+                                    />
+                                )}
                             </Grid>
                         </Grid>
                         <Snackbar />
@@ -119,6 +125,11 @@ export class App extends React.PureComponent {
             .then(data => data.json())
             .then(data => this.setState({ store: data }))
             .catch(err => console.log(err));
+    }
+
+    updateValidations = (id, error) => {
+        const { validations } = this.state;
+        this.setState({ validations: { ...validations, [id]: error }});
     }
 }
 
