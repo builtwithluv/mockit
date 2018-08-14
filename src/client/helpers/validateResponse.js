@@ -20,12 +20,12 @@ export function validator(obj, compartee, errors = {}) {
     return errors;
 }
 
-export default function validateResponse(fixture) {
-    if (!fixture.validate) {
+export function validateResponse(fixture) {
+    if (!fixture.validator) {
         return Promise.resolve(null);
     }
 
-    const { url, ...options } = fixture.validate;
+    const { url, ...options } = fixture.validator;
     const mockedData = fixture.data || {};
 
     return fetch(url, options)
@@ -44,3 +44,5 @@ export default function validateResponse(fixture) {
         })
         .catch(err => ({ error: err.message }));
 }
+
+export default validateResponse;

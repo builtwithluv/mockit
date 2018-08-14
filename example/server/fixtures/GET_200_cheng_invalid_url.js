@@ -6,7 +6,7 @@ module.exports = {
     method: 'GET',
     status: 200,
 
-    validate: {
+    validator: {
         url: 'http://localhost:3000/validations',
         headers: {
             'Content-Type': 'application/json',
