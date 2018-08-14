@@ -18,11 +18,7 @@ import PriorityHigh from '@material-ui/icons/PriorityHigh';
 import { withStyles } from '@material-ui/core';
 import Code from 'react-code-prettify';
 
-import {
-    generateDataString,
-    generateHandlerString,
-    validateResponse,
-} from '@client/common/helpers';
+import { validateResponse } from '@client/common/helpers';
 
 const styles = () => ({
     url: {
@@ -55,13 +51,10 @@ export class Viewer extends React.Component {
             classes,
             fixture,
             updateTesty,
-            validation,
         } = this.props;
 
         const {
             id,
-            data,
-            _handler,
             method,
             url,
         } = fixture;
@@ -87,11 +80,7 @@ export class Viewer extends React.Component {
                     </Navbar>
                 </div>
                 <div className={Classes.ELEVATION_2}>
-                    {data ? (
-                        <Code language="javascript" codeString={beautify(generateDataString(data, validation))} />
-                    ) : (
-                        <Code language="javascript" codeString={beautify(generateHandlerString(_handler))} />
-                    )}
+                    {this.renderCodeString()}
                 </div>
             </div>
         );
@@ -106,6 +95,45 @@ export class Viewer extends React.Component {
         } else {
             return null;
         }
+    }
+
+    renderCodeString = () => {
+        const {
+            fixture: {
+                data,
+                _handler,
+            },
+        } = this.props;
+
+        let codeString;
+
+        if (data) {
+            codeString = this.generateDataString();
+        } else if (_handler) {
+            codeString = this.generateHandlerString();
+        }
+
+        return codeString && <Code language="javascript" codeString={codeString} />;
+    }
+
+    generateHandlerString = () => {
+        const { fixture: { _handler } } = this.props;
+        return beautify(`const handler = ${_handler}`);
+    }
+
+    generateDataString = () => {
+        const {
+            fixture: {
+                data,
+            },
+            validation,
+        } = this.props;
+
+        return beautify(`
+            ${validation ? `const validationErrors = ${JSON.stringify(validation)};` : ''}
+
+            const data = ${JSON.stringify(data)};
+        `);
     }
 
     checkDataSameness = () => {
