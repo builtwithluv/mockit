@@ -9,8 +9,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
-import getNodeList from '@client/common/helpers/getNodeList';
-
 import { GlobalContext } from '@client/common/context';
 import { findFixture } from '@client/common/helpers';
 
@@ -58,7 +56,13 @@ export class App extends React.PureComponent {
     componentDidMount() {
         fetch('/testy/api')
             .then(data => data.json())
-            .then(data => this.setState(prevState => ({ ...prevState, isLoading: false, store: data })))
+            .then(data => this.setState(
+                prevState => ({
+                    ...prevState,
+                    isLoading: false,
+                    store: data,
+                }))
+            )
             .catch(err => console.error(err));
     }
 
@@ -85,7 +89,8 @@ export class App extends React.PureComponent {
                         <Grid container className={classes.container}>
                             <Grid item className={classes.sidebar}>
                                 <Sidebar
-                                    nodeList={getNodeList(fixtures, store.active)}
+                                    fixtures={fixtures}
+                                    activeFixtures={store.active}
                                     updateGlobalContext={this.updateGlobalContext}
                                 />
                             </Grid>

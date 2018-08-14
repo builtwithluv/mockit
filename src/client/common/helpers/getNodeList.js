@@ -1,18 +1,8 @@
 import { flow } from 'lodash';
 
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import {
-    Classes,
-    Colors,
-    Icon,
-    Position,
-    Tooltip,
-} from '@blueprintjs/core';
-import { IconNames } from '@blueprintjs/icons';
-
-import getMethodColor from '@client/common/helpers/getMethodColor';
-import getStatusColor from '@client/common/helpers/getStatusCodeColor';
+import NodeItemLabel from '@client/components/Sidebar/components/NodeItemLabel';
+import NodeParentLabel from '@client/components/Sidebar/components/NodeParentLabel';
 
 function sortByMethod(buckets) {
    Object.values(buckets).forEach(bucket => bucket.sort((a, b) => a.method > b.method));
@@ -37,56 +27,18 @@ function createNodeList(buckets, activeFixtures) {
             id: url,
             hasCaret: true,
             isExpanded: true,
-            label: <span style={{ color: Colors.BLUE1 }}>{url}</span>,
+            label: <NodeParentLabel url={url} />,
         };
 
         node.childNodes = fixtures.map(({ id, method, status, description }) => ({
             id,
             label: (
-                <Tooltip
-                    content={description}
-                    hoverOpenDelay={450}
-                    popoverClassName="sidebar-tooltip--width"
-                    position={Position.BOTTOM}
-                >
-                    <Grid container wrap="nowrap" alignItems="center">
-                        <Grid container style={{ width: 15 }}>
-                            {activeFixtures[method][url].id === id && <Icon icon={IconNames.SELECTION} iconSize={10} />}
-                        </Grid>
-                        <Grid
-                            item
-                            style={{
-                                width: 40,
-                                color: getMethodColor(method),
-                                fontSize: '0.75em',
-                                fontWeight: 800,
-                                textAlign: 'center',
-                                marginRight: 8,
-                            }}
-                        >
-                            {method}
-                        </Grid>
-                        <Grid
-                            item
-                            style={{
-                                width: 30,
-                                color: getStatusColor(status),
-                                fontSize: '0.75em',
-                                fontWeight: 600,
-                            }}
-                        >
-                            {status}
-                        </Grid>
-                        <Grid
-                            item
-                            xs
-                            zeroMinWidth
-                            className={Classes.TEXT_OVERFLOW_ELLIPSIS}
-                        >
-                            {description}
-                        </Grid>
-                    </Grid>
-                </Tooltip>
+                <NodeItemLabel
+                    description={description}
+                    isActive={activeFixtures[method][url].id === id}
+                    method={method}
+                    status={status}
+                />
             ),
         }));
 

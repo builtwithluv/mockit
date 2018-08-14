@@ -1,10 +1,11 @@
-import { cloneDeep } from 'lodash';
 import classNames from 'classnames';
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Classes, Tree } from '@blueprintjs/core';
 import { withStyles } from '@material-ui/core/styles';
+
+import getNodeList from '@client/common/helpers/getNodeList';
 
 const styles = theme => ({
     treeContainer: {
@@ -19,20 +20,26 @@ const styles = theme => ({
     },
 });
 
-export class Sidebar extends React.Component {
+export class Sidebar extends React.PureComponent {
     static propTypes = {
+        activeFixtures: PropTypes.object,
         classes: PropTypes.object,
+        fixtures: PropTypes.object,
+        updateGlobalContext: PropTypes.func,
     };
 
-    static getDerivedStateFromProps = props => {
-        return {
-            nodeList: props.nodeList,
+    constructor(props) {
+        super(props);
+        this.state = {
+            nodeList: getNodeList(props.fixtures, props.activeFixtures),
         };
     }
 
-    state = {
-        nodeList: [],
-    };
+    static getDerivedStateFromProps = nextProps => {
+        return {
+            nodeList: getNodeList(nextProps.fixtures, nextProps.activeFixtures),
+        };
+    }
 
     componentDidMount() {
         this.selectFirstItem();
@@ -47,8 +54,6 @@ export class Sidebar extends React.Component {
                 <Tree
                     contents={nodeList}
                     onNodeClick={this.handleNodeClick}
-                    onNodeCollapse={this.handleNodeCollapse}
-                    onNodeExpand={this.handleNodeExpand}
                     className={classNames(classes.tree, Classes.ELEVATION_3)}
                 />
             </div>
@@ -71,22 +76,6 @@ export class Sidebar extends React.Component {
 
         this.setState({ nodeList });
     };
-
-    handleNodeCollapse = nodeData => {
-        const { nodeList } = this.state;
-
-        nodeData.isExpanded = false;
-
-        this.setState({ nodeList: cloneDeep(nodeList) });
-    }
-
-    handleNodeExpand = nodeData => {
-        const { nodeList } = this.state;
-
-        nodeData.isExpanded = true;
-
-        this.setState({ nodeList: cloneDeep(nodeList) });
-    }
 
     forEachNode(nodes, callback) {
         if (nodes == null) {
