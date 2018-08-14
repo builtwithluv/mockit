@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "allowSyntheticDefaultImports": false,
+        "baseUrl": "./",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@client/*": [
+                "src/client/*"
+            ],
+            "@server/*": [
+                "src/server/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "lib"
+    ]
+}
