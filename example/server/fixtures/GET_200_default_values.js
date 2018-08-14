@@ -1,3 +1,3 @@
 module.exports = {
-    url: '/api/nested',
+    url: '/api/test',
 };
