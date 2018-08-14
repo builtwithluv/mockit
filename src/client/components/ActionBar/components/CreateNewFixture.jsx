@@ -32,6 +32,7 @@ const styles = theme => ({
 export class CreateNewFixture extends React.Component {
     state = getInitialState();
 
+    toggleSnackbar;
     updateGlobalContext;
 
     render() {
@@ -40,8 +41,10 @@ export class CreateNewFixture extends React.Component {
 
         return (
             <GlobalContext.Consumer>
-                {({ updateGlobalContext }) => {
+                {({ toggleSnackbar, updateGlobalContext }) => {
+                    this.toggleSnackbar = toggleSnackbar;
                     this.updateGlobalContext = updateGlobalContext;
+
                     return (
                         <div>
                             <Button
@@ -78,10 +81,8 @@ export class CreateNewFixture extends React.Component {
                                         <FormGroup
                                             label="Data"
                                             labelFor="data-input"
-                                            labelInfo="(required)"
                                         >
                                             <TextArea
-                                                required
                                                 id="data-input"
                                                 className={classes.data}
                                                 placeholder="{ }"
@@ -151,7 +152,7 @@ export class CreateNewFixture extends React.Component {
                                             <Spinner size={Spinner.SIZE_SMALL} />
                                         ) : (
                                             <Button
-                                                disabled={!values.url || !values.data}
+                                                disabled={!values.url}
                                                 onClick={this.handleSave}
                                                 intent={Intent.PRIMARY}
                                             >
@@ -201,9 +202,10 @@ export class CreateNewFixture extends React.Component {
         .then(data => this.updateGlobalContext({ store: data }))
         .then(() => this.setState({ isSubmitting: false }))
         .then(() => this.toggleDialog())
-        .then(() => this.setState(getInitialState()))
+        .then(() => this.toggleSnackbar('Successfully created the new fixture'))
         .catch(() => this.setState({ isSubmitting: true }))
-        .catch(() => this.setState(getInitialState()))
+        .catch(() => this.toggleSnackbar('Failed to create the new fixture'))
+        .finally(() => this.setState(getInitialState()));
     }
 
     toggleDialog = () => {
