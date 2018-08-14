@@ -58,7 +58,7 @@
     "react": "^16.4.1",
     "react-code-prettify": "0.0.1",
     "react-dom": "^16.4.1",
-    "typeface-roboto": "0.0.54",
+    "typeface-roboto": "^0.0.54",
     "uuid": "^3.2.1"
   },
   "devDependencies": {
