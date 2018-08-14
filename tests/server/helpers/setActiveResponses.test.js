@@ -1,4 +1,4 @@
-import setActiveResponses from '@/src/server/helpers/setActiveResponses';
+import createActiveResponses from '@/src/server/helpers/createActiveResponses';
 import fixture1 from '@/example/server/fixtures/GET_200_bhakti';
 import fixture2 from '@/example/server/fixtures/GET_200_cheng_failed_validation';
 import fixture3 from '@/example/server/fixtures/DELETE_200_cheng';
@@ -6,9 +6,9 @@ import fixture4 from '@/example/server/fixtures/PUT_200_update_name';
 import fixture5 from '@/example/server/fixtures/POST_200_cheng';
 import fixture6 from '@/example/server/fixtures/POST_200_invalid_validate_url';
 
-describe('setActiveResponses()', () => {
+describe('createActiveResponses()', () => {
     test('it should set fixtures with default as active first', () => {
-        expect(setActiveResponses([fixture1, fixture2])).toEqual({
+        expect(createActiveResponses([fixture1, fixture2])).toEqual({
             GET: {
                 '/api/test': fixture2,
             },
@@ -16,7 +16,7 @@ describe('setActiveResponses()', () => {
     });
 
     test('should set active for every available method and endpoint', () => {
-        expect(setActiveResponses([
+        expect(createActiveResponses([
             fixture1,
             fixture2,
             fixture3,

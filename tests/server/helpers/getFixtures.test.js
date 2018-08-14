@@ -28,8 +28,4 @@ describe('getFixtures()', () => {
             _handler: handlerFixture.handler.toString(),
         });
     });
-
-    test('gets all the available fixtures', () => {
-        expect(getFixtures()).toHaveLength(12);
-    });
 });

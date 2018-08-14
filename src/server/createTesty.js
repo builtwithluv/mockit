@@ -1,7 +1,7 @@
 import setNextActive from'./helpers/setNextActive';
 import setNextLatency from'./helpers/setNextLatency';
 import getFixtures from'./helpers/getFixtures';
-import setActiveResponses from'./helpers/setActiveResponses';
+import createActiveResponses from'./helpers/createActiveResponses';
 
 export default function createTesty() {
     const fixtures = getFixtures();
@@ -10,7 +10,7 @@ export default function createTesty() {
     const testy = {
         fixtures,
         latency: LATENCY,
-        active: setActiveResponses(fixtures),
+        active: createActiveResponses(fixtures),
     };
 
     function getState() {
@@ -19,7 +19,7 @@ export default function createTesty() {
 
     function reloadFixtures() {
         testy.fixtures = getFixtures();
-        testy.active = setActiveResponses(testy.fixtures);
+        testy.active = createActiveResponses(testy.fixtures);
     }
 
     function update(next) {

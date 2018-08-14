@@ -24,7 +24,7 @@ export class Sidebar extends React.PureComponent {
     static propTypes = {
         activeFixtures: PropTypes.object,
         classes: PropTypes.object,
-        fixtures: PropTypes.object,
+        fixtures: PropTypes.arrayOf(PropTypes.object),
         updateGlobalContext: PropTypes.func,
     };
 
