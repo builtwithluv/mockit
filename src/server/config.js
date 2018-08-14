@@ -1,8 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import defaultConfig from './getDefaultConfig';
 
 function getConfig() {
+    const defaultConfig = {
+        fixturesPath: 'server/fixtures',
+        port: 3000,
+    };
+
     const testyConfigurationFilePath = path.resolve('.testy');
 
     if (fs.existsSync(testyConfigurationFilePath)) {

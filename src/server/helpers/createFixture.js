@@ -3,7 +3,7 @@ import path from 'path';
 import uuidv4 from 'uuid/v4';
 import _url from 'url';
 import beautify from 'js-beautify';
-import config from './getConfig';
+import config from '@server/config';
 
 export default function createFixture({
     data,
