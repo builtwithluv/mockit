@@ -98,7 +98,7 @@ describe('<Viewer />', () => {
         it('should display handler code from fixture', () => {
             delete defaultProps.fixture.data;
 
-            defaultProps._handler = '() => {}';
+            defaultProps.fixture._handler = '() => {}';
 
             const wrapper = mount(<Viewer {...defaultProps} />).find(Code);
 

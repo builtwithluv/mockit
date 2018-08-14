@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Classes, Tree } from '@blueprintjs/core';
 import { withStyles } from '@material-ui/core/styles';
 
-import getNodeList from '@client/common/helpers/getNodeList';
+import getNodeList from '@client/components/Sidebar/helpers/getNodeList';
 
 const styles = theme => ({
     treeContainer: {
