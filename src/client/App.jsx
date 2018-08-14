@@ -66,7 +66,9 @@ export class App extends React.PureComponent {
         const { classes } = this.props;
         const {
             isLoading,
+            isSnackbarOpen,
             selectedNode,
+            snackbarMessage,
             store,
             validations,
         } = this.state;
@@ -98,7 +100,11 @@ export class App extends React.PureComponent {
                                 )}
                             </Grid>
                         </Grid>
-                        <Snackbar />
+                        <Snackbar
+                            isSnackbarOpen={isSnackbarOpen}
+                            snackbarMessage={snackbarMessage}
+                            toggleSnackbar={this.toggleSnackbar}
+                        />
                     </GlobalContext.Provider>
                 </CssBaseline>
             </main>
