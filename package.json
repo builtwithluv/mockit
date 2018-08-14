@@ -23,6 +23,13 @@
     "example"
   ],
   "jest": {
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/example/",
+      "<rootDir>/lib/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/tests/"
+    ],
     "moduleNameMapper": {
       "^@(/.+)": "<rootDir>$1",
       "^@client(/.+)": "<rootDir>/src/client$1",
