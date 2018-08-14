@@ -46,7 +46,7 @@ export class CreateNewFixture extends React.Component {
                     this.updateGlobalContext = updateGlobalContext;
 
                     return (
-                        <div>
+                        <React.Fragment>
                             <Button
                                 intent={Intent.SUCCESS}
                                 onClick={this.toggleDialog}
@@ -162,7 +162,7 @@ export class CreateNewFixture extends React.Component {
                                     </div>
                                 </div>
                             </Dialog>
-                        </div>
+                        </React.Fragment>
                     );
                 }}
             </GlobalContext.Consumer>

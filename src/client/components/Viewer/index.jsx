@@ -60,7 +60,7 @@ export class Viewer extends React.Component {
         } = fixture;
 
         return (
-            <div>
+            <React.Fragment>
                 <div className={Classes.ELEVATION_2}>
                     <Navbar>
                         <NavbarGroup>
@@ -82,7 +82,7 @@ export class Viewer extends React.Component {
                 <div className={Classes.ELEVATION_2}>
                     {this.renderCodeString()}
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 

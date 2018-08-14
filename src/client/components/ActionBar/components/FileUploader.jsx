@@ -68,7 +68,7 @@ export class FileUploader extends React.PureComponent {
         return (
             <GlobalContext.Consumer>
                 {({ toggleSnackbar, updateGlobalContext }) => (
-                    <div>
+                    <React.Fragment>
                         {isUploading ? (
                             <Spinner size={Spinner.SIZE_SMALL} />
                         ) : (
@@ -86,7 +86,7 @@ export class FileUploader extends React.PureComponent {
                                 'aria-hidden': true,
                             }}
                         />
-                    </div>
+                    </React.Fragment>
                 )}
             </GlobalContext.Consumer>
         );
