@@ -9,8 +9,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 
-import { GlobalContext } from '@client/common/context';
-import { findFixture } from '@client/common/helpers';
+import { GlobalContext } from '@client/context';
+import { findFixture } from '@client/helpers';
 
 import ActionBar from '@client/components/ActionBar';
 import Sidebar from '@client/components/Sidebar';

@@ -18,7 +18,7 @@ import PriorityHigh from '@material-ui/icons/PriorityHigh';
 import { withStyles } from '@material-ui/core';
 import Code from 'react-code-prettify';
 
-import { validateResponse } from '@client/common/helpers';
+import { validateResponse } from '@client/helpers';
 
 const styles = () => ({
     url: {

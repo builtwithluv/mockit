@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Button, Spinner } from '@blueprintjs/core';
 import Input from '@material-ui/core/Input';
 
-import { GlobalContext } from '@client/common/context';
+import { GlobalContext } from '@client/context';
 
 const styles = theme => ({
     rightIcon: {

@@ -10,8 +10,8 @@ import {
 } from '@blueprintjs/core';
 import { IconNames } from '@blueprintjs/icons';
 
-import getMethodColor from '@client/common/helpers/getMethodColor';
-import getStatusColor from '@client/common/helpers/getStatusCodeColor';
+import getMethodColor from '@client/helpers/getMethodColor';
+import getStatusColor from '@client/helpers/getStatusCodeColor';
 
 const styles = () => ({
     iconsContainer: {
