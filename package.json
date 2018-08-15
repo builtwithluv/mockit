@@ -9,7 +9,9 @@
     "start": "npx concurrently --kill-others --exec babel-node \"npm run start:server\" \"npm run start:client\"",
     "start:server": "./node_modules/.bin/nodemon example/server/index.js --exec babel-node",
     "start:client": "./node_modules/.bin/webpack-dev-server --config ./webpack.dev.js --mode development",
-    "test": "jest"
+    "test": "npm run test:unit && npm run test:integration",
+    "test:integration": "npx concurrently --kill-others \"npm run start:server\" \"npx cypress run\"",
+    "test:unit": "jest"
   },
   "bin": "lib/.bin/testy",
   "author": "Cheng Ly",
