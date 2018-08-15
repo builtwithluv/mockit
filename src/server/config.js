@@ -7,7 +7,7 @@ function getConfig() {
         port: 3000,
     };
 
-    const testyConfigurationFilePath = path.resolve('.testy');
+    const testyConfigurationFilePath = path.resolve('testy.json');
 
     if (fs.existsSync(testyConfigurationFilePath)) {
         const content = JSON.parse(fs.readFileSync(testyConfigurationFilePath));
