@@ -70,7 +70,7 @@ export class Viewer extends React.Component {
         return (
             <React.Fragment>
                 <div className={Classes.ELEVATION_2}>
-                    <Navbar>
+                    <Navbar data-tag="viewer-action-bar">
                         <NavbarGroup>
                             {this.renderErrorStatus()}
                         </NavbarGroup>
@@ -92,6 +92,7 @@ export class Viewer extends React.Component {
                             </NavbarHeading>
                             <NavbarDivider />
                             <Button
+                                data-tag="viewer-action-bar-set-active-btn"
                                 intent={Intent.PRIMARY}
                                 text="Set Active"
                                 onClick={() => updateTesty({ id })}
@@ -99,7 +100,7 @@ export class Viewer extends React.Component {
                         </NavbarGroup>
                     </Navbar>
                 </div>
-                <div className={Classes.ELEVATION_2}>
+                <div className={Classes.ELEVATION_2} data-tag="viewer-code">
                     {this.renderCodeString()}
                 </div>
             </React.Fragment>

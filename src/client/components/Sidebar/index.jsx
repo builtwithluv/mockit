@@ -50,7 +50,7 @@ export class Sidebar extends React.PureComponent {
         const { nodeList } = this.state;
 
         return (
-            <div className={classes.treeContainer}>
+            <div data-tag="sidebar" className={classes.treeContainer}>
                 <Tree
                     contents={nodeList}
                     onNodeClick={this.handleNodeClick}
