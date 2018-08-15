@@ -54,8 +54,6 @@ export class CreateNewFixture extends React.Component {
                                 NEW
                             </Button>
                             <Dialog
-                                canEscapeKeyClose={false}
-                                canOutsideClickClose={false}
                                 isOpen={isOpen}
                                 onClose={() => {
                                     this.toggleDialog();
