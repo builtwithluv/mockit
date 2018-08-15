@@ -22,10 +22,9 @@ export default function loadTestys(app, testy) {
         }
     });
     app.post('/testy/api/new', (req, res) => {
-        const content = req.body;
-
+        const contents = req.body;
         try {
-            createFixture(content);
+            contents.forEach(content => createFixture(content));
             testy.reloadFixtures();
             return res.json(testy.getState());
         } catch (e) {

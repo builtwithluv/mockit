@@ -193,7 +193,7 @@ export class CreateNewFixture extends React.Component {
 
         fetch('/testy/api/new', {
             method: 'POST',
-            body: JSON.stringify({ ...values, url }),
+            body: JSON.stringify([{ ...values, url }]),
             headers: {
                 'content-type': 'application/json',
             },

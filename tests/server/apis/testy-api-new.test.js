@@ -7,7 +7,7 @@ describe('/testy/api/new', () => {
         test('should be able to create a new fixture', (done) => {
             request(app)
                 .post('/testy/api/new')
-                .send({ id: 'supertest', url: '/supertest', data: 10 })
+                .send([{ id: 'supertest', url: '/supertest', data: 10 }])
                 .set('Accept', 'application/json')
                 .expect(200)
                 .expect('Content-Type', /json/)
@@ -17,7 +17,7 @@ describe('/testy/api/new', () => {
         test('should respond with the new state after creation of new fixture', (done) => {
             request(app)
                 .post('/testy/api/new')
-                .send({ id: 'supertest', url: '/supertest', data: 10 })
+                .send([{ id: 'supertest', url: '/supertest', data: 10 }])
                 .set('Accept', 'application/json')
                 .expect(200)
                 .expect('Content-Type', /json/)
@@ -34,7 +34,7 @@ describe('/testy/api/new', () => {
         test('respond with 400', (done) => {
             request(app)
                 .post('/testy/api/new')
-                .send({ description: 'lala' })
+                .send([{ description: 'lala' }])
                 .set('Accept', 'application/json')
                 .expect(400)
                 .end(done);

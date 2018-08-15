@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import uuidv4 from 'uuid/v4';
 
-import config from '@server/config';
+import config from '../config';
 
 const DEFAULT_PATH = path.resolve(config.fixturesPath);
 
