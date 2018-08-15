@@ -14,6 +14,23 @@ describe('/testy/api/new', () => {
                 .then(() => removeFile('example/server/fixtures/GET-200-supertest.js', done));
         });
 
+        test('should be able to create multiple fixtures', done => {
+            request(app)
+                .post('/testy/api/new')
+                .send([
+                    { id: 'supertest', url: '/supertest' },
+                    { id: 'supertest2', url: '/supertest' },
+                ])
+                .set('Accept', 'application/json')
+                .expect(200)
+                .expect('Content-Type', /json/)
+                .then(() => {
+                    removeFile('example/server/fixtures/GET-200-supertest.js', () => {
+                        removeFile('example/server/fixtures/GET-200-supertest2.js', done);
+                    });
+                });
+        });
+
         test('should respond with the new state after creation of new fixture', (done) => {
             request(app)
                 .post('/testy/api/new')
