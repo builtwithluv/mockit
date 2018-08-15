@@ -13,6 +13,7 @@ describe('<Viewer />', () => {
             id: '12345',
             data: 1,
             method: 'GET',
+            status: 200,
             url: '/test',
         },
         updateValidations: jest.fn(),
@@ -41,6 +42,11 @@ describe('<Viewer />', () => {
         it('should show method', () => {
             const nav = wrapper.find(Navbar);
             expect(nav.text()).toContain(defaultProps.fixture.method);
+        });
+
+        it('should show status', () => {
+            const nav = wrapper.find(Navbar);
+            expect(nav.text()).toContain(defaultProps.fixture.status);
         });
 
         it('should show url', () => {

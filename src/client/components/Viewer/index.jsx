@@ -18,11 +18,18 @@ import PriorityHigh from '@material-ui/icons/PriorityHigh';
 import { withStyles } from '@material-ui/core';
 import Code from 'react-code-prettify';
 
-import { validateResponse } from '@client/helpers';
+import {
+    getMethodColor,
+    getStatusCodeColor,
+    validateResponse,
+} from '@client/helpers';
 
-const styles = () => ({
+const styles = theme => ({
     url: {
         fontWeight: 600,
+    },
+    marginRight: {
+        marginRight: theme.spacing.unit,
     },
 });
 
@@ -56,6 +63,7 @@ export class Viewer extends React.Component {
         const {
             id,
             method,
+            status,
             url,
         } = fixture;
 
@@ -68,7 +76,19 @@ export class Viewer extends React.Component {
                         </NavbarGroup>
                         <NavbarGroup align={Alignment.RIGHT}>
                             <NavbarHeading>
-                                {method} <span className={classes.url}>{url}</span>
+                                <span
+                                    className={classes.marginRight}
+                                    style={{ color: getMethodColor(method) }}
+                                >
+                                    {method}
+                                </span>
+                                <span
+                                    className={classes.marginRight}
+                                    style={{ color: getStatusCodeColor(status) }}
+                                >
+                                    {status}
+                                </span>
+                                <span className={classes.url}>{url}</span>
                             </NavbarHeading>
                             <NavbarDivider />
                             <Button
