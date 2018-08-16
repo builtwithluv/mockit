@@ -1,6 +1,10 @@
 import selectors from '../../selectors';
 
 describe('Sets fixture as active', () => {
+    beforeEach(() => {
+        cy.resetTesty();
+    });
+
     it('set fixture as active when set active button is clicked', () => {
         cy
             .visit('/testy')
