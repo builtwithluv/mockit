@@ -1,13 +1,22 @@
+import { cloneDeep, differenceBy, flow } from 'lodash';
+
+import createActiveResponses from'./helpers/createActiveResponses';
+import getFixturePathById from './helpers/getFixturePathById';
+import getFixtures from'./helpers/getFixtures';
+import removeFile from './helpers/removeFile';
 import setNextActive from'./helpers/setNextActive';
 import setNextLatency from'./helpers/setNextLatency';
-import getFixtures from'./helpers/getFixtures';
-import createActiveResponses from'./helpers/createActiveResponses';
 
 export default function createTesty() {
-    let testy = getDefaultState();
+    // Global state to be used throughout application
+    let state = getDefaultState();
+
+    // This is used to take a snapshot of the first state creation
+    // To be used when resetting state
+    const initialState = cloneDeep(state);
 
     function getState() {
-        return testy;
+        return state;
     }
 
     function getDefaultState() {
@@ -22,12 +31,17 @@ export default function createTesty() {
     }
 
     function reloadFixtures() {
-        testy.fixtures = getFixtures();
-        testy.active = createActiveResponses(testy.fixtures);
+        state.fixtures = getFixtures();
+        state.active = createActiveResponses(state.fixtures);
     }
 
     function reset() {
-        testy = getDefaultState();
+        flow(
+            (a, b) => differenceBy(a, b, 'id'),
+            diffs => diffs.map(fixture => getFixturePathById(fixture.id)),
+            paths => paths.forEach(filePath => removeFile(filePath)),
+            () => state = cloneDeep(initialState),
+        )(state.fixtures, initialState.fixtures);
     }
 
     function update(next) {
