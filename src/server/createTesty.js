@@ -4,22 +4,30 @@ import getFixtures from'./helpers/getFixtures';
 import createActiveResponses from'./helpers/createActiveResponses';
 
 export default function createTesty() {
-    const fixtures = getFixtures();
-    const LATENCY = 50;
-
-    const testy = {
-        fixtures,
-        latency: LATENCY,
-        active: createActiveResponses(fixtures),
-    };
+    let testy = getDefaultState();
 
     function getState() {
         return testy;
     }
 
+    function getDefaultState() {
+        const latency = 50;
+        const fixtures = getFixtures();
+
+        return {
+            fixtures,
+            latency,
+            active: createActiveResponses(fixtures),
+        };
+    }
+
     function reloadFixtures() {
         testy.fixtures = getFixtures();
         testy.active = createActiveResponses(testy.fixtures);
+    }
+
+    function reset() {
+        testy = getDefaultState();
     }
 
     function update(next) {
@@ -31,6 +39,7 @@ export default function createTesty() {
     return {
         getState,
         reloadFixtures,
+        reset,
         update,
     };
 }

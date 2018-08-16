@@ -8,6 +8,10 @@ export default function loadTestys(app, testy) {
         testy.update(req.body);
         return res.json(testy.getState());
     });
+    app.put('/testy/api/reset', (_, res) => {
+        testy.reset();
+        return res.json(testy.getState());
+    });
     app.post('/testy/api/new', (req, res) => {
         const contents = req.body;
         try {
