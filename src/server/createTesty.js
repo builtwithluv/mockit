@@ -1,11 +1,13 @@
 import { cloneDeep, differenceBy, flow } from 'lodash';
 
-import createActiveResponses from'./helpers/createActiveResponses';
-import getFixturePathById from './helpers/getFixturePathById';
-import getFixtures from'./helpers/getFixtures';
-import removeFile from './helpers/removeFile';
-import setNextActive from'./helpers/setNextActive';
-import setNextLatency from'./helpers/setNextLatency';
+import {
+    createActiveResponses,
+    getFixturePathById,
+    getFixtures,
+    removeFile,
+    setNextActive,
+    setNextLatency,
+} from './helpers';
 
 export default function createTesty() {
     // Global state to be used throughout application
