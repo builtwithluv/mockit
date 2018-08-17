@@ -1,7 +1,7 @@
 import selectors from '../../selectors';
 
 describe('Sets fixture as active', () => {
-    beforeEach(() => {
+    afterEach(() => {
         cy.resetTesty();
     });
 

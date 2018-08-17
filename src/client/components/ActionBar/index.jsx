@@ -26,7 +26,10 @@ export class ActionBar extends React.PureComponent {
     render() {
         const { classes } = this.props;
         return (
-            <Navbar className={classes.root}>
+            <Navbar
+                data-tag="actionbar"
+                className={classes.root}
+            >
                 <NavbarGroup align={Alignment.LEFT}>
                     <div className={classes.buttons}>
                         <CreateNewFixture />

@@ -33,7 +33,14 @@ export class SimpleSnackbar extends React.PureComponent {
                 ContentProps={{
                     'aria-describedby': 'snackbar-message',
                 }}
-                message={<span id="snackbar-message">{snackbarMessage}</span>}
+                message={
+                    <span
+                        data-tag="snackbar-message"
+                        id="snackbar-message"
+                    >
+                        {snackbarMessage}
+                    </span>
+                }
             />
         );
     }

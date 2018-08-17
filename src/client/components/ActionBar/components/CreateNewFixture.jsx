@@ -14,7 +14,7 @@ import {
 
 import { GlobalContext } from '@client/context';
 
-const styles = theme => ({
+const styles = () => ({
     description: {
         minHeight: 100,
         width: '100%',
@@ -48,12 +48,14 @@ export class CreateNewFixture extends React.Component {
                     return (
                         <React.Fragment>
                             <Button
+                                data-tag="actionbar-new-open-btn"
                                 intent={Intent.SUCCESS}
                                 onClick={this.toggleDialog}
                             >
                                 NEW
                             </Button>
                             <Dialog
+                                data-tag="actionbar-new-dialog"
                                 isOpen={isOpen}
                                 onClose={() => {
                                     this.toggleDialog();
@@ -70,6 +72,7 @@ export class CreateNewFixture extends React.Component {
                                         >
                                             <InputGroup
                                                 required
+                                                data-tag="actionbar-new-dialog-url"
                                                 id="url-input"
                                                 placeholder="/"
                                                 value={values.url}
@@ -81,6 +84,7 @@ export class CreateNewFixture extends React.Component {
                                             labelFor="data-input"
                                         >
                                             <TextArea
+                                                data-tag="actionbar-new-dialog-data"
                                                 id="data-input"
                                                 className={classes.data}
                                                 placeholder="{ }"
@@ -93,6 +97,7 @@ export class CreateNewFixture extends React.Component {
                                             labelFor="method-input"
                                         >
                                             <InputGroup
+                                                data-tag="actionbar-new-dialog-method"
                                                 id="method-input"
                                                 placeholder="GET"
                                                 value={values.method}
@@ -104,6 +109,7 @@ export class CreateNewFixture extends React.Component {
                                             labelFor="status-input"
                                         >
                                             <InputGroup
+                                                data-tag="actionbar-new-dialog-status"
                                                 id="status-input"
                                                 placeholder="200"
                                                 type="number"
@@ -116,6 +122,7 @@ export class CreateNewFixture extends React.Component {
                                             labelFor="id-input"
                                         >
                                             <InputGroup
+                                                data-tag="actionbar-new-dialog-id"
                                                 id="id-input"
                                                 value={values.id}
                                                 onChange={e => this.handleChange('id', e.target.value)}
@@ -126,6 +133,7 @@ export class CreateNewFixture extends React.Component {
                                             labelFor="filename-input"
                                         >
                                             <InputGroup
+                                                data-tag="actionbar-new-dialog-filename"
                                                 id="filename-input"
                                                 value={values.filename}
                                                 onChange={e => this.handleChange('filename', e.target.value)}
@@ -136,6 +144,7 @@ export class CreateNewFixture extends React.Component {
                                             labelFor="description-input"
                                         >
                                             <TextArea
+                                                data-tag="actionbar-new-dialog-description"
                                                 id="description-input"
                                                 className={classes.description}
                                                 value={values.description}
@@ -150,6 +159,7 @@ export class CreateNewFixture extends React.Component {
                                             <Spinner size={Spinner.SIZE_SMALL} />
                                         ) : (
                                             <Button
+                                                data-tag="actionbar-new-dialog-save-btn"
                                                 disabled={!values.url}
                                                 onClick={this.handleSave}
                                                 intent={Intent.PRIMARY}
@@ -176,22 +186,27 @@ export class CreateNewFixture extends React.Component {
 
     handleSave = () => {
         const { values } = this.state;
-        let endpoint = values.url;
+        const { data } = values;
+        let { url } = values;
 
-        if (endpoint[0] !== '/') {
-            endpoint = `/${endpoint}`;
+        if (url[0] !== '/') {
+            url = `/${url}`;
         }
 
         // INFO Using backend service which needs a full url.
         // On client, only requesting endpoint so just giving it
         // a full path
-        const url = `http://localhost${endpoint}`;
+        url = `http://localhost${url}`;
 
         this.setState({ isSubmitting: true });
 
         fetch('/testy/api/new', {
             method: 'POST',
-            body: JSON.stringify([{ ...values, url }]),
+            body: JSON.stringify([{
+                ...values,
+                url,
+                data: data ? JSON.parse(data) : null,
+            }]),
             headers: {
                 'content-type': 'application/json',
             },
