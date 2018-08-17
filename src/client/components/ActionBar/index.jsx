@@ -13,7 +13,7 @@ const styles = theme => ({
         paddingBottom: 15,
         height: 80,
     },
-    buttons: {
+    buttonContainer: {
         marginRight: theme.spacing.unit,
     },
 });
@@ -31,7 +31,7 @@ export class ActionBar extends React.PureComponent {
                 className={classes.root}
             >
                 <NavbarGroup align={Alignment.LEFT}>
-                    <div className={classes.buttons}>
+                    <div className={classes.buttonContainer}>
                         <CreateNewFixture />
                     </div>
                     <FileUploader />

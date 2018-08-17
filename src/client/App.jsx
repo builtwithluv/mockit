@@ -116,13 +116,15 @@ export class App extends React.PureComponent {
         );
     }
 
-    toggleSnackbar = (msg = this.state.snackbarMessage) => {
-        const { isSnackbarOpen } = this.state;
-        this.setState({ isSnackbarOpen: !isSnackbarOpen, snackbarMessage: msg });
+    toggleSnackbar = msg => {
+        this.setState(prevState => ({
+            isSnackbarOpen: !prevState.isSnackbarOpen,
+            snackbarMessage: msg || prevState.snackbarMessage,
+        }));
     }
 
     updateGlobalContext = nextState => {
-        this.setState(nextState)
+        this.setState(() => nextState);
     }
 
     updateTesty = action => {
@@ -134,13 +136,17 @@ export class App extends React.PureComponent {
             },
         })
             .then(data => data.json())
-            .then(data => this.setState({ store: data }))
+            .then(data => this.setState(() => ({ store: data })))
             .catch(err => console.log(err));
     }
 
     updateValidations = (id, error) => {
-        const { validations } = this.state;
-        this.setState({ validations: { ...validations, [id]: error }});
+        this.setState(prevState => ({
+            validations: {
+                ...prevState.validations,
+                [id]: error,
+            },
+        }));
     }
 }
 

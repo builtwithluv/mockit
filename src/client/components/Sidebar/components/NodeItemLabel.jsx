@@ -24,6 +24,9 @@ const styles = () => ({
         textAlign: 'center',
         marginRight: 8,
     },
+    popover: {
+        maxWidth: 350,
+    },
     status: {
         width: 30,
         fontSize: '0.75em',
@@ -53,7 +56,7 @@ export class NodeItemLabel extends React.PureComponent {
             <Tooltip
                 content={description}
                 hoverOpenDelay={450}
-                popoverClassName="sidebar-tooltip--width"
+                popoverClassName={classes.popover}
                 position={Position.BOTTOM}
             >
                 <Grid
@@ -68,18 +71,14 @@ export class NodeItemLabel extends React.PureComponent {
                     <Grid
                         item
                         className={classes.method}
-                        style={{
-                            color: getMethodColor(method),
-                        }}
+                        style={{ color: getMethodColor(method) }}
                     >
                         {method}
                     </Grid>
                     <Grid
                         item
                         className={classes.status}
-                        style={{
-                            color: getStatusColor(status),
-                        }}
+                        style={{ color: getStatusColor(status) }}
                     >
                         {status}
                     </Grid>
