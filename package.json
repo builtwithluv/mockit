@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npx webpack --config ./webpack.prod.js -p && npx babel src/server -d lib/server && npx babel src/index.js --out-file lib/index.js",
     "prepublishOnly": "npx cleandir node_modules && npm i && npm run build",
-    "start": "npx concurrently --kill-others --exec babel-node \"npm run start:server\" \"npm run start:client\"",
+    "start": "npx concurrently --kill-others --exec babel-node \"npm run start:server-dev\" \"npm run start:client\"",
     "start:client": "npx webpack-dev-server --config ./webpack.dev.js --mode development",
     "start:server": "npx babel-node example/server/index.js",
     "start:server-dev": "npx nodemon example/server/index.js --exec babel-node",

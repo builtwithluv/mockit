@@ -56,7 +56,12 @@ export class NodeItemLabel extends React.PureComponent {
                 popoverClassName="sidebar-tooltip--width"
                 position={Position.BOTTOM}
             >
-                <Grid container wrap="nowrap" alignItems="center">
+                <Grid
+                    container
+                    data-tag="sidebar-parent-node-item"
+                    alignItems="center"
+                    wrap="nowrap"
+                >
                     <Grid container className={classes.iconsContainer}>
                         {isActive && <Icon icon={IconNames.SELECTION} iconSize={10} />}
                     </Grid>

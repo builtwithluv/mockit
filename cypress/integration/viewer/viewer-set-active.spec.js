@@ -8,17 +8,17 @@ describe('Sets fixture as active', () => {
     it('set fixture as active when set active button is clicked', () => {
         cy
             .visit('/testy')
-            .get(selectors.sidebar.treeNode)
-            .eq(2)
+            .get(selectors.sidebar.childNode)
+            .eq(1)
             .find(selectors.sidebar.treeNodeActiveIndicator)
             .should('have.length', 0)
-            .get(selectors.sidebar.treeNode)
-            .eq(2)
+            .get(selectors.sidebar.childNode)
+            .eq(1)
             .click()
             .get(selectors.viewer.setActiveButton)
             .click()
-            .get(selectors.sidebar.treeNode)
-            .eq(2)
+            .get(selectors.sidebar.childNode)
+            .eq(1)
             .find(selectors.sidebar.treeNodeActiveIndicator)
             .should('have.length', 1);
     });

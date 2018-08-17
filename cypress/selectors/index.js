@@ -1,6 +1,8 @@
 export default {
     sidebar: {
         root: '[data-tag="sidebar"]',
+        childNode: '[data-tag="sidebar-parent-node-item"]',
+        parentNode: '[data-tag="sidebar-parent-node"]',
         treeNode: '.bp3-tree-node',
         treeNodeActiveIndicator: '.bp3-icon',
     },

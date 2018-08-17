@@ -11,7 +11,7 @@ export class NodeParentLabel extends React.PureComponent {
         const { url } = this.props;
 
         return (
-            <span style={{ color: Colors.BLUE1 }}>
+            <span data-tag="sidebar-parent-node" style={{ color: Colors.BLUE1 }}>
                 {url}
             </span>
         );
