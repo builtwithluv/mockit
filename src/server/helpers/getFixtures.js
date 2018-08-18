@@ -1,12 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const uuidv4 = require('uuid/v4');
+import fs from 'fs';
+import path from 'path';
+import uuidv4 from 'uuid/v4';
 
-const config = require('../../helpers/getConfig')();
+import config from '../config';
 
 const DEFAULT_PATH = path.resolve(config.fixturesPath);
 
-module.exports = function getFixtures(contents = [], filePath = DEFAULT_PATH) {
+export default function getFixtures(contents = [], filePath = DEFAULT_PATH) {
     const files = fs.readdirSync(filePath);
 
     files.forEach(fileName => {
@@ -31,6 +31,10 @@ module.exports = function getFixtures(contents = [], filePath = DEFAULT_PATH) {
 
             if (!fixture.hasOwnProperty('description')) {
                 fixture.description = 'No description added.';
+            }
+
+            if (fixture.handler) {
+                fixture._handler = fixture.handler.toString();
             }
 
             contents.push(fixture);
