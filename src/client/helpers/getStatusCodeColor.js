@@ -2,16 +2,16 @@ import { Colors } from '@blueprintjs/core';
 
 export default function getStatusCodeColor(status) {
     if (status < 200) {
-        return Colors.COBALT2;
+        return Colors.COBALT4;
     }
     if (status < 300) {
-        return Colors.GREEN2;
+        return Colors.GREEN4;
     }
     if (status < 400) {
-        return Colors.GOLD2;
+        return Colors.GOLD4;
     }
     if (status < 500) {
-        return Colors.RED2;
+        return Colors.RED4;
     }
-    return Colors.GRAY2;
+    return Colors.GRAY4;
 }

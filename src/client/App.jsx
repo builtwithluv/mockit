@@ -11,15 +11,17 @@ import { withStyles } from '@material-ui/core/styles';
 
 import { GlobalContext } from '@client/context';
 import { findFixture } from '@client/helpers';
+import { Theme } from '@client/enums/theme';
 
 import ActionBar from '@client/components/ActionBar';
+import SettingsBar from '@client/components/SettingsBar';
 import Sidebar from '@client/components/Sidebar';
 import Snackbar from '@client/components/Snackbar';
 import Viewer from '@client/components/Viewer';
 
 const styles = theme => ({
     container: {
-        height: 'calc(100% - 80px)',
+        height: 'calc(100% - 130px)',
     },
     main: {
         height: '100vh',
@@ -45,6 +47,7 @@ export class App extends React.PureComponent {
             selectedNode: null,
             snackbarMessage: '',
             store: null,
+            theme: Theme.DARK,
             validations: {},
             toggleSnackbar: this.toggleSnackbar,
             updateGlobalContext: this.updateGlobalContext,
@@ -74,6 +77,7 @@ export class App extends React.PureComponent {
             selectedNode,
             snackbarMessage,
             store,
+            theme,
             validations,
         } = this.state;
 
@@ -82,9 +86,15 @@ export class App extends React.PureComponent {
         const selectedFixture = findFixture(selectedNodeId, fixtures);
 
         return !isLoading && (
-            <main className={classNames('bp3-light', classes.main)}>
+            <main
+                className={classNames(theme, classes.main)}
+                style={{
+                    backgroundColor: theme === Theme.DARK ? '#30404D' : '#EBF1F5',
+                }}
+            >
                 <CssBaseline>
                     <GlobalContext.Provider value={this.state}>
+                        <SettingsBar updateGlobalContext={this.updateGlobalContext} />
                         <ActionBar />
                         <Grid container className={classes.container}>
                             <Grid item className={classes.sidebar}>
