@@ -1,3 +1,1 @@
-const createRoutes = require('./server/createRoutes');
-
-module.exports = createRoutes;
+export { default } from './server/createRoutes';

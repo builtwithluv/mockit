@@ -1,12 +1,12 @@
-const createStore = require('../createStore');
-const loadTestys = require('./loadTestys');
-const loadFixtureRoutes = require('./loadFixtureRoutes');
-const loadMiddlewares = require('./loadMiddlewares');
+import createTesty from '../createTesty';
+import loadTestys from './loadTestys';
+import loadFixtureRoutes from './loadFixtureRoutes';
+import loadMiddlewares from './loadMiddlewares';
 
-module.exports = function createRoutes(app) {
-    const store = createStore();
+export default function createRoutes(app) {
+    const testy = createTesty();
 
-    loadMiddlewares(app, store);
-    loadTestys(app, store);
-    loadFixtureRoutes(app, store);
+    loadMiddlewares(app, testy);
+    loadTestys(app, testy);
+    loadFixtureRoutes(app, testy);
 }

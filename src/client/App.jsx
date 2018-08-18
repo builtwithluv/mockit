@@ -1,41 +1,134 @@
+import './styles.css';
+
+import { debounce, get } from 'lodash';
+import classNames from 'classnames';
+
 import React from 'react';
-import debounce from 'lodash.debounce';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
 
-import { StoreContext } from './context/store-context';
+import { GlobalContext } from '@client/context';
+import { findFixture } from '@client/helpers';
 
-import HeaderContainer from './HeaderContainer';
-import MethodSortContainer from './MethodSortContainer';
+import ActionBar from '@client/components/ActionBar';
+import Sidebar from '@client/components/Sidebar';
+import Snackbar from '@client/components/Snackbar';
+import Viewer from '@client/components/Viewer';
 
-const theme = createMuiTheme({
-    palette: {
-        type: 'dark',
+const styles = theme => ({
+    container: {
+        height: 'calc(100% - 80px)',
+    },
+    main: {
+        height: '100vh',
+    },
+    sidebar: {
+        width: 400,
+    },
+    viewer: {
+        margin: theme.spacing.unit,
     },
 });
 
 export class App extends React.PureComponent {
+    static propTypes = {
+        classes: PropTypes.object,
+    };
+
     constructor() {
         super();
         this.state = {
             isLoading: true,
+            isSnackbarOpen: false,
+            selectedNode: null,
+            snackbarMessage: '',
             store: null,
-            handlers: {
-                updateTesty: this.updateTesty,
-                updateTestyDebounced: debounce(this.updateTesty, 750),
-            },
+            validations: {},
+            toggleSnackbar: this.toggleSnackbar,
+            updateGlobalContext: this.updateGlobalContext,
+            updateTesty: this.updateTesty,
+            updateTestyDebounced: debounce(this.updateTesty, 750),
         };
     }
 
     componentDidMount() {
         fetch('/testy/api')
             .then(data => data.json())
-            .then(data => this.setState(prevState => ({ ...prevState, isLoading: false, store: data })))
+            .then(data => this.setState(
+                prevState => ({
+                    ...prevState,
+                    isLoading: false,
+                    store: data,
+                }))
+            )
             .catch(err => console.error(err));
     }
 
+    render() {
+        const { classes } = this.props;
+        const {
+            isLoading,
+            isSnackbarOpen,
+            selectedNode,
+            snackbarMessage,
+            store,
+            validations,
+        } = this.state;
+
+        const selectedNodeId = get(selectedNode, 'id');
+        const fixtures = get(store, 'fixtures');
+        const selectedFixture = findFixture(selectedNodeId, fixtures);
+
+        return !isLoading && (
+            <main className={classNames('bp3-light', classes.main)}>
+                <CssBaseline>
+                    <GlobalContext.Provider value={this.state}>
+                        <ActionBar />
+                        <Grid container className={classes.container}>
+                            <Grid item className={classes.sidebar}>
+                                <Sidebar
+                                    fixtures={fixtures}
+                                    activeFixtures={store.active}
+                                    updateGlobalContext={this.updateGlobalContext}
+                                />
+                            </Grid>
+                            <Grid item xs className={classes.viewer}>
+                                {selectedFixture && (
+                                    <Viewer
+                                        fixture={selectedFixture}
+                                        updateTesty={this.updateTesty}
+                                        updateValidations={this.updateValidations}
+                                        validation={validations[selectedNodeId]}
+                                    />
+                                )}
+                            </Grid>
+                        </Grid>
+                        <Snackbar
+                            isSnackbarOpen={isSnackbarOpen}
+                            snackbarMessage={snackbarMessage}
+                            toggleSnackbar={this.toggleSnackbar}
+                        />
+                    </GlobalContext.Provider>
+                </CssBaseline>
+            </main>
+        );
+    }
+
+    toggleSnackbar = msg => {
+        this.setState(prevState => ({
+            isSnackbarOpen: !prevState.isSnackbarOpen,
+            snackbarMessage: msg || prevState.snackbarMessage,
+        }));
+    }
+
+    updateGlobalContext = nextState => {
+        this.setState(() => nextState);
+    }
+
     updateTesty = action => {
-        return fetch('testy/api', {
+        return fetch('/testy/api', {
             method: 'PUT',
             body: JSON.stringify(action),
             headers: {
@@ -43,22 +136,18 @@ export class App extends React.PureComponent {
             },
         })
             .then(data => data.json())
-            .then(data => this.setState({ store: data }))
-            .catch(err => console.error(err));
+            .then(data => this.setState(() => ({ store: data })))
+            .catch(err => console.log(err));
     }
 
-    render() {
-        return !this.state.isLoading && (
-            <MuiThemeProvider theme={theme}>
-                <CssBaseline>
-                    <StoreContext.Provider value={this.state}>
-                        <HeaderContainer />
-                        <MethodSortContainer />
-                    </StoreContext.Provider>
-                </CssBaseline>
-            </MuiThemeProvider>
-        );
+    updateValidations = (id, error) => {
+        this.setState(prevState => ({
+            validations: {
+                ...prevState.validations,
+                [id]: error,
+            },
+        }));
     }
 }
 
-export default App;
+export default withStyles(styles)(App);
