@@ -5,6 +5,9 @@ module.exports = {
     url: '/api/nested',
     method: 'GET',
     status: 200,
+    headers: {
+        'Content-Type': 'text/plain',
+    },
     data: {
         firstName: 'Cheng',
         lastName: 'Ly',

@@ -13,6 +13,7 @@ export default function loadFixtureRoutes(app, testy) {
                 data,
                 description,
                 handler,
+                headers,
                 status,
             } = active[method][url];
 
@@ -25,8 +26,10 @@ export default function loadFixtureRoutes(app, testy) {
                     }
                 }
 
+                res.set(headers || { 'Content-Type': 'application/json' });
                 res.status(status);
-                return res.json(data);
+
+                return res.send(data);
             }, latency);
         });
     });
