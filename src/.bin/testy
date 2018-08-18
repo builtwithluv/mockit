@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+
+const start = require('../commands/start').default;
+
+const argv = require('minimist')(process.argv.slice(2));
+
+const command = argv._[0];
+
+switch (command) {
+    case 'start': {
+        return start();
+    }
+
+    default: {
+        console.error('Not a valid command');
+    }
+}
+
