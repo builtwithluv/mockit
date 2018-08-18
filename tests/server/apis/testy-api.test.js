@@ -17,7 +17,7 @@ describe('Test the api path', () => {
                 .get('/testy/api')
                 .then(response => {
                     expect(response.body).toHaveProperty(
-                        'active',
+                        'activeFixtures',
                         'fixtures',
                         'latency',
                     );
@@ -59,7 +59,7 @@ describe('Test the api path', () => {
                 .put('/testy/api')
                 .send({ id: 'GET_200_bhakti' })
                 .then(response => {
-                    expect(response.body.active.GET['/api/test']).toEqual({
+                    expect(response.body.activeFixtures.GET['/api/test']).toEqual({
                         ...fixture,
                         handler: undefined,
                     });

@@ -5,7 +5,7 @@ export default function loadFixtureRoutes(app, testy) {
     fixtures.forEach(({ method, url }) => {
         app[method.toLowerCase()](url, (req, res) => {
             const {
-                active,
+                activeFixtures,
                 latency,
             } = testy.getState();
 
@@ -15,7 +15,7 @@ export default function loadFixtureRoutes(app, testy) {
                 handler,
                 headers,
                 status,
-            } = active[method][url];
+            } = activeFixtures[method][url];
 
             setTimeout(() => {
                 if (handler) {

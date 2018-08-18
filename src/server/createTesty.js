@@ -28,13 +28,13 @@ export default function createTesty() {
         return {
             fixtures,
             latency,
-            active: createActiveResponses(fixtures),
+            activeFixtures: createActiveResponses(fixtures),
         };
     }
 
     function reloadFixtures() {
         state.fixtures = getFixtures();
-        state.active = createActiveResponses(state.fixtures);
+        state.activeFixtures = createActiveResponses(state.fixtures);
     }
 
     function reset() {

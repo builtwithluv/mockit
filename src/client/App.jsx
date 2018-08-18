@@ -90,7 +90,7 @@ export class App extends React.PureComponent {
                             <Grid item className={classes.sidebar}>
                                 <Sidebar
                                     fixtures={fixtures}
-                                    activeFixtures={store.active}
+                                    activeFixtures={store.activeFixtures}
                                     updateGlobalContext={this.updateGlobalContext}
                                 />
                             </Grid>

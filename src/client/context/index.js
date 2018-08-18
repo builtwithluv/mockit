@@ -7,7 +7,7 @@ export const GlobalContext = React.createContext({
     sidebarBuckets: [],
     snackbarMessage: '',
     store: {
-        active: {},
+        activeFixtures: {},
         fixtures: [],
         latency: 50,
     },
