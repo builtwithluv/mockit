@@ -17,7 +17,7 @@ function getConfig() {
         };
     }
 
-    return defaultConfiguration;
+    return defaultConfig;
 }
 
 export default getConfig();
