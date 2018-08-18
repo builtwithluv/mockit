@@ -1,39 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import TextField from '@material-ui/core/TextField';
+import { Intent, NumericInput } from '@blueprintjs/core';
 
 import { GlobalContext } from '@client/context';
 
-const styles = theme => ({
-    textField: {
-        marginRight: theme.spacing.unit,
-        width: 100,
-    },
-});
-
 export class LatencyField extends React.PureComponent {
-    static propTypes = {
-        classes: PropTypes.object.isRequired,
-    };
-
     render() {
-        const { classes } = this.props;
         return (
             <GlobalContext.Consumer>
                 {({ store, updateTestyDebounced }) => (
-                    <TextField
-                        id="latency-input"
-                        label="Latency"
-                        className={classes.textField}
-                        defaultValue={store.latency}
-                        type="number"
-                        margin="normal"
-                        onChange={e => updateTestyDebounced({ latency: +e.target.value })}
-                        InputProps={{
-                            endAdornment: <InputAdornment position="end">ms</InputAdornment>,
-                        }}
+                    <NumericInput
+                        intent={Intent.PRIMARY}
+                        majorStepSize={50}
+                        min={0}
+                        onValueChange={val => updateTestyDebounced({ latency: val })}
+                        placeholder={store.latency}
+                        stepSize={50}
+                        value={store.latency}
                     />
                 )}
             </GlobalContext.Consumer>
@@ -41,4 +23,4 @@ export class LatencyField extends React.PureComponent {
     }
 }
 
-export default withStyles(styles)(LatencyField);
+export default LatencyField;
