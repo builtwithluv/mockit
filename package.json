@@ -59,6 +59,7 @@
     "minimist": "^1.2.0",
     "node-fetch": "^2.1.2",
     "react": "^16.4.1",
+    "react-ace": "^6.1.4",
     "react-code-prettify": "0.0.1",
     "react-dom": "^16.4.1",
     "typeface-roboto": "^0.0.54",

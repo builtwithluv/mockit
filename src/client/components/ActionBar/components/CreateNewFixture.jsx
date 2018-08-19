@@ -1,4 +1,5 @@
 import React from 'react';
+import AceEditor from 'react-ace';
 import { withStyles } from '@material-ui/core/styles';
 import {
     Button,
@@ -11,6 +12,9 @@ import {
     Spinner,
     TextArea,
 } from '@blueprintjs/core';
+
+import 'brace/mode/json';
+import 'brace/theme/github';
 
 import { GlobalContext } from '@client/context';
 
@@ -94,16 +98,28 @@ export class CreateNewFixture extends React.Component {
                         />
                     </FormGroup>
                     <FormGroup
-                        label="Data"
+                        label="Data (JSON)"
                         labelFor="data-input"
                     >
-                        <TextArea
+                        <AceEditor
+                            enableBasicAutocompletion
+                            enableLiveAutocompletion
                             data-tag="actionbar-new-dialog-data"
-                            id="data-input"
-                            className={classes.data}
-                            placeholder="{ }"
+                            mode="json"
+                            theme="github"
+                            name="data-input"
+                            onLoad={this.onLoad}
+                            onChange={val => this.handleChange('data', val)}
+                            fontSize={14}
+                            showPrintMargin={false}
+                            showGutter={false}
                             value={values.data}
-                            onChange={e => this.handleChange('data', e.target.value)}
+                            setOptions={{
+                                showLineNumbers: false,
+                                tabSize: 2,
+                            }}
+                            width="100%"
+                            height="250px"
                         />
                     </FormGroup>
                     <FormGroup
