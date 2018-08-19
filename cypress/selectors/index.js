@@ -4,7 +4,7 @@ export default {
         newBtn: '[data-tag="actionbar-new-open-btn"]',
         newDialog: '.bp3-dialog',
         newDialogUrlInp: '[data-tag="actionbar-new-dialog-url"]',
-        newDialogDataInp: '[data-tag="actionbar-new-dialog-data"]',
+        newDialogDataInp: '.ace_text-input',
         newDialogMethodInp: '[data-tag="actionbar-new-dialog-method"]',
         newDialogStatusInp: '[data-tag="actionbar-new-dialog-status"]',
         newDialogIdInp: '[data-tag="actionbar-new-dialog-id"]',

@@ -38,7 +38,7 @@ describe('Create new fixture', () => {
             .get(selectors.actionbar.newDialogUrlInp)
             .type('/integration-testing')
             .get(selectors.actionbar.newDialogDataInp)
-            .type('{{} "hello": "world" }')
+            .type('{{} "hello": "world" }', { force: true })
             .get(selectors.actionbar.newDialogMethodInp)
             .clear()
             .type('POST')

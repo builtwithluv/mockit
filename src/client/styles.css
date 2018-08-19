@@ -5,6 +5,10 @@
     padding-left: 0;
 }
 
+.bp3-numeric-input input {
+    width: 75px !important;
+}
+
 .prettyprint {
     padding: 16px;
 }
