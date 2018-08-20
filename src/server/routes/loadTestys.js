@@ -1,4 +1,5 @@
 import path from 'path';
+import loadFixtureRoutes from './loadFixtureRoutes';
 import createFixture from '../helpers/createFixture';
 
 export default function loadTestys(app, testy) {
@@ -17,6 +18,7 @@ export default function loadTestys(app, testy) {
         try {
             contents.forEach(content => createFixture(content));
             testy.reloadFixtures();
+            loadFixtureRoutes(app, testy);
             return res.json(testy.getState());
         } catch (e) {
             res.status(400);
