@@ -1,46 +1,31 @@
 import React from 'react';
-import AceEditor from 'react-ace';
-import { withStyles } from '@material-ui/core/styles';
 import {
     Button,
     Classes,
-    ControlGroup,
     Dialog,
-    FormGroup,
-    InputGroup,
     Intent,
     Spinner,
-    TextArea,
+    Tabs,
+    Tab,
 } from '@blueprintjs/core';
-
-import 'brace/mode/json';
-import 'brace/theme/github';
 
 import { GlobalContext } from '@client/context';
 
-const styles = () => ({
-    description: {
-        minHeight: 100,
-        width: '100%',
-        resize: 'none',
-        overflowY: 'scroll',
-    },
-    data: {
-        minHeight: 200,
-        width: '100%',
-        resize: 'none',
-        overflowY: 'scroll',
-    },
-});
+import CustomForm from './CustomForm';
+import ApiForm from '@/client/components/ActionBar/components/ApiForm';
 
 export class CreateNewFixture extends React.Component {
-    state = getInitialState();
+    state = {
+        isOpen: false,
+        isSubmitting: false,
+        values: getInitialValues(),
+    };
 
     toggleSnackbar;
     updateGlobalContext;
 
     render() {
-        const { isOpen } = this.state;
+        const { isOpen, isSubmitting, values } = this.state;
 
         return (
             <GlobalContext.Consumer>
@@ -60,151 +45,60 @@ export class CreateNewFixture extends React.Component {
                             <Dialog
                                 data-tag="actionbar-new-dialog"
                                 isOpen={isOpen}
-                                onClose={() => {
-                                    this.toggleDialog();
-                                    this.setState(() => getInitialState());
-                                }}
+                                onClose={this.toggleDialog}
                                 title="Create New Fixture"
                             >
-                                {this.renderDialogBody()}
-                                {this.renderDialogFooter()}
+                                <div className={Classes.DIALOG_BODY}>
+                                    <Tabs
+                                        large
+                                        renderActiveTabPanelOnly
+                                        id="fix-types"
+                                        onChange={() => this.setState({ values: getInitialValues()})}
+                                    >
+                                        <Tab
+                                            id="cus"
+                                            title="Custom"
+                                            panel={
+                                                <CustomForm
+                                                    handleChange={this.handleChange}
+                                                    values={values}
+                                                />
+                                            }
+                                        />
+                                        <Tab
+                                            id="url"
+                                            title="URL"
+                                            panel={
+                                                <ApiForm
+                                                    handleChange={this.handleChange}
+                                                    toggleSnackbar={this.toggleSnackbar}
+                                                    values={values}
+                                                />
+                                            }
+                                        />
+                                    </Tabs>
+                                </div>
+                                <div className={Classes.DIALOG_FOOTER}>
+                                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                                        {isSubmitting ? (
+                                            <Spinner size={Spinner.SIZE_SMALL} />
+                                        ) : (
+                                            <Button
+                                                data-tag="actionbar-new-dialog-save-btn"
+                                                disabled={!values.url}
+                                                onClick={this.handleSave}
+                                                intent={Intent.PRIMARY}
+                                            >
+                                                Save
+                                            </Button>
+                                        )}
+                                    </div>
+                                </div>
                             </Dialog>
                         </React.Fragment>
                     );
                 }}
             </GlobalContext.Consumer>
-        );
-    }
-
-    renderDialogBody = () => {
-        const { values } = this.state;
-        const { classes } = this.props;
-
-        return (
-            <div className={Classes.DIALOG_BODY}>
-                <ControlGroup fill vertical>
-                    <FormGroup
-                        label="Endpoint"
-                        labelFor="url-input"
-                        labelInfo="(required)"
-                    >
-                        <InputGroup
-                            required
-                            data-tag="actionbar-new-dialog-url"
-                            id="url-input"
-                            placeholder="/"
-                            value={values.url}
-                            onChange={e => this.handleChange('url', e.target.value)}
-                        />
-                    </FormGroup>
-                    <FormGroup
-                        label="Data (JSON)"
-                        labelFor="data-input"
-                    >
-                        <AceEditor
-                            enableBasicAutocompletion
-                            enableLiveAutocompletion
-                            data-tag="actionbar-new-dialog-data"
-                            mode="json"
-                            theme="github"
-                            name="data-input"
-                            onLoad={this.onLoad}
-                            onChange={val => this.handleChange('data', val)}
-                            fontSize={14}
-                            showPrintMargin={false}
-                            showGutter={false}
-                            value={values.data}
-                            setOptions={{
-                                showLineNumbers: false,
-                                tabSize: 2,
-                            }}
-                            width="100%"
-                            height="250px"
-                        />
-                    </FormGroup>
-                    <FormGroup
-                        label="Method"
-                        labelFor="method-input"
-                    >
-                        <InputGroup
-                            data-tag="actionbar-new-dialog-method"
-                            id="method-input"
-                            placeholder="GET"
-                            value={values.method}
-                            onChange={e => this.handleChange('method', e.target.value)}
-                        />
-                    </FormGroup>
-                    <FormGroup
-                        label="Status"
-                        labelFor="status-input"
-                    >
-                        <InputGroup
-                            data-tag="actionbar-new-dialog-status"
-                            id="status-input"
-                            placeholder="200"
-                            type="number"
-                            value={values.status}
-                            onChange={e => this.handleChange('status', e.target.value)}
-                        />
-                    </FormGroup>
-                    <FormGroup
-                        label="ID"
-                        labelFor="id-input"
-                    >
-                        <InputGroup
-                            data-tag="actionbar-new-dialog-id"
-                            id="id-input"
-                            value={values.id}
-                            onChange={e => this.handleChange('id', e.target.value)}
-                        />
-                    </FormGroup>
-                    <FormGroup
-                        label="Filename"
-                        labelFor="filename-input"
-                    >
-                        <InputGroup
-                            data-tag="actionbar-new-dialog-filename"
-                            id="filename-input"
-                            value={values.filename}
-                            onChange={e => this.handleChange('filename', e.target.value)}
-                        />
-                    </FormGroup>
-                    <FormGroup
-                        label="Description"
-                        labelFor="description-input"
-                    >
-                        <TextArea
-                            data-tag="actionbar-new-dialog-description"
-                            id="description-input"
-                            className={classes.description}
-                            value={values.description}
-                            onChange={e => this.handleChange('description', e.target.value)}
-                        />
-                    </FormGroup>
-                </ControlGroup>
-            </div>
-        );
-    }
-
-    renderDialogFooter = () => {
-        const { isSubmitting, values } = this.state;
-        return (
-            <div className={Classes.DIALOG_FOOTER}>
-                <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                    {isSubmitting ? (
-                        <Spinner size={Spinner.SIZE_SMALL} />
-                    ) : (
-                        <Button
-                            data-tag="actionbar-new-dialog-save-btn"
-                            disabled={!values.url}
-                            onClick={this.handleSave}
-                            intent={Intent.PRIMARY}
-                        >
-                            Save
-                        </Button>
-                    )}
-                </div>
-            </div>
         );
     }
 
@@ -220,16 +114,6 @@ export class CreateNewFixture extends React.Component {
     handleSave = () => {
         const { values } = this.state;
         const { data } = values;
-        let { url } = values;
-
-        if (url[0] !== '/') {
-            url = `/${url}`;
-        }
-
-        // INFO Using backend service which needs a full url.
-        // On client, only requesting endpoint so just giving it
-        // a full path
-        url = `http://localhost${url}`;
 
         this.setState(() => ({ isSubmitting: true }));
 
@@ -237,21 +121,20 @@ export class CreateNewFixture extends React.Component {
             method: 'POST',
             body: JSON.stringify([{
                 ...values,
-                url,
                 data: data ? JSON.parse(data) : null,
             }]),
             headers: {
                 'content-type': 'application/json',
             },
         })
-        .then(res => res.json())
-        .then(data => this.updateGlobalContext({ store: data }))
-        .then(() => this.setState(() => ({ isSubmitting: false })))
-        .then(() => this.toggleDialog())
-        .then(() => this.toggleSnackbar('Successfully created the new fixture'))
-        .catch(() => this.setState(() => ({ isSubmitting: true })))
-        .catch(() => this.toggleSnackbar('Failed to create the new fixture'))
-        .finally(() => this.setState(() => getInitialState()));
+            .then(res => res.json())
+            .then(data => this.updateGlobalContext({ store: data }))
+            .then(() => this.setState(() => ({ isSubmitting: false })))
+            .then(() => this.toggleDialog())
+            .then(() => this.toggleSnackbar('Successfully created the new fixture'))
+            .catch(() => this.setState(() => ({ isSubmitting: true })))
+            .catch(() => this.toggleSnackbar('Failed to create the new fixture'))
+            .finally(() => this.setState(() => ({ values: getInitialValues() })));
     }
 
     toggleDialog = () => {
@@ -259,20 +142,14 @@ export class CreateNewFixture extends React.Component {
     }
 }
 
-function getInitialState() {
+function getInitialValues() {
     return {
-        isOpen: false,
-        isSubmitting: false,
-        values: {
-            id: '',
-            data: '',
-            description: '',
-            url: '',
-            filename: '',
-            method: 'GET',
-            status: '200',
-        },
+        data: '',
+        description: '',
+        method: 'GET',
+        url: '',
+        status: '200',
     };
 }
 
-export default withStyles(styles)(CreateNewFixture);
+export default CreateNewFixture;

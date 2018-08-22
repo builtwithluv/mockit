@@ -7,7 +7,7 @@ describe('Sets fixture as active', () => {
 
     it('set fixture as active when set active button is clicked', () => {
         cy
-            .visit('/testy')
+            .visit('')
             .get(selectors.sidebar.childNode)
             .eq(1)
             .find(selectors.sidebar.treeNodeActiveIndicator)

@@ -1,20 +1,22 @@
 import selectors from '../../selectors';
 
-describe('Create new fixture', () => {
+describe('Create new fixture by custom', () => {
     afterEach(() => {
         cy.resetTesty();
     });
 
     it('create a new fixture with just required data', () => {
         cy
-            .visit('/testy')
+            .visit('')
             .get(selectors.actionbar.newBtn)
             .click()
-            .get(selectors.actionbar.newDialog)
+            .get(selectors.actionbar.dialog.newDialog)
             .should('be.visible')
-            .get(selectors.actionbar.newDialogUrlInp)
+            .get(selectors.actionbar.dialog.tabs.cusTab)
+            .click()
+            .get(selectors.actionbar.dialog.newDialogUrlInp)
             .type('/integration-testing')
-            .get(selectors.actionbar.newDialogSaveBtn)
+            .get(selectors.actionbar.dialog.newDialogSaveBtn)
             .click()
             .get(selectors.snackbar.message)
             .should('be.visible')
@@ -30,28 +32,26 @@ describe('Create new fixture', () => {
 
     it('creates a fixture with all data', () => {
         cy
-            .visit('/testy')
+            .visit('')
             .get(selectors.actionbar.newBtn)
             .click()
-            .get(selectors.actionbar.newDialog)
+            .get(selectors.actionbar.dialog.newDialog)
             .should('be.visible')
-            .get(selectors.actionbar.newDialogUrlInp)
+            .get(selectors.actionbar.dialog.tabs.cusTab)
+            .click()
+            .get(selectors.actionbar.dialog.newDialogUrlInp)
             .type('/integration-testing')
-            .get(selectors.actionbar.newDialogDataInp)
+            .get(selectors.actionbar.dialog.newDialogCustomDataInp)
             .type('{{} "hello": "world" }', { force: true })
-            .get(selectors.actionbar.newDialogMethodInp)
+            .get(selectors.actionbar.dialog.newDialogMethodInp)
             .clear()
             .type('POST')
-            .get(selectors.actionbar.newDialogStatusInp)
+            .get(selectors.actionbar.dialog.newDialogStatusInp)
             .clear()
             .type('400')
-            .get(selectors.actionbar.newDialogIdInp)
-            .type('INTEGRATION_TESTING')
-            .get(selectors.actionbar.newDialogFilenameInp)
-            .type('POST_400_INTEGRATION_TESTING')
-            .get(selectors.actionbar.newDialogDescriptionInp)
+            .get(selectors.actionbar.dialog.newDialogDescriptionInp)
             .type('This description is for integration testing')
-            .get(selectors.actionbar.newDialogSaveBtn)
+            .get(selectors.actionbar.dialog.newDialogSaveBtn)
             .click()
             .get(selectors.snackbar.message)
             .should('be.visible')

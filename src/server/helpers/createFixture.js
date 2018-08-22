@@ -13,6 +13,7 @@ export default function createFixture({
     id,
     method,
     status,
+    validator,
 }) {
     id = id || uuidv4(),
     description = description || 'No description added.';
@@ -27,6 +28,7 @@ export default function createFixture({
         description,
         data,
         status,
+        validator,
         url: _url.parse(url).pathname,
     };
 
