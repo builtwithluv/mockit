@@ -2,11 +2,11 @@ import request from 'supertest';
 import app from '@/example/server/server';
 import removeFile from '@/tests/helpers/removeFile';
 
-describe('/testy/api/new', () => {
+describe('/mockit/api/new', () => {
     describe('POST', () => {
         test('should be able to create a new fixture', (done) => {
             request(app)
-                .post('/testy/api/new')
+                .post('/mockit/api/new')
                 .send([{ id: 'supertest', url: '/supertest', data: 10 }])
                 .set('Accept', 'application/json')
                 .expect(200)
@@ -16,7 +16,7 @@ describe('/testy/api/new', () => {
 
         test('should be able to create multiple fixtures', done => {
             request(app)
-                .post('/testy/api/new')
+                .post('/mockit/api/new')
                 .send([
                     { id: 'supertest', url: '/supertest' },
                     { id: 'supertest2', url: '/supertest' },
@@ -33,7 +33,7 @@ describe('/testy/api/new', () => {
 
         test('should respond with the new state after creation of new fixture', (done) => {
             request(app)
-                .post('/testy/api/new')
+                .post('/mockit/api/new')
                 .send([{ id: 'supertest', url: '/supertest', data: 10 }])
                 .set('Accept', 'application/json')
                 .expect(200)
@@ -50,7 +50,7 @@ describe('/testy/api/new', () => {
 
         test('respond with 400', (done) => {
             request(app)
-                .post('/testy/api/new')
+                .post('/mockit/api/new')
                 .send([{ description: 'lala' }])
                 .set('Accept', 'application/json')
                 .expect(400)

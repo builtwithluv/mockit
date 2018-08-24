@@ -26,7 +26,7 @@ module.exports = {
         hot: true,
         port: 3001,
         proxy: {
-            '/testy': 'http://localhost:3000',
+            '/mockit': 'http://localhost:3000',
         },
     }
 };

@@ -6,7 +6,7 @@ describe('Test the api path', () => {
     describe('GET', () => {
         test('respond with 200 and json', (done) => {
             request(app)
-                .get('/testy/api')
+                .get('/mockit/api')
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .end(done);
@@ -14,7 +14,7 @@ describe('Test the api path', () => {
 
         test('respond with store data', (done) => {
             request(app)
-                .get('/testy/api')
+                .get('/mockit/api')
                 .then(response => {
                     expect(response.body).toHaveProperty(
                         'activeFixtures',
@@ -27,7 +27,7 @@ describe('Test the api path', () => {
 
         test('respond with all available fixtures', (done) => {
             request(app)
-                .get('/testy/api')
+                .get('/mockit/api')
                 .then(response => {
                     expect(response.body.fixtures).toHaveLength(12);
                     response.body.fixtures.forEach(fixture => {
@@ -47,7 +47,7 @@ describe('Test the api path', () => {
     describe('PUT', () => {
         test('respond with 200 and json', (done) => {
             request(app)
-                .put('/testy/api')
+                .put('/mockit/api')
                 .send({ id: 'GET_200_CHENG' })
                 .expect(200)
                 .expect('Content-Type', /json/)
@@ -56,7 +56,7 @@ describe('Test the api path', () => {
 
         test('should be able to set another fixture as active', (done) => {
             request(app)
-                .put('/testy/api')
+                .put('/mockit/api')
                 .send({ id: 'GET_200_bhakti' })
                 .then(response => {
                     expect(response.body.activeFixtures.GET['/api/test']).toEqual({
@@ -69,7 +69,7 @@ describe('Test the api path', () => {
 
         test('should be able to set latency', (done) => {
             request(app)
-                .put('/testy/api')
+                .put('/mockit/api')
                 .send({ latency: 100 })
                 .then(response => {
                     expect(response.body.latency).toBe(100);

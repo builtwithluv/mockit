@@ -1,5 +1,5 @@
-export default function loadFixtureRoutes(app, testy) {
-    const state = testy.getState();
+export default function loadFixtureRoutes(app, mockit) {
+    const state = mockit.getState();
     const fixtures = state.fixtures;
 
     fixtures.forEach(({ method, url }) => {
@@ -7,7 +7,7 @@ export default function loadFixtureRoutes(app, testy) {
             const {
                 activeFixtures,
                 latency,
-            } = testy.getState();
+            } = mockit.getState();
 
             const {
                 data,

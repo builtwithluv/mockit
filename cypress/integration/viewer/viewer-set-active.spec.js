@@ -2,7 +2,7 @@ import selectors from '../../selectors';
 
 describe('Sets fixture as active', () => {
     afterEach(() => {
-        cy.resetTesty();
+        cy.resetMockit();
     });
 
     it('set fixture as active when set active button is clicked', () => {

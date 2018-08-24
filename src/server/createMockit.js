@@ -9,7 +9,7 @@ import {
     setNextLatency,
 } from './helpers';
 
-export default function createTesty() {
+export default function createMockit() {
     // Global state to be used throughout application
     let state = getDefaultState();
 
@@ -47,7 +47,7 @@ export default function createTesty() {
     }
 
     function update(next) {
-        // ! All the next functions will modify testy directly
+        // ! All the next functions will modify mockit directly
         setNextActive(next, getState());
         setNextLatency(next, getState());
     }

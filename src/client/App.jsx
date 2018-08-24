@@ -51,13 +51,13 @@ export class App extends React.PureComponent {
             validations: {},
             toggleSnackbar: this.toggleSnackbar,
             updateGlobalContext: this.updateGlobalContext,
-            updateTesty: this.updateTesty,
-            updateTestyDebounced: debounce(this.updateTesty, 750),
+            updateMockit: this.updateMockit,
+            updateMockitDebounced: debounce(this.updateMockit, 750),
         };
     }
 
     componentDidMount() {
-        fetch('/testy/api')
+        fetch('/mockit/api')
             .then(data => data.json())
             .then(data => this.setState(
                 prevState => ({
@@ -108,7 +108,7 @@ export class App extends React.PureComponent {
                                 {selectedFixture && (
                                     <Viewer
                                         fixture={selectedFixture}
-                                        updateTesty={this.updateTesty}
+                                        updateMockit={this.updateMockit}
                                         updateValidations={this.updateValidations}
                                         validation={validations[selectedNodeId]}
                                     />
@@ -137,8 +137,8 @@ export class App extends React.PureComponent {
         this.setState(() => nextState);
     }
 
-    updateTesty = action => {
-        return fetch('/testy/api', {
+    updateMockit = action => {
+        return fetch('/mockit/api', {
             method: 'PUT',
             body: JSON.stringify(action),
             headers: {

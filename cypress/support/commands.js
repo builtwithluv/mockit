@@ -1,11 +1,11 @@
 import fetch from 'node-fetch';
 
-Cypress.Commands.add('resetTesty', () => {
+Cypress.Commands.add('resetMockit', () => {
     const defaultLog = {
         displayName: 'RESET SERVER STATE',
     };
 
-    return fetch('http://localhost:3000/testy/api/reset', {
+    return fetch('http://localhost:3000/mockit/api/reset', {
         method: 'PUT',
     }).then(() => {
         return Cypress.log({
@@ -24,7 +24,7 @@ Cypress.Commands.add('switchContract', id => {
         displayName: 'SWITCH CONTRACT',
     };
 
-    return fetch('http://localhost:3000/testy/api', {
+    return fetch('http://localhost:3000/mockit/api', {
         method: 'PUT',
         data: JSON.stringify({ id }),
         headers: {

@@ -38,7 +38,7 @@ export class Viewer extends React.Component {
         classes: PropTypes.object,
         fixture: PropTypes.object,
         updateValidations: PropTypes.func,
-        updateTesty: PropTypes.func,
+        updateMockit: PropTypes.func,
         validation: PropTypes.object,
     };
 
@@ -57,7 +57,7 @@ export class Viewer extends React.Component {
         const {
             classes,
             fixture,
-            updateTesty,
+            updateMockit,
         } = this.props;
 
         const {
@@ -95,7 +95,7 @@ export class Viewer extends React.Component {
                                 data-tag="viewer-action-bar-set-active-btn"
                                 intent={Intent.PRIMARY}
                                 text="Set Active"
-                                onClick={() => updateTesty({ id })}
+                                onClick={() => updateMockit({ id })}
                             />
                         </NavbarGroup>
                     </Navbar>

@@ -5,7 +5,7 @@ describe('/', () => {
     describe('GET', () => {
         test('respond with 200', (done) => {
             request(app)
-                .get('/testy')
+                .get('/mockit')
                 .expect(200)
                 .expect('Content-Type', /text\/html/)
                 .end(done);

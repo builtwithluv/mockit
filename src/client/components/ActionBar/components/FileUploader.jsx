@@ -181,7 +181,7 @@ export class FileUploader extends React.PureComponent {
 
         const fixturesToCreate = fixturesFromHar.filter(fixture => fixture.isChecked === true);
 
-        return fetch('/testy/api/new', {
+        return fetch('/mockit/api/new', {
             method: 'POST',
             body: JSON.stringify(fixturesToCreate),
             headers: {

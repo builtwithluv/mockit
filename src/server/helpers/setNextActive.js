@@ -1,6 +1,6 @@
-export default function setNextActive(next, testy) {
+export default function setNextActive(next, mockit) {
     if (next.hasOwnProperty('id')) {
-        const fixture = testy.fixtures.find(fixture => fixture.id === next.id);
-        testy.activeFixtures[fixture.method][fixture.url] = fixture;
+        const fixture = mockit.fixtures.find(fixture => fixture.id === next.id);
+        mockit.activeFixtures[fixture.method][fixture.url] = fixture;
     }
 }

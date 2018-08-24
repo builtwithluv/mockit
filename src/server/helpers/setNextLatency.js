@@ -1,5 +1,5 @@
-export default function setNextLatency(next, testy) {
+export default function setNextLatency(next, mockit) {
     if (next.hasOwnProperty('latency')) {
-        testy.latency = next.latency;
+        mockit.latency = next.latency;
     }
 }

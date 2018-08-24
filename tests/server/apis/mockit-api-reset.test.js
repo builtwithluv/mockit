@@ -7,13 +7,13 @@ describe('Test resetting store', () => {
             const agent = request(app);
 
             agent
-                .put('/testy/api')
+                .put('/mockit/api')
                 .send({ latency: 100 })
                 .end((_, response) => {
                     expect(response.body.latency).toBe(100);
 
                     agent
-                        .put('/testy/api/reset')
+                        .put('/mockit/api/reset')
                         .end((_, response) => {
                             expect(response.body.latency).toBe(50);
                             done();
@@ -25,13 +25,13 @@ describe('Test resetting store', () => {
             const agent = request(app);
 
             agent
-                .post('/testy/api/new')
+                .post('/mockit/api/new')
                 .send([{ url: '/testinggg' }])
                 .end((_, response) => {
                     expect(response.body.fixtures).toHaveLength(13);
 
                     agent
-                        .put('/testy/api/reset')
+                        .put('/mockit/api/reset')
                         .end((_, response) => {
                             expect(response.body.fixtures).toHaveLength(12);
                             done();

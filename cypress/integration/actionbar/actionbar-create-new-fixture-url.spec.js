@@ -2,7 +2,7 @@ import selectors from '../../selectors';
 
 describe('Create new fixture by url', () => {
     afterEach(() => {
-        cy.resetTesty();
+        cy.resetMockit();
     });
 
     it('creates a fixture with api data', () => {

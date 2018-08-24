@@ -117,7 +117,7 @@ export class CreateNewFixture extends React.Component {
 
         this.setState(() => ({ isSubmitting: true }));
 
-        fetch('/testy/api/new', {
+        fetch('/mockit/api/new', {
             method: 'POST',
             body: JSON.stringify([{
                 ...values,

@@ -7,10 +7,10 @@ function getConfig() {
         port: 3000,
     };
 
-    const testyConfigurationFilePath = path.resolve('testy.json');
+    const mockitConfigurationFilePath = path.resolve('mockit.json');
 
-    if (fs.existsSync(testyConfigurationFilePath)) {
-        const content = JSON.parse(fs.readFileSync(testyConfigurationFilePath));
+    if (fs.existsSync(mockitConfigurationFilePath)) {
+        const content = JSON.parse(fs.readFileSync(mockitConfigurationFilePath));
         return {
             ...defaultConfig,
             ...content,

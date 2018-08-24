@@ -1,6 +1,6 @@
 {
-  "name": "@builtwithluv/testy",
-  "version": "1.0.4",
+  "name": "@builtwithluv/mockit",
+  "version": "1.0.0",
   "description": "Framework for mocking",
   "main": "lib/index.js",
   "scripts": {
@@ -14,12 +14,12 @@
     "test:integration": "npx concurrently --kill-others \"npm run start:server\" \"npx cypress run\"",
     "test:unit": "jest"
   },
-  "bin": "lib/.bin/testy",
+  "bin": "lib/.bin/mockit",
   "author": "Cheng Ly",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/builtwithluv/testy"
+    "url": "https://github.com/builtwithluv/mockit"
   },
   "files": [
     "lib",

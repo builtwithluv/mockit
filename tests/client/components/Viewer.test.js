@@ -17,7 +17,7 @@ describe('<Viewer />', () => {
             url: '/test',
         },
         updateValidations: jest.fn(),
-        updateTesty: jest.fn(),
+        updateMockit: jest.fn(),
         validation: undefined,
     });
 
@@ -57,8 +57,8 @@ describe('<Viewer />', () => {
         it('should set current fixture as active when clicked on button', () => {
             const btn = wrapper.find(Button);
             btn.simulate('click');
-            expect(defaultProps.updateTesty).toHaveBeenCalledTimes(1);
-            expect(defaultProps.updateTesty).toHaveBeenCalledWith({ id: defaultProps.fixture.id });
+            expect(defaultProps.updateMockit).toHaveBeenCalledTimes(1);
+            expect(defaultProps.updateMockit).toHaveBeenCalledWith({ id: defaultProps.fixture.id });
         });
     });
 

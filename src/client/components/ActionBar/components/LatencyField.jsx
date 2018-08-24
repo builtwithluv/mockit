@@ -21,7 +21,7 @@ export class LatencyField extends React.PureComponent {
 
         return (
             <GlobalContext.Consumer>
-                {({ store, updateTestyDebounced }) => (
+                {({ store, updateMockitDebounced }) => (
                     <React.Fragment>
                         <label
                             className={classes.label}
@@ -35,7 +35,7 @@ export class LatencyField extends React.PureComponent {
                             intent={Intent.PRIMARY}
                             majorStepSize={50}
                             min={0}
-                            onValueChange={val => updateTestyDebounced({ latency: val })}
+                            onValueChange={val => updateMockitDebounced({ latency: val })}
                             placeholder={store.latency}
                             stepSize={50}
                             value={store.latency}

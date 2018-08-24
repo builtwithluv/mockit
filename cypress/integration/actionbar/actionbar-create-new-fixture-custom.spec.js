@@ -2,7 +2,7 @@ import selectors from '../../selectors';
 
 describe('Create new fixture by custom', () => {
     afterEach(() => {
-        cy.resetTesty();
+        cy.resetMockit();
     });
 
     it('create a new fixture with just required data', () => {
