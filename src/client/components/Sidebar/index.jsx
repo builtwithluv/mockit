@@ -90,8 +90,11 @@ export class Sidebar extends React.PureComponent {
 
     selectFirstItem = () => {
         const { nodeList } = this.state;
+        const firstNode = nodeList[0];
 
-        this.handleNodeClick(nodeList[0].childNodes[0]);
+        if (firstNode) {
+            this.handleNodeClick(firstNode.childNodes[0]);
+        }
     }
 }
 
