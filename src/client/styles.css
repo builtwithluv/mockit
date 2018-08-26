@@ -11,7 +11,7 @@
 
 .prettyprint {
     padding: 16px;
-    overflow: scroll;
+    overflow: auto;
     max-height: calc(100vh - 210px);
 }
 
