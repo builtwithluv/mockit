@@ -12,9 +12,9 @@
 .prettyprint {
     padding: 16px;
     overflow: scroll;
+    max-height: calc(100vh - 210px);
 }
 
 .prettyprint code > div {
     max-width: 0;
-    max-height: 450px;
 }
