@@ -26,7 +26,7 @@ Cypress.Commands.add('switchContract', id => {
 
     return fetch('http://localhost:3000/mockit/api', {
         method: 'PUT',
-        data: JSON.stringify({ id }),
+        body: JSON.stringify({ id }),
         headers: {
             'Content-Type': 'application/json',
         },
