@@ -14,7 +14,9 @@ import {
     NavbarHeading,
     Spinner,
 } from '@blueprintjs/core';
-import PriorityHigh from '@material-ui/icons/PriorityHigh';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import HighlightOff from '@material-ui/icons/HighlightOff';
+import PanoramaFishEye from '@material-ui/icons/PanoramaFishEye';
 import { withStyles } from '@material-ui/core';
 import Code from 'react-code-prettify';
 
@@ -112,9 +114,11 @@ export class Viewer extends React.Component {
         if (validation === undefined) {
             return <Spinner size={Spinner.SIZE_SMALL} />;
         } else if (validation) {
-            return <PriorityHigh style={{ color: Colors.RED4 }} />;
+            return <HighlightOff style={{ color: Colors.RED4 }} />;
+        } else if (validation === null) {
+            return <CheckCircle style={{ color: Colors.GREEN4 }} />;
         } else {
-            return null;
+            return <PanoramaFishEye />;
         }
     }
 

@@ -2,7 +2,9 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import { Button, Navbar, Spinner } from '@blueprintjs/core';
-import PriorityHigh from '@material-ui/icons/PriorityHigh';
+import CheckCircle from '@material-ui/icons/CheckCircle';
+import HighlightOff from '@material-ui/icons/HighlightOff';
+import PanoramaFishEye from '@material-ui/icons/PanoramaFishEye';
 import Viewer from '@/src/client/components/Viewer';
 import Code from 'react-code-prettify';
 
@@ -74,13 +76,18 @@ describe('<Viewer />', () => {
         });
 
         it('should show error status when it has validation errors', () => {
-            wrapper.setProps({ validation: { error: 'error' }});
-            expect(wrapper.find(PriorityHigh)).toHaveLength(1);
+            wrapper.setProps({ validation: { error: 'error' } });
+            expect(wrapper.find(HighlightOff)).toHaveLength(1);
         });
 
-        it('should not show error status when it does not have validation errors', () => {
+        it('should show success status when it has no validation errors', () => {
             wrapper.setProps({ validation: null });
-            expect(wrapper.find(PriorityHigh)).toHaveLength(0);
+            expect(wrapper.find(CheckCircle)).toHaveLength(1);
+        });
+
+        it('should show neutral status when no validator was set', () => {
+            wrapper.setProps({ validation: false });
+            expect(wrapper.find(PanoramaFishEye)).toHaveLength(1);
         });
     });
 

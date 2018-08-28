@@ -9,4 +9,11 @@ module.exports = {
     method: 'DELETE',
     status: 200,
     data: 'Ok',
+    validator: {
+        url: 'http://localhost:3000/api/test',
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'text/plain',
+        }
+    }
 };
