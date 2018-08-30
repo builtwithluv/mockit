@@ -58,6 +58,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.flow": "^3.5.0",
     "minimist": "^1.2.0",
+    "mkdir-recursive": "^0.4.0",
     "node-fetch": "^2.1.2",
     "react": "^16.4.1",
     "react-ace": "^6.1.4",

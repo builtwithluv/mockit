@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import fx from 'mkdir-recursive';
 import uuidv4 from 'uuid/v4';
 import _url from 'url';
 import beautify from 'js-beautify';
@@ -16,7 +17,7 @@ export default function createFixture({
     validator,
 }) {
     id = id || uuidv4(),
-    description = description || 'No description added.';
+        description = description || 'No description added.';
     method = (method && method.toUpperCase()) || 'GET';
     status = Number(status) || 200;
 
@@ -37,8 +38,14 @@ export default function createFixture({
         end_with_newline: true,
     };
 
+    const fixturesFullPath = path.resolve(config.fixturesPath);
+
+    if (!fs.existsSync(fixturesFullPath)) {
+        fx.mkdirSync(fixturesFullPath);
+    }
+
     const errs = fs.writeFileSync(
-        path.resolve(path.join(config.fixturesPath, fileName)),
+        path.join(fixturesFullPath, fileName),
         beautify(`module.exports = ${JSON.stringify(fixture)}`, beautifyOptions),
     );
 
