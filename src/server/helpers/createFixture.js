@@ -21,7 +21,7 @@ export default function createFixture({
     method = (method && method.toUpperCase()) || 'GET';
     status = Number(status) || 200;
 
-    const fileName = `${method}-${status}-${filename || id}.js`;
+    const fileName = `${method}-${status}-${filename || id}.fixture.js`;
 
     const fixture = {
         id,

@@ -10,7 +10,7 @@ describe('getFixturePathById()', () => {
                 'fixtures',
                 'nested',
                 'nested2',
-                'GET_200_nested_2.js'
+                'GET_200_nested_2.fixture.js'
             ));
     });
 

@@ -41,7 +41,7 @@ export class Viewer extends React.Component {
         fixture: PropTypes.object,
         updateValidations: PropTypes.func,
         updateMockit: PropTypes.func,
-        validation: PropTypes.object,
+        validation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     };
 
     componentDidMount() {
