@@ -11,7 +11,7 @@ describe('/mockit/api/new', () => {
                 .set('Accept', 'application/json')
                 .expect(200)
                 .expect('Content-Type', /json/)
-                .then(() => removeFile('example/server/fixtures/GET-200-supertest.fixture.js', done));
+                .then(() => removeFile('example/mockit/GET-200-supertest.fixture.js', done));
         });
 
         test('should be able to create multiple fixtures', done => {
@@ -25,8 +25,8 @@ describe('/mockit/api/new', () => {
                 .expect(200)
                 .expect('Content-Type', /json/)
                 .then(() => {
-                    removeFile('example/server/fixtures/GET-200-supertest.fixture.js', () => {
-                        removeFile('example/server/fixtures/GET-200-supertest2.fixture.js', done);
+                    removeFile('example/mockit/GET-200-supertest.fixture.js', () => {
+                        removeFile('example/mockit/GET-200-supertest2.fixture.js', done);
                     });
                 });
         });
@@ -45,7 +45,7 @@ describe('/mockit/api/new', () => {
                         data: 10,
                     }));
                 })
-                .then(() => removeFile('example/server/fixtures/GET-200-supertest.fixture.js', done));
+                .then(() => removeFile('example/mockit/GET-200-supertest.fixture.js', done));
         });
 
         test('respond with 400', (done) => {

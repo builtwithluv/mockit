@@ -6,8 +6,7 @@ describe('getFixturePathById()', () => {
         expect(getFixturePathById('GET_200_nested_2'))
             .toBe(path.resolve(
                 'example',
-                'server',
-                'fixtures',
+                'mockit',
                 'nested',
                 'nested2',
                 'GET_200_nested_2.fixture.js'

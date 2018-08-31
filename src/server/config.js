@@ -3,7 +3,7 @@ import path from 'path';
 
 function getConfig() {
     const defaultConfig = {
-        fixturesPath: 'server/fixtures',
+        fixturesPath: 'mockit',
         port: 3000,
     };
 

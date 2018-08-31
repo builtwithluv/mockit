@@ -1,10 +1,10 @@
 import createActiveResponses from '@/src/server/helpers/createActiveResponses';
-import fixture1 from '@/example/server/fixtures/GET_200_bhakti.fixture';
-import fixture2 from '@/example/server/fixtures/GET_200_cheng_failed_validation.fixture';
-import fixture3 from '@/example/server/fixtures/DELETE_200_cheng.fixture';
-import fixture4 from '@/example/server/fixtures/PUT_200_update_name.fixture';
-import fixture5 from '@/example/server/fixtures/POST_200_cheng.fixture';
-import fixture6 from '@/example/server/fixtures/POST_200_invalid_validate_url.fixture';
+import fixture1 from '@/example/mockit/GET_200_bhakti.fixture';
+import fixture2 from '@/example/mockit/GET_200_cheng_failed_validation.fixture';
+import fixture3 from '@/example/mockit/DELETE_200_cheng.fixture';
+import fixture4 from '@/example/mockit/PUT_200_update_name.fixture';
+import fixture5 from '@/example/mockit/POST_200_cheng.fixture';
+import fixture6 from '@/example/mockit/POST_200_invalid_validate_url.fixture';
 
 describe('createActiveResponses()', () => {
     test('it should set fixtures with default as active first', () => {

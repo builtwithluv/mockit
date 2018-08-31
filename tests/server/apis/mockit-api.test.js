@@ -1,5 +1,5 @@
 import request from 'supertest';
-import fixture from '@/example/server/fixtures/GET_200_bhakti.fixture';
+import fixture from '@/example/mockit/GET_200_bhakti.fixture';
 import app from '@/example/server/server';
 
 describe('Test the api path', () => {

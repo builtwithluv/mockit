@@ -143,7 +143,7 @@ export class Viewer extends React.Component {
 
     generateHandlerString = () => {
         const { fixture: { _handler } } = this.props;
-        return beautify(`const handler = ${_handler}`);
+        return beautify(`const handler = ${_handler};`);
     }
 
     generateDataString = () => {

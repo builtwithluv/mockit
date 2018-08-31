@@ -9,7 +9,7 @@ describe('validateResponse()', () => {
             id: 'ab',
         };
 
-        validateResponse(fixture).then(d => expect(d).toBe(null));
+        validateResponse(fixture).then(d => expect(d).toBe(false));
     });
 
     it('should return error when validation failed', () => {
