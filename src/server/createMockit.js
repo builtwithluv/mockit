@@ -9,6 +9,8 @@ import {
     setNextLatency,
 } from './helpers';
 
+import { NetworkProfiles } from './enums';
+
 export default function createMockit() {
     // Global state to be used throughout application
     let state = getDefaultState();
@@ -22,7 +24,7 @@ export default function createMockit() {
     }
 
     function getDefaultState() {
-        const latency = 50;
+        const latency = NetworkProfiles.DISABLED; 1
         const fixtures = getFixtures();
 
         return {

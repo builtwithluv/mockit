@@ -64,6 +64,7 @@
     "react-ace": "^6.1.4",
     "react-code-prettify": "0.0.1",
     "react-dom": "^16.4.1",
+    "toxy": "^0.3.15",
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.2.1"
   },
