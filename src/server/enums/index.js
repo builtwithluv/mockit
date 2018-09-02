@@ -1,1 +1,1 @@
-export { default as NetworkProfiles } from './NetworkProfiles';
+export { default as NetworkProfile } from './NetworkProfile';

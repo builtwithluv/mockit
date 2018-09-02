@@ -4,7 +4,7 @@ import { setWhitelist } from './middlewares';
 export default function createToxy() {
     const proxy = toxy();
 
-    // proxy.rule(setWhitelist());
+    proxy.rule(setWhitelist());
 
     return proxy;
 }

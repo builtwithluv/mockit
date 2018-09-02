@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CreateNewFixture from './components/CreateNewFixture';
 import FileUploader from './components/FileUploader';
-import LatencyField from './components/LatencyField';
+import Throttle from './components/Throttle';
 
 const styles = theme => ({
     root: {
@@ -37,7 +37,7 @@ export class ActionBar extends React.PureComponent {
                     <FileUploader />
                 </NavbarGroup>
                 <NavbarGroup align={Alignment.RIGHT}>
-                    <LatencyField />
+                    <Throttle />
                 </NavbarGroup>
             </Navbar>
         );

@@ -1,21 +1,22 @@
 import request from 'supertest';
 import app from '@/example/server/server';
+import { NetworkProfile } from '@server/enums';
 
 describe('Test resetting store', () => {
     describe('PUT', () => {
-        test('should reset latency', done => {
+        test('should reset throttle', done => {
             const agent = request(app);
 
             agent
                 .put('/mockit/api')
-                .send({ latency: 100 })
+                .send({ throttle: NetworkProfile.REGULAR_4G })
                 .end((_, response) => {
-                    expect(response.body.latency).toBe(100);
+                    expect(response.body.throttle).toBe(NetworkProfile.REGULAR_4G);
 
                     agent
                         .put('/mockit/api/reset')
                         .end((_, response) => {
-                            expect(response.body.latency).toBe(50);
+                            expect(response.body.throttle).toBe(NetworkProfile.DISABLED);
                             done();
                         });
                 });

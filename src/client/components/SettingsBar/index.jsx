@@ -52,7 +52,7 @@ export class SettingsBar extends React.PureComponent {
         return (
             <Menu>
                 <li className="bp3-menu-header">
-                    <h6 class="bp3-heading">Theme</h6>
+                    <h6 className="bp3-heading">Theme</h6>
                 </li>
                 <MenuItem
                     text="Dark"
