@@ -1,6 +1,6 @@
 import './styles.css';
 
-import { get } from 'lodash';
+import { debounce, get } from 'lodash';
 import classNames from 'classnames';
 
 import React from 'react';
@@ -52,6 +52,7 @@ export class App extends React.PureComponent {
             toggleSnackbar: this.toggleSnackbar,
             updateGlobalContext: this.updateGlobalContext,
             updateMockit: this.updateMockit,
+            updateMockitDebounced: debounce(this.updateMockit, 750),
         };
     }
 

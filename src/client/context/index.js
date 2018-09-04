@@ -10,6 +10,7 @@ export const GlobalContext = React.createContext({
     store: {
         activeFixtures: {},
         fixtures: [],
+        latency: 50,
         throttle: NetworkProfile.DISABLED,
     },
     validations: {},

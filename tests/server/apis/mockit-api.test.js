@@ -20,6 +20,7 @@ describe('Test the api path', () => {
                     expect(response.body).toHaveProperty(
                         'activeFixtures',
                         'fixtures',
+                        'latency',
                         'throttle',
                     );
                     done();
@@ -74,6 +75,16 @@ describe('Test the api path', () => {
                 .send({ throttle: NetworkProfile.REGULAR_3G })
                 .then(response => {
                     expect(response.body.throttle).toBe(NetworkProfile.REGULAR_3G);
+                    done();
+                });
+        });
+
+        test('should be able to set latency', (done) => {
+            request(app)
+                .put('/mockit/api')
+                .send({ latency: 1000 })
+                .then(response => {
+                    expect(response.body.latency).toBe(1000);
                     done();
                 });
         });

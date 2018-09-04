@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import CreateNewFixture from './components/CreateNewFixture';
 import FileUploader from './components/FileUploader';
+import Latency from './components/Latency';
 import Throttle from './components/Throttle';
 
 const styles = theme => ({
@@ -15,6 +16,9 @@ const styles = theme => ({
     },
     buttonContainer: {
         marginRight: theme.spacing.unit,
+    },
+    navRightItem: {
+        marginRight: theme.spacing.unit * 3,
     },
 });
 
@@ -37,6 +41,9 @@ export class ActionBar extends React.PureComponent {
                     <FileUploader />
                 </NavbarGroup>
                 <NavbarGroup align={Alignment.RIGHT}>
+                    <div className={classes.navRightItem}>
+                        <Latency />
+                    </div>
                     <Throttle />
                 </NavbarGroup>
             </Navbar>
