@@ -26,7 +26,7 @@ export default {
     sidebar: {
         root: '[data-tag="sidebar"]',
         childNode: '[data-tag="sidebar-parent-node-item"]',
-        parentNode: '[data-tag="sidebar-parent-node"]',
+        parentNode: 'li.bp3-tree-node.bp3-tree-node-expanded',
         treeNode: '.bp3-tree-node',
         treeNodeActiveIndicator: '.bp3-icon',
     },

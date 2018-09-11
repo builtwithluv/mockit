@@ -1,6 +1,7 @@
 import request from 'supertest';
 import fixture from '@/example/mockit/GET_200_bhakti.fixture';
 import app from '@/example/server/server';
+import { NetworkProfile } from '@server/enums';
 
 describe('Test the api path', () => {
     describe('GET', () => {
@@ -20,6 +21,7 @@ describe('Test the api path', () => {
                         'activeFixtures',
                         'fixtures',
                         'latency',
+                        'throttle',
                     );
                     done();
                 });
@@ -67,12 +69,22 @@ describe('Test the api path', () => {
                 });
         });
 
+        test('should be able to set throttle', (done) => {
+            request(app)
+                .put('/mockit/api')
+                .send({ throttle: NetworkProfile.REGULAR_3G })
+                .then(response => {
+                    expect(response.body.throttle).toBe(NetworkProfile.REGULAR_3G);
+                    done();
+                });
+        });
+
         test('should be able to set latency', (done) => {
             request(app)
                 .put('/mockit/api')
-                .send({ latency: 100 })
+                .send({ latency: 1000 })
                 .then(response => {
-                    expect(response.body.latency).toBe(100);
+                    expect(response.body.latency).toBe(1000);
                     done();
                 });
         });
