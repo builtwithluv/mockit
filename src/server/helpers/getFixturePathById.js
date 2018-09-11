@@ -5,7 +5,7 @@ import config from '../config';
 
 const DEFAULT_PATH = path.resolve(config.fixturesPath);
 
-export default function getFixturePathById(id, filePath = DEFAULT_PATH, found = '') {
+export default function getFixturePathById(id, filePath = DEFAULT_PATH) {
     const files = fs.readdirSync(filePath);
 
     for (let i = 0; i < files.length; i++) {
@@ -13,7 +13,10 @@ export default function getFixturePathById(id, filePath = DEFAULT_PATH, found = 
         const fullPath = path.join(filePath, fileName);
 
         if (fs.statSync(fullPath).isDirectory()) {
-            return getFixturePathById(id, fullPath);
+            const found = getFixturePathById(id, fullPath);
+            if (found) {
+                return found;
+            }
         } else {
             const fixture = require(fullPath);
 
