@@ -42,9 +42,9 @@ export class ActionBar extends React.PureComponent {
                 </NavbarGroup>
                 <NavbarGroup align={Alignment.RIGHT}>
                     <div className={classes.navRightItem}>
-                        <Latency />
+                        <Throttle />
                     </div>
-                    <Throttle />
+                    <Latency />
                 </NavbarGroup>
             </Navbar>
         );
