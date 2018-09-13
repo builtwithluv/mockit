@@ -9,7 +9,7 @@ describe('Sets fixture as active', () => {
         cy
             .visit('')
             .get(selectors.sidebar.childNode)
-            .eq(1)
+            .eq(3)
             .find(selectors.sidebar.treeNodeActiveIndicator)
             .should('have.length', 0)
             .get(selectors.sidebar.childNode)

@@ -23,8 +23,21 @@ describe('Select a fixture to view', () => {
 
 function assertFirstFixture() {
     return cy
-        .get('.bp3-tree-node')
-        .eq(1)
+        .get(selectors.sidebar.childNode)
+        .eq(0)
+        .click()
+        .get(selectors.viewer.actionBar)
+        .should('contain', 'GET')
+        .should('contain', '200')
+        .should('contain', '/api/nested')
+        .get(selectors.viewer.code)
+        .should('contain', '"firstName": "Cheng"');
+}
+
+function assertFixtureClick1() {
+    return cy
+        .get(selectors.sidebar.childNode)
+        .eq(2)
         .click()
         .get(selectors.viewer.actionBar)
         .should('contain', 'DELETE')
@@ -34,23 +47,10 @@ function assertFirstFixture() {
         .should('contain', 'const data = "Ok";');
 }
 
-function assertFixtureClick1() {
-    return cy
-        .get('.bp3-tree-node')
-        .eq(2)
-        .click()
-        .get(selectors.viewer.actionBar)
-        .should('contain', 'GET')
-        .should('contain', '200')
-        .should('contain', '/api/test')
-        .get(selectors.viewer.code)
-        .should('contain', 'const handler = function handler');
-}
-
 function assertFixtureClick2() {
     return cy
-        .get('.bp3-tree-node')
-        .eq(9)
+        .get(selectors.sidebar.childNode)
+        .eq(10)
         .click()
         .get(selectors.viewer.actionBar)
         .should('contain', 'GET')
