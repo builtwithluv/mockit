@@ -5,8 +5,19 @@ import NodeItemLabel from '@client/components/Sidebar/components/NodeItemLabel';
 import NodeParentLabel from '@client/components/Sidebar/components/NodeParentLabel';
 
 function sortByMethod(buckets) {
-   Object.values(buckets).forEach(bucket => bucket.sort((a, b) => a.method > b.method));
-   return buckets;
+    Object.values(buckets).forEach(bucket => bucket.sort((a, b) => a.method > b.method));
+    return buckets;
+}
+
+function sortByUrl(buckets) {
+    return Object.entries(buckets).sort(([a], [b]) => {
+        const urlA = a.toLowerCase();
+        const urlB = b.toLowerCase();
+
+        if (urlA < urlB) return -1;
+        if (urlA > urlB) return 1;
+        return 0;
+    });
 }
 
 function createBuckets(fixtures) {
@@ -21,8 +32,8 @@ function createBuckets(fixtures) {
     }, {});
 }
 
-function createNodeList(buckets, activeFixtures) {
-    return Object.entries(buckets).reduce((nodeList, [url, fixtures]) => {
+function createNodeList(sortedBuckets, activeFixtures) {
+    return sortedBuckets.reduce((nodeList, [url, fixtures]) => {
         const node = {
             id: url,
             hasCaret: true,
@@ -49,6 +60,6 @@ function createNodeList(buckets, activeFixtures) {
 }
 
 export default function getNodeList(fixtures, activeFixtures) {
-    const buckets = flow(createBuckets, sortByMethod)(fixtures);
-    return createNodeList(buckets, activeFixtures);
+    const sortedBuckets = flow(createBuckets, sortByMethod, sortByUrl)(fixtures);
+    return createNodeList(sortedBuckets, activeFixtures);
 }
