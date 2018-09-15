@@ -2,18 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Adjust from '@material-ui/icons/Adjust';
 import {
     Classes,
-    Icon,
     Position,
     Tooltip,
 } from '@blueprintjs/core';
-import { IconNames } from '@blueprintjs/icons';
 
 import getMethodColor from '@client/helpers/getMethodColor';
 import getStatusColor from '@client/helpers/getStatusCodeColor';
 
 const styles = () => ({
+    icon: {
+        fontSize: 12,
+    },
     iconsContainer: {
         width: 15,
     },
@@ -66,7 +68,7 @@ export class NodeItemLabel extends React.PureComponent {
                     wrap="nowrap"
                 >
                     <Grid container className={classes.iconsContainer}>
-                        {isActive && <Icon icon={IconNames.SELECTION} iconSize={10} />}
+                        {isActive && <Adjust className={classes.icon} />}
                     </Grid>
                     <Grid
                         item
