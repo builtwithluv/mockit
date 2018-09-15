@@ -1,7 +1,7 @@
 {
   "name": "@builtwithluv/mockit",
   "version": "1.1.1",
-  "description": "Framework for mocking",
+  "description": "Tool for mocking services",
   "main": "lib/index.js",
   "scripts": {
     "build": "npx webpack --config ./webpack.prod.js -p && npx babel src/server -d lib/server && npx babel src/commands -d lib/commands && npx babel src/index.js --out-file lib/index.js",
@@ -16,7 +16,7 @@
   },
   "bin": "lib/.bin/mockit",
   "author": "Cheng Ly",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/builtwithluv/mockit"
