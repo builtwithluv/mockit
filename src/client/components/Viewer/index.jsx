@@ -17,7 +17,7 @@ import {
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import PanoramaFishEye from '@material-ui/icons/PanoramaFishEye';
-import { withStyles } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
 import Code from 'react-code-prettify';
 
 import {

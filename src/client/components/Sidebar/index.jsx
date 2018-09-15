@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Classes, Tree } from '@blueprintjs/core';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import getNodeList from '@client/components/Sidebar/helpers/getNodeList';
 
