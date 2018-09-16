@@ -68,7 +68,7 @@ export class NodeItemLabel extends React.PureComponent {
                     wrap="nowrap"
                 >
                     <Grid container className={classes.iconsContainer}>
-                        {isActive && <Adjust className={classes.icon} />}
+                        {isActive && <Adjust data-tag="node-active-indicator" className={classes.icon} />}
                     </Grid>
                     <Grid
                         item
