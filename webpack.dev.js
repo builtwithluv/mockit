@@ -1,10 +1,10 @@
-const webpack = require('webpack');
+const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 const common = require('./webpack.common');
 
-module.exports = {
-    ...common,
+module.exports = merge(common, {
     mode: 'development',
     entry: [
         'react-hot-loader/patch',
@@ -15,8 +15,16 @@ module.exports = {
         publicPath: '/',
         filename: 'bundle.js'
     },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+            },
+        ]
+    },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
+        new HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
             template: './src/index.html',
             inject: false,
@@ -30,4 +38,4 @@ module.exports = {
             '/mockit': 'http://localhost:3000',
         },
     }
-};
+});
