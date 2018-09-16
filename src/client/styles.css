@@ -9,6 +9,7 @@
 }
 
 .prettyprint {
+    margin: 0;
     padding: 16px;
     overflow: auto;
     max-height: calc(100vh - 210px);

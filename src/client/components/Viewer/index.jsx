@@ -13,6 +13,7 @@ import {
     NavbarDivider,
     NavbarHeading,
     Spinner,
+    Text,
 } from '@blueprintjs/core';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import HighlightOff from '@material-ui/icons/HighlightOff';
@@ -27,6 +28,10 @@ import {
 } from '@client/helpers';
 
 const styles = theme => ({
+    descriptionContainer: {
+        marginTop: theme.spacing.unit * 2,
+        marginBottom: theme.spacing.unit * 2,
+    },
     url: {
         fontWeight: 600,
     },
@@ -102,9 +107,10 @@ export class Viewer extends React.Component {
                         </NavbarGroup>
                     </Navbar>
                 </div>
-                <div className={Classes.ELEVATION_2} data-tag="viewer-code">
-                    {this.renderCodeString()}
+                <div className={classes.descriptionContainer}>
+                    <Text>{fixture.description}</Text>
                 </div>
+                {this.renderCodeString()}
             </React.Fragment>
         );
     }
@@ -138,7 +144,11 @@ export class Viewer extends React.Component {
             codeString = this.generateHandlerString();
         }
 
-        return codeString && <Code language="javascript" codeString={codeString} />;
+        return codeString && (
+            <div className={Classes.ELEVATION_2} data-tag="viewer-code">
+                <Code language="javascript" codeString={codeString} />
+            </div>
+        );
     }
 
     generateHandlerString = () => {
