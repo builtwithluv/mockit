@@ -1,4 +1,4 @@
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 import React from 'react';
 import NodeItemLabel from '@client/components/Sidebar/components/NodeItemLabel';

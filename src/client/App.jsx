@@ -1,6 +1,7 @@
 import './styles.css';
 
-import { debounce, get } from 'lodash';
+import debounce from 'lodash/debounce';
+import get from 'lodash/get';
 import classNames from 'classnames';
 
 import React from 'react';
