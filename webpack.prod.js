@@ -1,11 +1,13 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const common = require('./webpack.common');
 
 module.exports = {
     ...common,
+    mode: 'production',
     entry: {
         'client/bundle': './src/client/index.jsx',
     },
@@ -22,5 +24,6 @@ module.exports = {
             template: 'src/index.html',
             inject: false,
         }),
+        new BundleAnalyzerPlugin(),
     ],
 };

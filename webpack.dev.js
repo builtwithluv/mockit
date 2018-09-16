@@ -5,6 +5,7 @@ const common = require('./webpack.common');
 
 module.exports = {
     ...common,
+    mode: 'development',
     entry: [
         'react-hot-loader/patch',
         './src/client/index.jsx',
