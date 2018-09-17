@@ -1,4 +1,4 @@
-import { flow } from 'lodash';
+import flow from 'lodash/flow';
 
 import React from 'react';
 import NodeItemLabel from '@client/components/Sidebar/components/NodeItemLabel';
@@ -32,7 +32,7 @@ function createBuckets(fixtures) {
     }, {});
 }
 
-function createNodeList(sortedBuckets, activeFixtures) {
+function createNodeList(sortedBuckets, activeFixtures, selectedNode) {
     return sortedBuckets.reduce((nodeList, [url, fixtures]) => {
         const node = {
             id: url,
@@ -43,6 +43,7 @@ function createNodeList(sortedBuckets, activeFixtures) {
 
         node.childNodes = fixtures.map(({ id, method, status, description }) => ({
             id,
+            isSelected: selectedNode.id === id,
             label: (
                 <NodeItemLabel
                     description={description}
@@ -59,7 +60,7 @@ function createNodeList(sortedBuckets, activeFixtures) {
     }, []);
 }
 
-export default function getNodeList(fixtures, activeFixtures) {
+export default function getNodeList(fixtures, activeFixtures, selectedNode = {}) {
     const sortedBuckets = flow(createBuckets, sortByMethod, sortByUrl)(fixtures);
-    return createNodeList(sortedBuckets, activeFixtures);
+    return createNodeList(sortedBuckets, activeFixtures, selectedNode);
 }

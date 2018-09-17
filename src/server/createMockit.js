@@ -1,4 +1,6 @@
-import { cloneDeep, differenceBy, flow } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import differenceBy from 'lodash/differenceBy';
+import flow from 'lodash/flow';
 
 import {
     createActiveResponses,

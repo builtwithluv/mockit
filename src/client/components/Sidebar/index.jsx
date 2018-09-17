@@ -1,9 +1,11 @@
+import cloneDeep from 'lodash/cloneDeep';
+import memoize from 'lodash/memoize';
 import classNames from 'classnames';
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Classes, Tree } from '@blueprintjs/core';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import getNodeList from '@client/components/Sidebar/helpers/getNodeList';
 
@@ -20,25 +22,45 @@ const styles = theme => ({
     },
 });
 
+const getNodeListMem = memoize(getNodeList);
+
+let activeFixtures;
+let fixtures;
+let selectedNode;
+
 export class Sidebar extends React.PureComponent {
     static propTypes = {
         activeFixtures: PropTypes.object,
         classes: PropTypes.object,
         fixtures: PropTypes.arrayOf(PropTypes.object),
+        selectedNode: PropTypes.object,
         updateGlobalContext: PropTypes.func,
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nodeList: getNodeList(props.fixtures, props.activeFixtures),
-        };
-    }
+    state = {
+        nodeList: getNodeListMem(this.props.fixtures, this.props.activeFixtures),
+    };
 
-    static getDerivedStateFromProps = nextProps => {
-        return {
-            nodeList: getNodeList(nextProps.fixtures, nextProps.activeFixtures),
-        };
+    static getDerivedStateFromProps = (nextProps, nextState) => {
+        const nextActiveFixtures = nextProps.activeFixtures;
+        const nextFixtures = nextProps.fixtures;
+        const nextSelectedNode = nextProps.selectedNode;
+
+        if (
+            fixtures !== nextFixtures
+            || activeFixtures !== nextActiveFixtures
+            || selectedNode !== nextSelectedNode
+        ) {
+            activeFixtures = nextActiveFixtures;
+            fixtures = nextFixtures;
+            selectedNode = nextSelectedNode;
+
+            return {
+                nodeList: getNodeListMem(nextFixtures, nextActiveFixtures, nextSelectedNode),
+            };
+        }
+
+        return nextState;
     }
 
     componentDidMount() {
@@ -74,7 +96,7 @@ export class Sidebar extends React.PureComponent {
 
         updateGlobalContext({ selectedNode: nodeData });
 
-        this.setState({ nodeList });
+        this.setState(() => ({ nodeList: cloneDeep(nodeList) }));
     };
 
     forEachNode(nodes, callback) {

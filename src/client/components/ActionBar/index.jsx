@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Alignment, Navbar, NavbarGroup } from '@blueprintjs/core';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import CreateNewFixture from './components/CreateNewFixture';
 import FileUploader from './components/FileUploader';

@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 
 import createActiveResponses from '@server/helpers/createActiveResponses';
 
-import { Icon } from '@blueprintjs/core';
+import Adjust from '@material-ui/icons/Adjust';
 import Sidebar from '@client/components/Sidebar';
 import NodeParentLabel from '@client/components/Sidebar/components/NodeParentLabel';
 import NodeItemLabel from '@client/components/Sidebar/components/NodeItemLabel';
@@ -77,7 +77,7 @@ describe('<Sidebar />', () => {
         });
 
         it('should have active icon on active fixtures', () => {
-            expect(firstNodeItem.find(Icon)).toHaveLength(1);
+            expect(firstNodeItem.find(Adjust)).toHaveLength(1);
         });
 
         it('should set the first node as active', () => {

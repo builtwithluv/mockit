@@ -10,7 +10,7 @@ import {
     Popover,
     Position,
 } from '@blueprintjs/core';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import { Theme } from '@client/enums/theme';
 

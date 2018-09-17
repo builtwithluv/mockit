@@ -28,7 +28,7 @@ export default {
         childNode: '[data-tag="sidebar-parent-node-item"]',
         parentNode: 'li.bp3-tree-node.bp3-tree-node-expanded',
         treeNode: '.bp3-tree-node',
-        treeNodeActiveIndicator: '.bp3-icon',
+        treeNodeActiveIndicator: '[data-tag="node-active-indicator"]',
     },
     snackbar: {
         message: '[data-tag="snackbar-message"]',

@@ -1,13 +1,14 @@
 import './styles.css';
 
-import { debounce, get } from 'lodash';
+import debounce from 'lodash/debounce';
+import get from 'lodash/get';
 import classNames from 'classnames';
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import { GlobalContext } from '@client/context';
 import { findFixture } from '@client/helpers';
@@ -99,8 +100,9 @@ export class App extends React.PureComponent {
                         <Grid container className={classes.container}>
                             <Grid item className={classes.sidebar}>
                                 <Sidebar
-                                    fixtures={fixtures}
                                     activeFixtures={store.activeFixtures}
+                                    fixtures={fixtures}
+                                    selectedNode={selectedNode}
                                     updateGlobalContext={this.updateGlobalContext}
                                 />
                             </Grid>
