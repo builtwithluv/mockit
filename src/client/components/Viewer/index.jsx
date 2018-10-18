@@ -79,9 +79,13 @@ export class Viewer extends React.Component {
                 <div className={Classes.ELEVATION_2}>
                     <Navbar data-tag="viewer-action-bar">
                         <NavbarGroup>
-                            {this.renderErrorStatus()}
-                        </NavbarGroup>
-                        <NavbarGroup align={Alignment.RIGHT}>
+                            <Button
+                                data-tag="viewer-action-bar-set-active-btn"
+                                intent={Intent.PRIMARY}
+                                text="Set Active"
+                                onClick={() => updateMockit({ id })}
+                            />
+                            <NavbarDivider />
                             <NavbarHeading>
                                 <span
                                     className={classes.marginRight}
@@ -97,13 +101,9 @@ export class Viewer extends React.Component {
                                 </span>
                                 <span className={classes.url}>{url}</span>
                             </NavbarHeading>
-                            <NavbarDivider />
-                            <Button
-                                data-tag="viewer-action-bar-set-active-btn"
-                                intent={Intent.PRIMARY}
-                                text="Set Active"
-                                onClick={() => updateMockit({ id })}
-                            />
+                        </NavbarGroup>
+                        <NavbarGroup align={Alignment.RIGHT}>
+                            {this.renderErrorStatus()}
                         </NavbarGroup>
                     </Navbar>
                 </div>
