@@ -48,6 +48,7 @@ export class NodeItemLabel extends React.PureComponent {
             isActive,
             method,
             status,
+            updateMockit,
         } = this.props;
 
         return (
@@ -56,6 +57,7 @@ export class NodeItemLabel extends React.PureComponent {
                 data-tag="sidebar-parent-node-item"
                 alignItems="center"
                 wrap="nowrap"
+                onDoubleClick={updateMockit}
             >
                 <Grid container className={classes.iconsContainer}>
                     {isActive && <Adjust data-tag="node-active-indicator" className={classes.icon} />}

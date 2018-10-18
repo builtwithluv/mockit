@@ -104,6 +104,7 @@ export class App extends React.PureComponent {
                                     fixtures={fixtures}
                                     selectedNode={selectedNode}
                                     updateGlobalContext={this.updateGlobalContext}
+                                    updateMockit={this.updateMockit}
                                 />
                             </Grid>
                             <Grid item xs className={classes.viewer}>

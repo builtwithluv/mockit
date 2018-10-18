@@ -35,16 +35,18 @@ export class Sidebar extends React.PureComponent {
         fixtures: PropTypes.arrayOf(PropTypes.object),
         selectedNode: PropTypes.object,
         updateGlobalContext: PropTypes.func,
+        updateMockit: PropTypes.func,
     };
 
     state = {
-        nodeList: getNodeListMem(this.props.fixtures, this.props.activeFixtures),
+        nodeList: getNodeListMem(this.props.fixtures, this.props.activeFixtures, this.props.updateMockit),
     };
 
     static getDerivedStateFromProps = (nextProps, nextState) => {
         const nextActiveFixtures = nextProps.activeFixtures;
         const nextFixtures = nextProps.fixtures;
         const nextSelectedNode = nextProps.selectedNode;
+        const updateMockit = nextProps.updateMockit;
 
         if (
             fixtures !== nextFixtures
@@ -56,7 +58,7 @@ export class Sidebar extends React.PureComponent {
             selectedNode = nextSelectedNode;
 
             return {
-                nodeList: getNodeListMem(nextFixtures, nextActiveFixtures, nextSelectedNode),
+                nodeList: getNodeListMem(nextFixtures, nextActiveFixtures, updateMockit, nextSelectedNode),
             };
         }
 

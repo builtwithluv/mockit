@@ -32,7 +32,7 @@ function createBuckets(fixtures) {
     }, {});
 }
 
-function createNodeList(sortedBuckets, activeFixtures, selectedNode) {
+function createNodeList(sortedBuckets, activeFixtures, updateMockit, selectedNode) {
     return sortedBuckets.reduce((nodeList, [url, fixtures]) => {
         const node = {
             id: url,
@@ -50,6 +50,7 @@ function createNodeList(sortedBuckets, activeFixtures, selectedNode) {
                     isActive={activeFixtures[method][url].id === id}
                     method={method}
                     status={status}
+                    updateMockit={() => updateMockit({ id })}
                 />
             ),
         }));
@@ -60,7 +61,7 @@ function createNodeList(sortedBuckets, activeFixtures, selectedNode) {
     }, []);
 }
 
-export default function getNodeList(fixtures, activeFixtures, selectedNode = {}) {
+export default function getNodeList(fixtures, activeFixtures, updateMockit, selectedNode = {}) {
     const sortedBuckets = flow(createBuckets, sortByMethod, sortByUrl)(fixtures);
-    return createNodeList(sortedBuckets, activeFixtures, selectedNode);
+    return createNodeList(sortedBuckets, activeFixtures, updateMockit, selectedNode);
 }
