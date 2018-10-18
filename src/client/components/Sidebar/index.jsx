@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
 import memoize from 'lodash/memoize';
 import classNames from 'classnames';
 
@@ -85,12 +86,13 @@ export class Sidebar extends React.PureComponent {
     }
 
     handleNodeClick = nodeData => {
-        const { updateGlobalContext } = this.props;
-        const { nodeList } = this.state;
+        const { selectedNode, updateGlobalContext } = this.props;
 
-        if (nodeData.hasCaret) {
+        if (get(selectedNode, 'id') === nodeData.id || nodeData.hasCaret) {
             return;
         }
+
+        const { nodeList } = this.state;
 
         this.forEachNode(nodeList, n => (n.isSelected = false));
 
