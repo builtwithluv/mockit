@@ -1,14 +1,22 @@
-import express from 'express';
-import mockit from '../';
-
+import path from 'path';
+import nodemon from 'nodemon';
 import config from '../server/config';
 
-export default function start() {
-    const app = express();
+export default function start(watch) {
+    const serverScript = path.join(__dirname, 'helpers', 'server.js');
 
-    mockit(app);
+    if (watch) {
+        nodemon({
+            script: serverScript,
+            watch: [
+                path.resolve(config.fixturesPath),
+            ],
+        });
 
-    app.listen(config.port, () => {
-        console.log(`Mock server started on localhost:${config.port}`);
-    });
+        nodemon.on('restart', files => {
+            console.log('App restarted due to: ', files);
+        });
+    } else {
+        require(serverScript);
+    }
 }
