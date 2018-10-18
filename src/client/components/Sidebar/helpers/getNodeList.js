@@ -1,4 +1,5 @@
 import flow from 'lodash/flow';
+import get from 'lodash/get';
 
 import React from 'react';
 import NodeItemLabel from '@client/components/Sidebar/components/NodeItemLabel';
@@ -43,7 +44,7 @@ function createNodeList(sortedBuckets, activeFixtures, updateMockit, selectedNod
 
         node.childNodes = fixtures.map(({ id, method, status, description }) => ({
             id,
-            isSelected: selectedNode.id === id,
+            isSelected: get(selectedNode, 'id') === id,
             label: (
                 <NodeItemLabel
                     description={description}
