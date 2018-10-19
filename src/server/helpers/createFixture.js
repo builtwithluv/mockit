@@ -33,6 +33,10 @@ export default function createFixture({
         url: _url.parse(url).pathname,
     };
 
+    if (fixture.url[0] !== '/') {
+        fixture.url = '/' + fixture.url;
+    }
+
     const beautifyOptions = {
         indent_size: 4,
         end_with_newline: true,
