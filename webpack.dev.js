@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { HotModuleReplacementPlugin } = require('webpack');
 
 const common = require('./webpack.common');
@@ -18,16 +19,19 @@ module.exports = merge(common, {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                test: /\.pug$/,
+                use: 'pug-loader',
             },
         ]
     },
     plugins: [
         new HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: './src/index.pug',
             inject: false,
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'bundle.css',
         }),
     ],
     devServer: {

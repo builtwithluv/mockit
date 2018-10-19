@@ -59,14 +59,17 @@
     "minimist": "^1.2.0",
     "mkdir-recursive": "^0.4.0",
     "node-fetch": "^2.1.2",
+    "node-watch": "^0.5.8",
     "nodemon": "^1.18.4",
+    "pug": "^2.0.3",
     "react": "^16.5.1",
     "react-ace": "^6.1.4",
     "react-code-prettify": "0.0.1",
     "react-dom": "^16.5.1",
     "toxy": "^0.3.15",
     "typeface-roboto": "^0.0.54",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "ws": "^6.1.0"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^2.0.1",
@@ -92,6 +95,7 @@
     "mini-css-extract-plugin": "^0.4.2",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prop-types": "^15.6.2",
+    "pug-loader": "^2.4.0",
     "react-hot-loader": "^4.3.8",
     "regenerator-runtime": "^0.12.1",
     "style-loader": "^0.21.0",

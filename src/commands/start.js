@@ -1,22 +1,12 @@
-import path from 'path';
-import nodemon from 'nodemon';
-import config from '../server/config';
+import startNodemon from './helpers/nodemon';
+import startServer from './helpers/server';
+import startWebsocket from './helpers/ws';
 
 export default function start(watch) {
-    const serverScript = path.join(__dirname, 'helpers', 'server.js');
-
     if (watch) {
-        nodemon({
-            script: serverScript,
-            watch: [
-                path.resolve(config.fixturesPath),
-            ],
-        });
-
-        nodemon.on('restart', files => {
-            console.log('App restarted due to: ', files);
-        });
+        startNodemon();
+        startWebsocket();
     } else {
-        require(serverScript);
+        startServer();
     }
 }

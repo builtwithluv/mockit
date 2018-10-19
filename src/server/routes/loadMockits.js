@@ -1,9 +1,12 @@
 import path from 'path';
 import loadFixtureRoutes from './loadFixtureRoutes';
 import createFixture from '../helpers/createFixture';
+import config from '../config';
 
 export default function loadMockits(app, mockit) {
-    app.get('/mockit', (_, res) => res.sendFile(path.join(__dirname, '../../index.html')));
+    app.get('/mockit', (_, res) => {
+        return res.render(path.join(__dirname, '../../index.pug'), { wsPort: config.wsPort });
+    });
     app.get('/mockit/api', (_, res) => res.json(mockit.getState()));
     app.put('/mockit/api', (req, res) => {
         mockit.update(req.body);

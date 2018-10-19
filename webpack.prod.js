@@ -1,7 +1,6 @@
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -18,14 +17,6 @@ module.exports = merge(common, {
         path: __dirname + '/lib',
         filename: '[name].js'
     },
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
-        ],
-    },
     optimization: {
         minimizer: [
             new UglifyJsPlugin(),
@@ -36,11 +27,8 @@ module.exports = merge(common, {
         new CleanWebpackPlugin(['lib']),
         new CopyWebpackPlugin([
             { from: 'src/.bin', to: '.bin' },
+            { from: 'src/index.pug', to: 'index.pug' },
         ]),
-        new HtmlWebpackPlugin({
-            template: 'src/index.html',
-            inject: false,
-        }),
         new MiniCssExtractPlugin({
             filename: '[name].css',
         }),

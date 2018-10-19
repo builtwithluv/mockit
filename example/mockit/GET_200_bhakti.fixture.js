@@ -5,6 +5,6 @@ module.exports = {
     method: 'GET',
     status: 200,
     handler: (req, res) => {
-        res.json({ firstName: 'Bhakti', lastName: 'Patel '});
+        res.json({ firstName: 'Bhakti', lastName: 'Patel' });
     },
 };

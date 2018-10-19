@@ -5,6 +5,7 @@ function getConfig() {
     const defaultConfig = {
         fixturesPath: 'mockit',
         port: 3000,
+        wsPort: 8080,
     };
 
     const mockitConfigurationFilePath = path.resolve('mockit.json');

@@ -1,12 +1,5 @@
-import express from 'express';
-import mockit from '../..';
+import path from 'path';
 
-import config from '../../server/config';
-
-const app = express();
-
-mockit(app);
-
-app.listen(config.port, () => {
-    console.log(`Mock server started on localhost:${config.port}`);
-});
+export default function start() {
+    require(path.join(__dirname, '..', '..', 'server', 'index.js'));
+}
