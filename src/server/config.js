@@ -1,14 +1,15 @@
 import fs from 'fs';
 import path from 'path';
+import * as CONSTANTS from './constants';
 
 function getConfig() {
     const defaultConfig = {
-        fixturesPath: 'mockit',
-        port: 3000,
-        wsPort: 8080,
+        fixturesPath: CONSTANTS.FIXTURES_PATH,
+        port: CONSTANTS.MOCKIT_PORT,
+        wsPort: CONSTANTS.WSS_PORT,
     };
 
-    const mockitConfigurationFilePath = path.resolve('mockit.json');
+    const mockitConfigurationFilePath = path.resolve(CONSTANTS.MOCKIT_CONFIG_FILENAME);
 
     if (fs.existsSync(mockitConfigurationFilePath)) {
         const content = JSON.parse(fs.readFileSync(mockitConfigurationFilePath));

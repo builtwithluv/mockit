@@ -15,4 +15,6 @@ export default function start() {
             });
         });
     });
+
+    console.log(`Websocket server started. Files are being watched on {projRoot}/${config.fixturesPath}`);
 }

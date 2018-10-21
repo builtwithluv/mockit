@@ -37,7 +37,7 @@ module.exports = merge(common, {
     devServer: {
         contentBase: './dist',
         hot: true,
-        port: 3001,
+        port: 8080,
         proxy: {
             '/mockit': 'http://localhost:3000',
         },
