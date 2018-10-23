@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Resizable from 're-resizable';
 
 import { GlobalContext } from '@client/context';
 import { findFixture } from '@client/helpers';
@@ -26,9 +27,6 @@ const styles = theme => ({
     },
     main: {
         height: '100vh',
-    },
-    sidebar: {
-        width: 400,
     },
     viewer: {
         margin: theme.spacing.unit,
@@ -98,7 +96,19 @@ export class App extends React.PureComponent {
                         <SettingsBar updateGlobalContext={this.updateGlobalContext} />
                         <ActionBar />
                         <Grid container className={classes.container}>
-                            <Grid item className={classes.sidebar}>
+                            <Resizable
+                                defaultSize={{ width: 400 }}
+                                enable={{
+                                    top: false,
+                                    right: true,
+                                    bottom: false,
+                                    left: false,
+                                    ztopRight: false,
+                                    bottomRight: false,
+                                    bottomLeft: false,
+                                    topLeft: false
+                                }}
+                            >
                                 <Sidebar
                                     activeFixtures={store.activeFixtures}
                                     fixtures={fixtures}
@@ -106,7 +116,7 @@ export class App extends React.PureComponent {
                                     updateGlobalContext={this.updateGlobalContext}
                                     updateMockit={this.updateMockit}
                                 />
-                            </Grid>
+                            </Resizable>
                             <Grid item xs className={classes.viewer}>
                                 {selectedFixture && (
                                     <Viewer
