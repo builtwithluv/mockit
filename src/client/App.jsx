@@ -12,7 +12,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Resizable from 're-resizable';
 
 import { GlobalContext } from '@client/context';
-import { findFixture, mockitStorage } from '@client/helpers';
+import { findFixture, getActiveFixturesIds, mockitStorage } from '@client/helpers';
 import { Storage, Theme } from '@client/enums';
 
 import ActionBar from '@client/components/ActionBar';
@@ -56,7 +56,13 @@ export class App extends React.PureComponent {
     }
 
     componentDidMount() {
-        fetch('/mockit/api')
+        fetch('/mockit/api', {
+            method: 'PUT',
+            data: JSON.stringify({ id: mockitStorage.getItem(Storage.ACTIVE_FIXTURES) }),
+            headers: {
+                'content-type': 'application/json',
+            },
+        })
             .then(data => data.json())
             .then(data => this.setState(
                 prevState => ({
@@ -159,7 +165,10 @@ export class App extends React.PureComponent {
             },
         })
             .then(data => data.json())
-            .then(data => this.setState(() => ({ store: data })))
+            .then(data => {
+                mockitStorage.setItem(Storage.ACTIVE_FIXTURES, getActiveFixturesIds(data.activeFixtures));
+                this.setState(() => ({ store: data }))
+            })
             .catch(err => console.log(err));
     }
 

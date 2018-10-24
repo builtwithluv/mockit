@@ -1,4 +1,5 @@
 export const Storage = {
+    ACTIVE_FIXTURES: 'activeFixtures',
     PRIMARY_KEY: 'mockit',
     THEME: 'theme',
 };
