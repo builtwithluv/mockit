@@ -12,7 +12,8 @@ import {
 } from '@blueprintjs/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import { Theme } from '@client/enums/theme';
+import { Storage, Theme } from '@client/enums';
+import { mockitStorage } from '@client/helpers';
 
 const styles = () => ({
     root: {
@@ -46,9 +47,13 @@ export class SettingsBar extends React.PureComponent {
         );
     }
 
-    renderMenu = () => {
+    updateTheme = theme => {
         const { updateGlobalContext } = this.props;
+        updateGlobalContext({ theme });
+        mockitStorage.setItem(Storage.THEME, theme);
+    }
 
+    renderMenu = () => {
         return (
             <Menu>
                 <li className="bp3-menu-header">
@@ -56,11 +61,11 @@ export class SettingsBar extends React.PureComponent {
                 </li>
                 <MenuItem
                     text="Dark"
-                    onClick={() => updateGlobalContext({ theme: Theme.DARK })}
+                    onClick={() => this.updateTheme(Theme.DARK)}
                 />
                 <MenuItem
                     text="Light"
-                    onClick={() => updateGlobalContext({ theme: Theme.LIGHT })}
+                    onClick={() => this.updateTheme(Theme.LIGHT)}
                 />
             </Menu>
         );

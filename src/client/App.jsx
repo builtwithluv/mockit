@@ -12,8 +12,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Resizable from 're-resizable';
 
 import { GlobalContext } from '@client/context';
-import { findFixture } from '@client/helpers';
-import { Theme } from '@client/enums/theme';
+import { findFixture, mockitStorage } from '@client/helpers';
+import { Storage, Theme } from '@client/enums';
 
 import ActionBar from '@client/components/ActionBar';
 import SettingsBar from '@client/components/SettingsBar';
@@ -46,7 +46,7 @@ export class App extends React.PureComponent {
             selectedNode: null,
             snackbarMessage: '',
             store: null,
-            theme: Theme.DARK,
+            theme: mockitStorage.getItem(Storage.THEME) || Theme.DARK,
             validations: {},
             toggleSnackbar: this.toggleSnackbar,
             updateGlobalContext: this.updateGlobalContext,
