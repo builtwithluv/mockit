@@ -1,15 +1,6 @@
-import { isNumber } from "util";
-
-export default function setLatency(mockit, toxy) {
+export default function setLatency(mockit) {
     return (req, res, next) => {
         const { latency } = mockit.getState();
-
-        toxy.remove('latency');
-
-        if (latency !== 0 && typeof latency === 'number') {
-            toxy.poison(toxy.poisons.latency({ jitter: latency }));
-        }
-
-        next();
+        setTimeout(next, latency);
     };
 }

@@ -9,10 +9,7 @@ import {
     removeFile,
     setNextActive,
     setNextLatency,
-    setNextThrottle,
 } from './helpers';
-
-import { NetworkProfile } from './enums';
 
 export default function createMockit() {
     // Global state to be used throughout application
@@ -29,12 +26,10 @@ export default function createMockit() {
     function getDefaultState() {
         const fixtures = getFixtures();
         const latency = 50;
-        const throttle = NetworkProfile.DISABLED;
 
         return {
             fixtures,
             latency,
-            throttle,
             activeFixtures: createActiveResponses(fixtures),
         };
     }
@@ -59,7 +54,6 @@ export default function createMockit() {
         // ! All the next functions will modify mockit directly
         setNextActive(next, state);
         setNextLatency(next, state);
-        setNextThrottle(next, state);
     }
 
     return {

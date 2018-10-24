@@ -1,5 +1,4 @@
 import React from 'react';
-import { NetworkProfile } from '@server/enums';
 
 export const GlobalContext = React.createContext({
     isLoading: false,
@@ -11,7 +10,6 @@ export const GlobalContext = React.createContext({
         activeFixtures: {},
         fixtures: [],
         latency: 50,
-        throttle: NetworkProfile.DISABLED,
     },
     validations: {},
 });
