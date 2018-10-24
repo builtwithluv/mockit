@@ -1,5 +1,5 @@
 module.exports = {
-    id: 'GET_200_CHENG',
+    id: 'POST_200_CHENG',
 
     default: true,
 

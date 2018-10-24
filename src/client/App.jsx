@@ -40,6 +40,9 @@ export class App extends React.PureComponent {
 
     constructor() {
         super();
+
+        const useLastSavedActiveFixtures = mockitStorage.getItem(Storage.USE_LAST_SAVED_ACTIVE_FIXTURES);
+
         this.state = {
             isLoading: true,
             isSnackbarOpen: false,
@@ -47,6 +50,7 @@ export class App extends React.PureComponent {
             snackbarMessage: '',
             store: null,
             theme: mockitStorage.getItem(Storage.THEME) || Theme.DARK,
+            useLastSavedActiveFixtures: useLastSavedActiveFixtures === undefined ? true : useLastSavedActiveFixtures,
             validations: {},
             toggleSnackbar: this.toggleSnackbar,
             updateGlobalContext: this.updateGlobalContext,
@@ -56,9 +60,12 @@ export class App extends React.PureComponent {
     }
 
     componentDidMount() {
+        const { useLastSavedActiveFixtures } = this.state;
         fetch('/mockit/api', {
             method: 'PUT',
-            data: JSON.stringify({ id: mockitStorage.getItem(Storage.ACTIVE_FIXTURES) }),
+            body: useLastSavedActiveFixtures
+                ? JSON.stringify({ id: mockitStorage.getItem(Storage.ACTIVE_FIXTURES) })
+                : JSON.stringify({}),
             headers: {
                 'content-type': 'application/json',
             },
@@ -83,6 +90,7 @@ export class App extends React.PureComponent {
             snackbarMessage,
             store,
             theme,
+            useLastSavedActiveFixtures,
             validations,
         } = this.state;
 
@@ -99,7 +107,11 @@ export class App extends React.PureComponent {
             >
                 <CssBaseline>
                     <GlobalContext.Provider value={this.state}>
-                        <SettingsBar updateGlobalContext={this.updateGlobalContext} />
+                        <SettingsBar
+                            theme={theme}
+                            updateGlobalContext={this.updateGlobalContext}
+                            useLastSavedActiveFixtures={useLastSavedActiveFixtures}
+                        />
                         <ActionBar />
                         <Grid container className={classes.container}>
                             <Resizable
@@ -167,6 +179,7 @@ export class App extends React.PureComponent {
             .then(data => data.json())
             .then(data => {
                 mockitStorage.setItem(Storage.ACTIVE_FIXTURES, getActiveFixturesIds(data.activeFixtures));
+
                 this.setState(() => ({ store: data }))
             })
             .catch(err => console.log(err));

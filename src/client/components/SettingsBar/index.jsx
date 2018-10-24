@@ -4,6 +4,7 @@ import {
     Alignment,
     Button,
     Menu,
+    MenuDivider,
     MenuItem,
     Navbar,
     NavbarGroup,
@@ -47,25 +48,34 @@ export class SettingsBar extends React.PureComponent {
         );
     }
 
-    updateTheme = theme => {
-        const { updateGlobalContext } = this.props;
-        updateGlobalContext({ theme });
-        mockitStorage.setItem(Storage.THEME, theme);
+    updateLastUseActiveFixturesStorageSettings = () => {
+        const { updateGlobalContext, useLastSavedActiveFixtures } = this.props;
+        const nextuseLastSavedActiveFixtures = !useLastSavedActiveFixtures;
+        updateGlobalContext({ useLastSavedActiveFixtures: nextuseLastSavedActiveFixtures });
+        mockitStorage.setItem(Storage.USE_LAST_SAVED_ACTIVE_FIXTURES, nextuseLastSavedActiveFixtures);
+    }
+
+    updateTheme = () => {
+        const { theme, updateGlobalContext } = this.props;
+        const nextTheme = theme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
+        updateGlobalContext({ theme: nextTheme });
+        mockitStorage.setItem(Storage.THEME, nextTheme);
     }
 
     renderMenu = () => {
+        const { theme, useLastSavedActiveFixtures } = this.props;
         return (
             <Menu>
-                <li className="bp3-menu-header">
-                    <h6 className="bp3-heading">Theme</h6>
-                </li>
                 <MenuItem
+                    icon={theme === Theme.DARK ? 'small-tick' : 'blank'}
                     text="Dark"
-                    onClick={() => this.updateTheme(Theme.DARK)}
+                    onClick={this.updateTheme}
                 />
+                <MenuDivider />
                 <MenuItem
-                    text="Light"
-                    onClick={() => this.updateTheme(Theme.LIGHT)}
+                    icon={useLastSavedActiveFixtures ? 'small-tick' : 'blank'}
+                    text="Use last saved active fixtures"
+                    onClick={this.updateLastUseActiveFixturesStorageSettings}
                 />
             </Menu>
         );
