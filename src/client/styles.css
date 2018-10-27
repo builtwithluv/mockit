@@ -8,6 +8,19 @@
     width: 75px !important;
 }
 
+h4.bp3-heading {
+    font-size: 1em;
+}
+
+dt::after {
+    content: ": ";
+    white-space: pre;
+}
+
+dd {
+    margin-left: 0;
+}
+
 .prettyprint {
     margin: 0;
     padding: 16px;

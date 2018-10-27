@@ -6,7 +6,7 @@ import {
     Alignment,
     Button,
     Classes,
-    Colors,
+    Icon,
     Intent,
     Navbar,
     NavbarGroup,
@@ -15,11 +15,9 @@ import {
     Spinner,
     Text,
 } from '@blueprintjs/core';
-import CheckCircle from '@material-ui/icons/CheckCircle';
-import HighlightOff from '@material-ui/icons/HighlightOff';
-import PanoramaFishEye from '@material-ui/icons/PanoramaFishEye';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Code from 'react-code-prettify';
+import ValidationError from './components/ValidationError';
 
 import {
     getMethodColor,
@@ -37,6 +35,9 @@ const styles = theme => ({
     },
     marginRight: {
         marginRight: theme.spacing.unit,
+    },
+    validationsContainer: {
+        marginBottom: theme.spacing.unit,
     },
 });
 
@@ -110,6 +111,9 @@ export class Viewer extends React.Component {
                 <div className={classes.descriptionContainer}>
                     <Text>{fixture.description}</Text>
                 </div>
+                <div className={classes.validationsContainer}>
+                    <ValidationError />
+                </div>
                 {this.renderCodeString()}
             </React.Fragment>
         );
@@ -120,11 +124,11 @@ export class Viewer extends React.Component {
         if (validation === undefined) {
             return <Spinner size={Spinner.SIZE_SMALL} />;
         } else if (validation) {
-            return <HighlightOff style={{ color: Colors.RED4 }} />;
+            return <Icon icon="warning-sign" intent={Intent.WARNING} />;
         } else if (validation === null) {
-            return <CheckCircle style={{ color: Colors.GREEN4 }} />;
+            return <Icon icon="tick-circle" intent={Intent.SUCCESS} />;
         } else {
-            return <PanoramaFishEye />;
+            return <Icon icon="circle" />;
         }
     }
 
@@ -161,14 +165,9 @@ export class Viewer extends React.Component {
             fixture: {
                 data,
             },
-            validation,
         } = this.props;
 
-        return beautify(`
-            ${validation ? `const validationErrors = ${JSON.stringify(validation)};` : ''}
-
-            const data = ${JSON.stringify(data)};
-        `);
+        return beautify(`const data = ${JSON.stringify(data)};`);
     }
 
     checkDataSameness = () => {
