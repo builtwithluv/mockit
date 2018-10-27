@@ -15,90 +15,81 @@ import CustomForm from './CustomForm';
 import ApiForm from '@/client/components/ActionBar/components/ApiForm';
 
 export class CreateNewFixture extends React.Component {
+    static contextType = GlobalContext;
+
     state = {
         isOpen: false,
         isSubmitting: false,
         values: getInitialValues(),
     };
 
-    toggleSnackbar;
-    updateGlobalContext;
-
     render() {
+        const { toggleSnackbar } = this.context;
         const { isOpen, isSubmitting, values } = this.state;
 
         return (
-            <GlobalContext.Consumer>
-                {({ toggleSnackbar, updateGlobalContext }) => {
-                    this.toggleSnackbar = toggleSnackbar;
-                    this.updateGlobalContext = updateGlobalContext;
-
-                    return (
-                        <React.Fragment>
-                            <Button
-                                data-tag="actionbar-new-open-btn"
-                                intent={Intent.SUCCESS}
-                                onClick={this.toggleDialog}
-                            >
-                                NEW
-                            </Button>
-                            <Dialog
-                                data-tag="actionbar-new-dialog"
-                                isOpen={isOpen}
-                                onClose={this.toggleDialog}
-                                title="Create New Fixture"
-                            >
-                                <div className={Classes.DIALOG_BODY}>
-                                    <Tabs
-                                        large
-                                        renderActiveTabPanelOnly
-                                        id="fix-types"
-                                        onChange={() => this.setState({ values: getInitialValues()})}
+            <React.Fragment>
+                <Button
+                    data-tag="actionbar-new-open-btn"
+                    intent={Intent.SUCCESS}
+                    onClick={this.toggleDialog}
+                >
+                    NEW
+                    </Button>
+                <Dialog
+                    data-tag="actionbar-new-dialog"
+                    isOpen={isOpen}
+                    onClose={this.toggleDialog}
+                    title="Create New Fixture"
+                >
+                    <div className={Classes.DIALOG_BODY}>
+                        <Tabs
+                            large
+                            renderActiveTabPanelOnly
+                            id="fix-types"
+                            onChange={() => this.setState({ values: getInitialValues() })}
+                        >
+                            <Tab
+                                id="cus"
+                                title="Custom"
+                                panel={
+                                    <CustomForm
+                                        handleChange={this.handleChange}
+                                        values={values}
+                                    />
+                                }
+                            />
+                            <Tab
+                                id="url"
+                                title="URL"
+                                panel={
+                                    <ApiForm
+                                        handleChange={this.handleChange}
+                                        toggleSnackbar={toggleSnackbar}
+                                        values={values}
+                                    />
+                                }
+                            />
+                        </Tabs>
+                    </div>
+                    <div className={Classes.DIALOG_FOOTER}>
+                        <div className={Classes.DIALOG_FOOTER_ACTIONS}>
+                            {isSubmitting ? (
+                                <Spinner size={Spinner.SIZE_SMALL} />
+                            ) : (
+                                    <Button
+                                        data-tag="actionbar-new-dialog-save-btn"
+                                        disabled={!values.url}
+                                        onClick={this.handleSave}
+                                        intent={Intent.PRIMARY}
                                     >
-                                        <Tab
-                                            id="cus"
-                                            title="Custom"
-                                            panel={
-                                                <CustomForm
-                                                    handleChange={this.handleChange}
-                                                    values={values}
-                                                />
-                                            }
-                                        />
-                                        <Tab
-                                            id="url"
-                                            title="URL"
-                                            panel={
-                                                <ApiForm
-                                                    handleChange={this.handleChange}
-                                                    toggleSnackbar={this.toggleSnackbar}
-                                                    values={values}
-                                                />
-                                            }
-                                        />
-                                    </Tabs>
-                                </div>
-                                <div className={Classes.DIALOG_FOOTER}>
-                                    <div className={Classes.DIALOG_FOOTER_ACTIONS}>
-                                        {isSubmitting ? (
-                                            <Spinner size={Spinner.SIZE_SMALL} />
-                                        ) : (
-                                            <Button
-                                                data-tag="actionbar-new-dialog-save-btn"
-                                                disabled={!values.url}
-                                                onClick={this.handleSave}
-                                                intent={Intent.PRIMARY}
-                                            >
-                                                Save
-                                            </Button>
-                                        )}
-                                    </div>
-                                </div>
-                            </Dialog>
-                        </React.Fragment>
-                    );
-                }}
-            </GlobalContext.Consumer>
+                                        Save
+                                    </Button>
+                                )}
+                        </div>
+                    </div>
+                </Dialog>
+            </React.Fragment>
         );
     }
 
@@ -112,6 +103,7 @@ export class CreateNewFixture extends React.Component {
     }
 
     handleSave = () => {
+        const { toggleSnackbar, updateGlobalContext } = this.context;
         const { values } = this.state;
         const { data } = values;
 
@@ -128,12 +120,12 @@ export class CreateNewFixture extends React.Component {
             },
         })
             .then(res => res.json())
-            .then(data => this.updateGlobalContext({ store: data }))
+            .then(data => updateGlobalContext({ store: data }))
             .then(() => this.setState(() => ({ isSubmitting: false })))
             .then(() => this.toggleDialog())
-            .then(() => this.toggleSnackbar('Successfully created the new fixture'))
+            .then(() => toggleSnackbar('Successfully created the new fixture'))
             .catch(() => this.setState(() => ({ isSubmitting: true })))
-            .catch(() => this.toggleSnackbar('Failed to create the new fixture'))
+            .catch(() => toggleSnackbar('Failed to create the new fixture'))
             .finally(() => this.setState(() => ({ values: getInitialValues() })));
     }
 

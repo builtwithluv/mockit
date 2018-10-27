@@ -16,33 +16,32 @@ export class LatencyField extends React.PureComponent {
         classes: PropTypes.object,
     };
 
+    static contextType = GlobalContext;
+
     render() {
+        const { store: { latency }, updateMockitDebounced } = this.context;
         const { classes } = this.props;
 
         return (
-            <GlobalContext.Consumer>
-                {({ store, updateMockitDebounced }) => (
-                    <React.Fragment>
-                        <label
-                            className={classes.label}
-                            htmlFor="latency"
-                        >
-                            Latency (ms)
+            <React.Fragment>
+                <label
+                    className={classes.label}
+                    htmlFor="latency"
+                >
+                    Latency (ms)
                         </label>
-                        <NumericInput
-                            large
-                            id="latency"
-                            intent={Intent.PRIMARY}
-                            majorStepSize={50}
-                            min={0}
-                            onValueChange={val => updateMockitDebounced({ latency: val })}
-                            placeholder={store.latency}
-                            stepSize={50}
-                            value={store.latency}
-                        />
-                    </React.Fragment>
-                )}
-            </GlobalContext.Consumer>
+                <NumericInput
+                    large
+                    id="latency"
+                    intent={Intent.PRIMARY}
+                    majorStepSize={50}
+                    min={0}
+                    onValueChange={val => updateMockitDebounced({ latency: val })}
+                    placeholder={latency}
+                    stepSize={50}
+                    value={latency}
+                />
+            </React.Fragment>
         );
     }
 }

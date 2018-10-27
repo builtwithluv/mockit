@@ -53,6 +53,8 @@ export class FileUploader extends React.PureComponent {
         classes: PropTypes.object.isRequired,
     };
 
+    static contextType = GlobalContext;
+
     state = {
         fixturesFromHar: [],
         isUploading: false,
@@ -65,31 +67,22 @@ export class FileUploader extends React.PureComponent {
         const { classes } = this.props;
 
         return (
-            <GlobalContext.Consumer>
-                {({ toggleSnackbar, updateGlobalContext }) => {
-                    this.toggleSnackbar = toggleSnackbar;
-                    this.updateGlobalContext = updateGlobalContext;
-
-                    return (
-                        <React.Fragment>
-                            <Button onClick={this.handleClick}>
-                                UPLOAD HAR FILE
-                            </Button>
-                            <Input
-                                className={classes.input}
-                                inputRef={ref => { this.input = ref; }}
-                                type="file"
-                                onChange={this.handleUpload}
-                                inputProps={{
-                                    'accept': '.har',
-                                    'aria-hidden': true,
-                                }}
-                            />
-                            {this.renderDialog()}
-                        </React.Fragment>
-                    );
-                }}
-            </GlobalContext.Consumer>
+            <React.Fragment>
+                <Button onClick={this.handleClick}>
+                    UPLOAD HAR FILE
+                    </Button>
+                <Input
+                    className={classes.input}
+                    inputRef={ref => { this.input = ref; }}
+                    type="file"
+                    onChange={this.handleUpload}
+                    inputProps={{
+                        'accept': '.har',
+                        'aria-hidden': true,
+                    }}
+                />
+                {this.renderDialog()}
+            </React.Fragment>
         );
     }
 
@@ -148,8 +141,8 @@ export class FileUploader extends React.PureComponent {
                             </div>
                         ))
                     ) : (
-                        <p>No mockable requests found</p>
-                    )}
+                            <p>No mockable requests found</p>
+                        )}
                 </div>
                 <div className={Classes.DIALOG_FOOTER}>
                     <div className={Classes.DIALOG_FOOTER_ACTIONS}>
@@ -158,14 +151,14 @@ export class FileUploader extends React.PureComponent {
                                 Cancel
                             </Button>
                         ) : (
-                            isUploading ? (
-                                <Spinner size={Spinner.SIZE_SMALL} />
-                            ) : (
-                                <Button onClick={this.createFixtures}>
-                                    Create Fixtures
+                                isUploading ? (
+                                    <Spinner size={Spinner.SIZE_SMALL} />
+                                ) : (
+                                        <Button onClick={this.createFixtures}>
+                                            Create Fixtures
                                 </Button>
-                            )
-                        )}
+                                    )
+                            )}
                     </div>
                 </div>
             </Dialog>
@@ -173,6 +166,7 @@ export class FileUploader extends React.PureComponent {
     }
 
     createFixtures = () => {
+        const { toggleSnackbar, updateGlobalContext } = this.context;
         const { fixturesFromHar } = this.state;
 
         this.setState({ isUploading: true });
@@ -194,12 +188,12 @@ export class FileUploader extends React.PureComponent {
                 }
                 return res.json();
             })
-            .then(data => this.updateGlobalContext({ store: data }))
+            .then(data => updateGlobalContext({ store: data }))
             .then(() => snackbarMessage = `Successfully created ${fixturesToCreate.length} fixtures from .har file`)
             .then(() => this.setState({ isDialogOpen: false }))
             .catch(err => snackbarMessage = err)
             .finally(() => {
-                this.toggleSnackbar(snackbarMessage);
+                toggleSnackbar(snackbarMessage);
                 this.setState({ isUploading: false });
             });
     }
