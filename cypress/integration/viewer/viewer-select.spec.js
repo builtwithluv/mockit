@@ -44,7 +44,7 @@ function assertFixtureClick1() {
         .should('contain', '200')
         .should('contain', '/api/test')
         .get(selectors.viewer.code)
-        .should('contain', 'const data = "Ok";');
+        .should('contain', "Ok");
 }
 
 function assertFixtureClick2() {

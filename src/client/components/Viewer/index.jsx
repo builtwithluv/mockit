@@ -1,5 +1,3 @@
-import beautify from 'js-beautify';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -16,7 +14,7 @@ import {
     Text,
 } from '@blueprintjs/core';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Code from 'react-code-prettify';
+import CodePreview from './components/CodePreview';
 import ValidationError from './components/ValidationError';
 
 import {
@@ -114,7 +112,7 @@ export class Viewer extends React.Component {
                 <div className={classes.validationsContainer}>
                     <ValidationError />
                 </div>
-                {this.renderCodeString()}
+                <CodePreview />
             </React.Fragment>
         );
     }
@@ -130,44 +128,6 @@ export class Viewer extends React.Component {
         } else {
             return <Icon icon="circle" />;
         }
-    }
-
-    renderCodeString = () => {
-        const {
-            fixture: {
-                data,
-                _handler,
-            },
-        } = this.props;
-
-        let codeString;
-
-        if (data) {
-            codeString = this.generateDataString();
-        } else if (_handler) {
-            codeString = this.generateHandlerString();
-        }
-
-        return codeString && (
-            <div className={Classes.ELEVATION_2} data-tag="viewer-code">
-                <Code language="javascript" codeString={codeString} />
-            </div>
-        );
-    }
-
-    generateHandlerString = () => {
-        const { fixture: { _handler } } = this.props;
-        return beautify(`const handler = ${_handler};`);
-    }
-
-    generateDataString = () => {
-        const {
-            fixture: {
-                data,
-            },
-        } = this.props;
-
-        return beautify(`const data = ${JSON.stringify(data)};`);
     }
 
     checkDataSameness = () => {
