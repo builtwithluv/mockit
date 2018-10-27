@@ -12,9 +12,9 @@ import {
     Position,
 } from '@blueprintjs/core';
 import withStyles from '@material-ui/core/styles/withStyles';
-
 import { Storage, Theme } from '@client/enums';
 import { mockitStorage } from '@client/helpers';
+import { GlobalContext } from '@/client/context';
 
 const styles = () => ({
     root: {
@@ -25,8 +25,9 @@ const styles = () => ({
 export class SettingsBar extends React.PureComponent {
     static propTypes = {
         classes: PropTypes.object,
-        updateGlobalContext: PropTypes.func,
     };
+
+    static contextType = GlobalContext;
 
     render() {
         const { classes } = this.props;
@@ -48,22 +49,8 @@ export class SettingsBar extends React.PureComponent {
         );
     }
 
-    updateLastUseActiveFixturesStorageSettings = () => {
-        const { updateGlobalContext, useLastSavedActiveFixtures } = this.props;
-        const nextuseLastSavedActiveFixtures = !useLastSavedActiveFixtures;
-        updateGlobalContext({ useLastSavedActiveFixtures: nextuseLastSavedActiveFixtures });
-        mockitStorage.setItem(Storage.USE_LAST_SAVED_ACTIVE_FIXTURES, nextuseLastSavedActiveFixtures);
-    }
-
-    updateTheme = () => {
-        const { theme, updateGlobalContext } = this.props;
-        const nextTheme = theme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
-        updateGlobalContext({ theme: nextTheme });
-        mockitStorage.setItem(Storage.THEME, nextTheme);
-    }
-
     renderMenu = () => {
-        const { theme, useLastSavedActiveFixtures } = this.props;
+        const { theme, useLastSavedActiveFixtures } = this.context;
         return (
             <Menu>
                 <MenuItem
@@ -79,6 +66,20 @@ export class SettingsBar extends React.PureComponent {
                 />
             </Menu>
         );
+    }
+
+    updateLastUseActiveFixturesStorageSettings = () => {
+        const { updateGlobalContext, useLastSavedActiveFixtures } = this.context;
+        const nextuseLastSavedActiveFixtures = !useLastSavedActiveFixtures;
+        updateGlobalContext({ useLastSavedActiveFixtures: nextuseLastSavedActiveFixtures });
+        mockitStorage.setItem(Storage.USE_LAST_SAVED_ACTIVE_FIXTURES, nextuseLastSavedActiveFixtures);
+    }
+
+    updateTheme = () => {
+        const { theme, updateGlobalContext } = this.context;
+        const nextTheme = theme === Theme.DARK ? Theme.LIGHT : Theme.DARK;
+        updateGlobalContext({ theme: nextTheme });
+        mockitStorage.setItem(Storage.THEME, nextTheme);
     }
 }
 

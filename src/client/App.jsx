@@ -91,7 +91,6 @@ export class App extends React.PureComponent {
             snackbarMessage,
             store,
             theme,
-            useLastSavedActiveFixtures,
         } = this.state;
 
         const fixtures = get(store, 'fixtures');
@@ -105,11 +104,7 @@ export class App extends React.PureComponent {
             >
                 <CssBaseline>
                     <GlobalContext.Provider value={this.state}>
-                        <SettingsBar
-                            theme={theme}
-                            updateGlobalContext={this.updateGlobalContext}
-                            useLastSavedActiveFixtures={useLastSavedActiveFixtures}
-                        />
+                        <SettingsBar />
                         <ActionBar />
                         <Grid container className={classes.container}>
                             <Resizable
