@@ -23,7 +23,7 @@ import {
     getStatusCodeColor,
     validateResponse,
 } from '@client/helpers';
-import { GlobalContext } from '@/client/context';
+import { GlobalContext } from '@client/context';
 
 const styles = theme => ({
     descriptionContainer: {

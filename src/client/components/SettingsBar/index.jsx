@@ -14,7 +14,7 @@ import {
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Storage, Theme } from '@client/enums';
 import { mockitStorage } from '@client/helpers';
-import { GlobalContext } from '@/client/context';
+import { GlobalContext } from '@client/context';
 
 const styles = () => ({
     root: {

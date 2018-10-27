@@ -132,11 +132,7 @@ export class App extends React.PureComponent {
                                 <Viewer />
                             </Grid>
                         </Grid>
-                        <Snackbar
-                            isSnackbarOpen={isSnackbarOpen}
-                            snackbarMessage={snackbarMessage}
-                            toggleSnackbar={this.toggleSnackbar}
-                        />
+                        <Snackbar />
                     </GlobalContext.Provider>
                 </CssBaseline>
             </main>
