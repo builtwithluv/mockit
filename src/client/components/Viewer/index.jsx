@@ -1,3 +1,4 @@
+import get from 'lodash/get';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -16,12 +17,13 @@ import {
 import withStyles from '@material-ui/core/styles/withStyles';
 import CodePreview from './components/CodePreview';
 import ValidationError from './components/ValidationError';
-
 import {
+    findFixture,
     getMethodColor,
     getStatusCodeColor,
     validateResponse,
 } from '@client/helpers';
+import { GlobalContext } from '@/client/context';
 
 const styles = theme => ({
     descriptionContainer: {
@@ -42,38 +44,28 @@ const styles = theme => ({
 export class Viewer extends React.Component {
     static propTypes = {
         classes: PropTypes.object,
-        fixture: PropTypes.object,
-        updateValidations: PropTypes.func,
-        updateMockit: PropTypes.func,
-        validation: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     };
+
+    static contextType = GlobalContext;
 
     componentDidMount() {
         this.checkDataSameness();
     }
 
     componentDidUpdate() {
-        const { validation } = this.props;
-        if (validation === undefined) {
+        const errors = this.getValidationErrors();
+
+        if (errors === undefined) {
             this.checkDataSameness();
         }
     }
 
     render() {
-        const {
-            classes,
-            fixture,
-            updateMockit,
-        } = this.props;
+        const { classes } = this.props;
+        const { updateMockit } = this.context;
+        const fixture = this.getSelectedFixture();
 
-        const {
-            id,
-            method,
-            status,
-            url,
-        } = fixture;
-
-        return (
+        return fixture ? (
             <React.Fragment>
                 <div className={Classes.ELEVATION_2}>
                     <Navbar data-tag="viewer-action-bar">
@@ -82,23 +74,23 @@ export class Viewer extends React.Component {
                                 data-tag="viewer-action-bar-set-active-btn"
                                 intent={Intent.PRIMARY}
                                 text="Set Active"
-                                onClick={() => updateMockit({ id })}
+                                onClick={() => updateMockit({ id: fixture.id })}
                             />
                             <NavbarDivider />
                             <NavbarHeading>
                                 <span
                                     className={classes.marginRight}
-                                    style={{ color: getMethodColor(method) }}
+                                    style={{ color: getMethodColor(fixture.method) }}
                                 >
-                                    {method}
+                                    {fixture.method}
                                 </span>
                                 <span
                                     className={classes.marginRight}
-                                    style={{ color: getStatusCodeColor(status) }}
+                                    style={{ color: getStatusCodeColor(fixture.status) }}
                                 >
-                                    {status}
+                                    {fixture.status}
                                 </span>
-                                <span className={classes.url}>{url}</span>
+                                <span className={classes.url}>{fixture.url}</span>
                             </NavbarHeading>
                         </NavbarGroup>
                         <NavbarGroup align={Alignment.RIGHT}>
@@ -114,27 +106,48 @@ export class Viewer extends React.Component {
                 </div>
                 <CodePreview />
             </React.Fragment>
-        );
+        ) : null;
+    }
+
+    checkDataSameness = () => {
+        const { updateValidations } = this.context;
+        const fixture = this.getSelectedFixture();
+
+        if (!fixture) {
+            return;
+        }
+
+        validateResponse(fixture)
+            .then(errors => updateValidations(fixture.id, errors))
+            .catch(errors => updateValidations(fixture.id, errors));
+    }
+
+    getValidationErrors = () => {
+        const { selectedNode, validations } = this.context;
+        return validations[get(selectedNode, 'id')];
+    }
+
+    getSelectedFixture = () => {
+        const {
+            selectedNode,
+            store: { fixtures },
+        } = this.context;
+
+        return findFixture(get(selectedNode, 'id'), fixtures);
     }
 
     renderErrorStatus = () => {
-        const { validation } = this.props;
-        if (validation === undefined) {
+        const errors = this.getValidationErrors();
+
+        if (errors === undefined) {
             return <Spinner size={Spinner.SIZE_SMALL} />;
-        } else if (validation) {
+        } else if (errors) {
             return <Icon icon="warning-sign" intent={Intent.WARNING} />;
-        } else if (validation === null) {
+        } else if (errors === null) {
             return <Icon icon="tick-circle" intent={Intent.SUCCESS} />;
         } else {
             return <Icon icon="circle" />;
         }
-    }
-
-    checkDataSameness = () => {
-        const { fixture, updateValidations } = this.props;
-        validateResponse(fixture)
-            .then(errors => updateValidations(fixture.id, errors))
-            .catch(errors => updateValidations(fixture.id, errors));
     }
 }
 

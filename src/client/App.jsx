@@ -12,7 +12,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Resizable from 're-resizable';
 
 import { GlobalContext } from '@client/context';
-import { findFixture, getActiveFixturesIds, mockitStorage } from '@client/helpers';
+import { getActiveFixturesIds, mockitStorage } from '@client/helpers';
 import { Storage, Theme } from '@client/enums';
 
 import ActionBar from '@client/components/ActionBar';
@@ -56,6 +56,7 @@ export class App extends React.PureComponent {
             updateGlobalContext: this.updateGlobalContext,
             updateMockit: this.updateMockit,
             updateMockitDebounced: debounce(this.updateMockit, 750),
+            updateValidations: this.updateValidations,
         };
     }
 
@@ -91,12 +92,9 @@ export class App extends React.PureComponent {
             store,
             theme,
             useLastSavedActiveFixtures,
-            validations,
         } = this.state;
 
-        const selectedNodeId = get(selectedNode, 'id');
         const fixtures = get(store, 'fixtures');
-        const selectedFixture = findFixture(selectedNodeId, fixtures);
 
         return !isLoading && (
             <main
@@ -136,14 +134,7 @@ export class App extends React.PureComponent {
                                 />
                             </Resizable>
                             <Grid item xs className={classes.viewer}>
-                                {selectedFixture && (
-                                    <Viewer
-                                        fixture={selectedFixture}
-                                        updateMockit={this.updateMockit}
-                                        updateValidations={this.updateValidations}
-                                        validation={validations[selectedNodeId]}
-                                    />
-                                )}
+                                <Viewer />
                             </Grid>
                         </Grid>
                         <Snackbar

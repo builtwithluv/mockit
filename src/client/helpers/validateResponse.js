@@ -27,6 +27,10 @@ export function validator(original, compartee, errors = {}) {
 }
 
 export function validateResponse(fixture) {
+    if (!fixture) {
+        return Promise.resolve();
+    }
+
     if (!fixture.validator) {
         return Promise.resolve(false);
     }
