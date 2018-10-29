@@ -65,8 +65,6 @@ export class ApiForm extends React.Component {
                         labelFor="options-input"
                     >
                         <AceEditor
-                            enableBasicAutocompletion
-                            enableLiveAutocompletion
                             mode="json"
                             theme="github"
                             name="actionbar-new-dialog-api-options"

@@ -3,19 +3,19 @@ import selectors from '../../selectors';
 describe('Select a fixture to view', () => {
     it('display first item fixture initially', () => {
         cy
-            .visit('')
+            .visit('/mockit')
             .then(assertFirstFixture);
     });
 
     it('displays fixture upon click', () => {
         cy
-            .visit('')
+            .visit('/mockit')
             .then(assertFixtureClick1);
     });
 
     it('displays proper fixtures when clicking on different fixtures', () => {
         cy
-            .visit('')
+            .visit('/mockit')
             .then(assertFixtureClick1)
             .then(assertFixtureClick2);
     });

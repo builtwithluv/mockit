@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
+import { Spinner } from '@blueprintjs/core';
 import Resizable from 're-resizable';
 
 import { GlobalContext } from '@client/context';
@@ -18,8 +19,9 @@ import { Storage, Theme } from '@client/enums';
 import ActionBar from '@client/components/ActionBar';
 import SettingsBar from '@client/components/SettingsBar';
 import Sidebar from '@client/components/Sidebar';
-import Snackbar from '@client/components/Snackbar';
 import Viewer from '@client/components/Viewer';
+
+const Snackbar = React.lazy(() => import('@client/components/Snackbar'));
 
 const styles = theme => ({
     container: {
@@ -88,7 +90,6 @@ export class App extends React.PureComponent {
             isLoading,
             isSnackbarOpen,
             selectedNode,
-            snackbarMessage,
             store,
             theme,
         } = this.state;
@@ -132,7 +133,9 @@ export class App extends React.PureComponent {
                                 <Viewer />
                             </Grid>
                         </Grid>
-                        <Snackbar />
+                        <React.Suspense fallback={<Spinner size={Spinner.SIZE_SMALL} />}>
+                            {isSnackbarOpen && <Snackbar />}
+                        </React.Suspense>
                     </GlobalContext.Provider>
                 </CssBaseline>
             </main>

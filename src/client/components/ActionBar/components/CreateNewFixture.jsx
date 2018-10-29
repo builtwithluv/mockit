@@ -11,8 +11,8 @@ import {
 
 import { GlobalContext } from '@client/context';
 
-import CustomForm from './CustomForm';
-import ApiForm from '@/client/components/ActionBar/components/ApiForm';
+const CustomForm = React.lazy(() => import('./CustomForm'));
+const ApiForm = React.lazy(() => import('@client/components/ActionBar/components/ApiForm'));
 
 export class CreateNewFixture extends React.Component {
     static contextType = GlobalContext;
@@ -35,7 +35,7 @@ export class CreateNewFixture extends React.Component {
                     onClick={this.toggleDialog}
                 >
                     NEW
-                    </Button>
+                </Button>
                 <Dialog
                     data-tag="actionbar-new-dialog"
                     isOpen={isOpen}
@@ -53,21 +53,25 @@ export class CreateNewFixture extends React.Component {
                                 id="cus"
                                 title="Custom"
                                 panel={
-                                    <CustomForm
-                                        handleChange={this.handleChange}
-                                        values={values}
-                                    />
+                                    <React.Suspense fallback={<Spinner size={Spinner.SIZE_SMALL} />}>
+                                        <CustomForm
+                                            handleChange={this.handleChange}
+                                            values={values}
+                                        />
+                                    </React.Suspense>
                                 }
                             />
                             <Tab
                                 id="url"
                                 title="URL"
                                 panel={
-                                    <ApiForm
-                                        handleChange={this.handleChange}
-                                        toggleSnackbar={toggleSnackbar}
-                                        values={values}
-                                    />
+                                    <React.Suspense fallback={<Spinner size={Spinner.SIZE_SMALL} />}>
+                                        <ApiForm
+                                            handleChange={this.handleChange}
+                                            toggleSnackbar={toggleSnackbar}
+                                            values={values}
+                                        />
+                                    </React.Suspense>
                                 }
                             />
                         </Tabs>

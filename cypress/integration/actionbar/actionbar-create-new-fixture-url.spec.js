@@ -7,7 +7,7 @@ describe('Create new fixture by url', () => {
 
     it('creates a fixture with api data', () => {
         cy
-            .visit('')
+            .visit('/mockit')
             .get(selectors.actionbar.newBtn)
             .click()
             .get(selectors.actionbar.dialog.newDialog)

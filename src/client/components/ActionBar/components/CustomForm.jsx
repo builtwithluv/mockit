@@ -52,8 +52,6 @@ export class CustomForm extends React.Component {
                     labelFor="data-input"
                 >
                     <AceEditor
-                        enableBasicAutocompletion
-                        enableLiveAutocompletion
                         name="actionbar-new-dialog-custom-data"
                         mode="json"
                         theme="github"

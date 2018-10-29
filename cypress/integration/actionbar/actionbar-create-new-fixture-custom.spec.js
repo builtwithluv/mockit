@@ -7,7 +7,7 @@ describe('Create new fixture by custom', () => {
 
     it('create a new fixture with just required data', () => {
         cy
-            .visit('')
+            .visit('/mockit')
             .get(selectors.actionbar.newBtn)
             .click()
             .get(selectors.actionbar.dialog.newDialog)
@@ -30,7 +30,7 @@ describe('Create new fixture by custom', () => {
 
     it('creates a fixture with all data', () => {
         cy
-            .visit('')
+            .visit('/mockit')
             .get(selectors.actionbar.newBtn)
             .click()
             .get(selectors.actionbar.dialog.newDialog)

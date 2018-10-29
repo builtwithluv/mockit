@@ -5,7 +5,6 @@ import { GlobalContext } from '@client/context';
 
 export class SimpleSnackbar extends React.PureComponent {
     static propTypes = {
-        isSnackbarOpen: PropTypes.bool,
         snackbarMessage: PropTypes.string,
         toggleSnackbar: PropTypes.func,
     };
@@ -14,18 +13,17 @@ export class SimpleSnackbar extends React.PureComponent {
 
     render() {
         const {
-            isSnackbarOpen,
             snackbarMessage,
             toggleSnackbar,
         } = this.context;
 
         return (
             <Snackbar
+                open
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right',
                 }}
-                open={isSnackbarOpen}
                 autoHideDuration={3000}
                 onClose={(_, reason) => {
                     if (reason === 'clickaway') {

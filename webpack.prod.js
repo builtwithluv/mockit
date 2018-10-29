@@ -1,3 +1,4 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -11,11 +12,12 @@ const common = require('./webpack.common');
 module.exports = merge(common, {
     mode: 'production',
     entry: {
-        'client/bundle': './src/client/index.jsx',
+        bundle: './src/client/index.jsx',
     },
     output: {
-        path: __dirname + '/lib',
-        filename: '[name].js'
+        filename: '[name].js',
+        chunkFilename: '[name].js',
+        path: path.join(__dirname, 'lib', 'client'),
     },
     optimization: {
         minimizer: [
@@ -26,8 +28,8 @@ module.exports = merge(common, {
     plugins: [
         new CleanWebpackPlugin(['lib']),
         new CopyWebpackPlugin([
-            { from: 'src/.bin', to: '.bin' },
-            { from: 'src/index.pug', to: 'index.pug' },
+            { from: 'src/.bin', to: path.join('..', '.bin') },
+            { from: 'src/index.pug', to: path.join('..', 'index.pug') },
         ]),
         new MiniCssExtractPlugin({
             filename: '[name].css',
