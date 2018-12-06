@@ -64,7 +64,8 @@
     "mkdir-recursive": "^0.4.0",
     "node-fetch": "^2.1.2",
     "node-watch": "^0.5.8",
-    "nodemon": "^1.18.5",
+    "nodemon": "^1.18.7",
+    "prop-types": "^15.6.2",
     "pug": "^2.0.3",
     "re-resizable": "^4.9.2",
     "react": "^16.6.0",
@@ -108,7 +109,6 @@
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "prop-types": "^15.6.2",
     "pug-loader": "^2.4.0",
     "react-hot-loader": "^4.3.11",
     "regenerator-runtime": "^0.12.1",
@@ -120,8 +120,5 @@
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4"
-  },
-  "engines": {
-    "node": ">=8 <9"
   }
 }
