@@ -5,7 +5,6 @@ import get from 'lodash/get';
 import classNames from 'classnames';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -36,10 +35,6 @@ const styles = theme => ({
 });
 
 export class App extends React.PureComponent {
-    static propTypes = {
-        classes: PropTypes.object,
-    };
-
     constructor() {
         super();
 

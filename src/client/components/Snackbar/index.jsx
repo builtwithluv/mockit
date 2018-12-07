@@ -1,14 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Snackbar from '@material-ui/core/Snackbar';
 import { GlobalContext } from '@client/context';
 
 export class SimpleSnackbar extends React.PureComponent {
-    static propTypes = {
-        snackbarMessage: PropTypes.string,
-        toggleSnackbar: PropTypes.func,
-    };
-
     static contextType = GlobalContext;
 
     render() {

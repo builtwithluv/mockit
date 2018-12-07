@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Adjust from '@material-ui/icons/Adjust';
@@ -33,14 +32,6 @@ const styles = () => ({
 });
 
 export class NodeItemLabel extends React.PureComponent {
-    static propTypes = {
-        classes: PropTypes.object,
-        description: PropTypes.string,
-        isActive: PropTypes.bool,
-        method: PropTypes.string,
-        status: PropTypes.number,
-    };
-
     render() {
         const {
             classes,

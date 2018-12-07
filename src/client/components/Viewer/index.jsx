@@ -1,6 +1,5 @@
 import get from 'lodash/get';
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     Alignment,
     Button,
@@ -42,10 +41,6 @@ const styles = theme => ({
 });
 
 export class Viewer extends React.Component {
-    static propTypes = {
-        classes: PropTypes.object,
-    };
-
     static contextType = GlobalContext;
 
     componentDidMount() {

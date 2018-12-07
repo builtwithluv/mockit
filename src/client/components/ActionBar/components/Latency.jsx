@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Intent, NumericInput } from '@blueprintjs/core';
 
@@ -12,10 +11,6 @@ const styles = theme => ({
 });
 
 export class LatencyField extends React.PureComponent {
-    static propTypes = {
-        classes: PropTypes.object,
-    };
-
     static contextType = GlobalContext;
 
     render() {

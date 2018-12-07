@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
     Alignment,
     Button,
@@ -23,10 +22,6 @@ const styles = () => ({
 });
 
 export class SettingsBar extends React.PureComponent {
-    static propTypes = {
-        classes: PropTypes.object,
-    };
-
     static contextType = GlobalContext;
 
     render() {

@@ -1,7 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Input from '@material-ui/core/Input';
 import {
@@ -49,10 +48,6 @@ const styles = theme => ({
 });
 
 export class FileUploader extends React.PureComponent {
-    static propTypes = {
-        classes: PropTypes.object.isRequired,
-    };
-
     static contextType = GlobalContext;
 
     state = {

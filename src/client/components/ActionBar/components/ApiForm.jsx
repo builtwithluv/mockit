@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import AceEditor from 'react-ace';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
@@ -27,13 +26,6 @@ const styles = theme => ({
 });
 
 export class ApiForm extends React.Component {
-    static propTypes = {
-        classes: PropTypes.object,
-        handleChange: PropTypes.func,
-        toggleSnackbar: PropTypes.func,
-        values: PropTypes.object,
-    };
-
     state = {
         apiUrl: '',
         options: '',
