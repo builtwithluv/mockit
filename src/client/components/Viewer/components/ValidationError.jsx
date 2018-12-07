@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Callout, Intent } from '@blueprintjs/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { GlobalContext } from '@client/context';
@@ -10,6 +11,10 @@ const styles = {
 };
 
 export class ValidationError extends React.PureComponent {
+    static propTypes = {
+        classes: PropTypes.object,
+    };
+
     static contextType = GlobalContext;
 
     render() {

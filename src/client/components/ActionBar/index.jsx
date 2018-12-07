@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Alignment, Navbar, NavbarGroup } from '@blueprintjs/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -18,6 +19,10 @@ const styles = theme => ({
 });
 
 export class ActionBar extends React.PureComponent {
+    static propTypes = {
+        classes: PropTypes.object.isRequired,
+    };
+
     render() {
         const { classes } = this.props;
         return (

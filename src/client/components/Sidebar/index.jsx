@@ -4,6 +4,7 @@ import memoize from 'lodash/memoize';
 import classNames from 'classnames';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Classes, Tree } from '@blueprintjs/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 
@@ -29,6 +30,15 @@ let fixtures;
 let selectedNode;
 
 export class Sidebar extends React.PureComponent {
+    static propTypes = {
+        activeFixtures: PropTypes.object,
+        classes: PropTypes.object,
+        fixtures: PropTypes.arrayOf(PropTypes.object),
+        selectedNode: PropTypes.object,
+        updateGlobalContext: PropTypes.func,
+        updateMockit: PropTypes.func,
+    };
+
     state = {
         nodeList: getNodeListMem(this.props.fixtures, this.props.activeFixtures, this.props.updateMockit),
     };

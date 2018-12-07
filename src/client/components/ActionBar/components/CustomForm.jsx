@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AceEditor from 'react-ace';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
@@ -21,6 +22,12 @@ const styles = () => ({
 });
 
 export class CustomForm extends React.Component {
+    static propTypes = {
+        classes: PropTypes.object,
+        handleChange: PropTypes.func,
+        values: PropTypes.object,
+    };
+
     render() {
         const { classes, handleChange, values } = this.props;
 
