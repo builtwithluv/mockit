@@ -30,8 +30,13 @@ const styles = theme => ({
     main: {
         height: '100vh',
     },
+    sidebar: {
+        height: '100% !important',
+    },
     viewer: {
+        height: 'calc(100% - 15px)',
         margin: theme.spacing.unit,
+        overflowY: 'scroll',
     },
 });
 
@@ -109,6 +114,7 @@ export class App extends React.PureComponent {
                         <ActionBar />
                         <Grid container className={classes.container}>
                             <Resizable
+                                className={classes.sidebar}
                                 defaultSize={{ width: 400 }}
                                 enable={{
                                     top: false,
