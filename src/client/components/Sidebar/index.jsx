@@ -12,7 +12,7 @@ import getNodeList from '@client/components/Sidebar/helpers/getNodeList';
 
 const styles = theme => ({
     treeContainer: {
-        display: 'relative',
+        position: 'relative',
         height: '100%',
         padding: theme.spacing.unit,
         overflow: 'hidden',
