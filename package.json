@@ -1,6 +1,6 @@
 {
   "name": "@builtwithluv/mockit",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "Tool for mocking services",
   "main": "lib/index.js",
   "scripts": {
@@ -94,19 +94,19 @@
     "@babel/preset-react": "^7.0.0",
     "@cypress/webpack-preprocessor": "^3.0.1",
     "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.4",
     "clean-dir": "^1.0.3",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^4.0.1",
     "copy-webpack-plugin": "^4.5.4",
     "css-loader": "^1.0.0",
-    "cypress": "^3.1.0",
+    "cypress": "^3.1.5",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "mini-css-extract-plugin": "^0.4.4",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "pug-loader": "^2.4.0",
@@ -118,7 +118,7 @@
     "webpack": "^4.23.1",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10",
+    "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.1.4"
   }
 }
