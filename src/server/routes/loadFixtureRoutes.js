@@ -22,8 +22,14 @@ export default function loadFixtureRoutes(app, mockit) {
                 }
             }
 
-            res.set(headers || { 'Content-Type': 'application/json' });
+            res.set(headers);
             res.status(status);
+
+            const contentType = res.get('Content-Type');
+
+            if (!contentType) {
+                res.set('Content-Type', 'application/json');
+            }
 
             return res.send(data);
         });
