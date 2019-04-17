@@ -34,9 +34,8 @@ const styles = theme => ({
         height: '100% !important',
     },
     viewer: {
-        height: 'calc(100% - 15px)',
+        height: '100%',
         margin: theme.spacing.unit,
-        overflowY: 'scroll',
     },
 });
 

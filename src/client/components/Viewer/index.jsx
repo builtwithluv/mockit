@@ -39,6 +39,10 @@ const styles = theme => ({
     validationsContainer: {
         marginBottom: theme.spacing.unit,
     },
+    viewer: {
+        height: 'calc(100% - 28px)',
+        overflowY: 'scroll',
+    },
 });
 
 export class Viewer extends React.Component {
@@ -98,13 +102,15 @@ export class Viewer extends React.Component {
                         </NavbarGroup>
                     </Navbar>
                 </div>
-                <div className={classes.descriptionContainer}>
-                    <Text>{fixture.description}</Text>
+                <div className={classes.viewer}>
+                    <div className={classes.descriptionContainer}>
+                        <Text>{fixture.description}</Text>
+                    </div>
+                    <div className={classes.validationsContainer}>
+                        <ValidationError />
+                    </div>
+                    <CodePreview />
                 </div>
-                <div className={classes.validationsContainer}>
-                    <ValidationError />
-                </div>
-                <CodePreview />
             </React.Fragment>
         ) : null;
     }
