@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import uuidv4 from 'uuid/v4';
 
 import config from '../config';
 
@@ -20,7 +19,12 @@ export default function getFixtures(contents = [], filePath = DEFAULT_PATH) {
                     const fixture = require(fullPath);
 
                     if (!fixture.hasOwnProperty('id')) {
-                        fixture.id = uuidv4();
+                        const id = fullPath
+                            .replace(`${DEFAULT_PATH}/`, '')
+                            .replace(/\.fixture.js$/, '')
+                            .replace('/', '-');
+
+                        fixture.id = id;
                     }
 
                     if (!fixture.hasOwnProperty('method')) {
