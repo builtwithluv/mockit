@@ -115,7 +115,7 @@ export class App extends React.PureComponent {
                         <Grid container className={classes.container}>
                             <Resizable
                                 className={classes.sidebar}
-                                defaultSize={{ width: 400 }}
+                                defaultSize={{ width: 500 }}
                                 enable={{
                                     top: false,
                                     right: true,
