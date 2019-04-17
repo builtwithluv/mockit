@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import fx from 'mkdir-recursive';
-import uuidv4 from 'uuid/v4';
 import _url from 'url';
 import beautify from 'js-beautify';
 import config from '../config';
@@ -16,8 +15,7 @@ export default function createFixture({
     status,
     validator,
 }) {
-    id = id || uuidv4(),
-        description = description || 'No description added.';
+    description = description || 'No description added.';
     method = (method && method.toUpperCase()) || 'GET';
     status = Number(status) || 200;
 
