@@ -1,7 +1,6 @@
 import './styles.css';
 
 import debounce from 'lodash/debounce';
-import get from 'lodash/get';
 import classNames from 'classnames';
 
 import React from 'react';
@@ -17,6 +16,7 @@ import { getActiveFixturesIds, mockitStorage } from '@client/helpers';
 import { Storage, Theme } from '@client/enums';
 
 import ActionBar from '@client/components/ActionBar';
+import FilterInput from '@client/components/FilterInput';
 import SettingsBar from '@client/components/SettingsBar';
 import Sidebar from '@client/components/Sidebar';
 import Viewer from '@client/components/Viewer';
@@ -25,7 +25,7 @@ const Snackbar = React.lazy(() => import('@client/components/Snackbar'));
 
 const styles = theme => ({
     container: {
-        height: 'calc(100% - 130px)',
+        height: 'calc(100% - 168px)',
     },
     main: {
         height: '100vh',
@@ -51,6 +51,7 @@ export class App extends React.PureComponent {
         const useLastSavedActiveFixtures = mockitStorage.getItem(Storage.USE_LAST_SAVED_ACTIVE_FIXTURES);
 
         this.state = {
+            filterText: '',
             isLoading: true,
             isSnackbarOpen: false,
             selectedNode: null,
@@ -92,14 +93,13 @@ export class App extends React.PureComponent {
     render() {
         const { classes } = this.props;
         const {
+            filterText,
             isLoading,
             isSnackbarOpen,
             selectedNode,
             store,
             theme,
         } = this.state;
-
-        const fixtures = get(store, 'fixtures');
 
         return !isLoading && (
             <main
@@ -127,9 +127,10 @@ export class App extends React.PureComponent {
                                     topLeft: false
                                 }}
                             >
+                                <FilterInput onChange={this.updateFilterText} value={filterText} />
                                 <Sidebar
                                     activeFixtures={store.activeFixtures}
-                                    fixtures={fixtures}
+                                    fixtures={this.getFilteredFixtures()}
                                     selectedNode={selectedNode}
                                     updateGlobalContext={this.updateGlobalContext}
                                     updateMockit={this.updateMockit}
@@ -148,11 +149,26 @@ export class App extends React.PureComponent {
         );
     }
 
+    getFilteredFixtures = () => {
+        const { filterText, store } = this.state;
+        const fixtures = store.fixtures;
+
+        if (!filterText) {
+            return fixtures;
+        }
+
+        return fixtures.filter(fixture => fixture.url.includes(filterText));
+    }
+
     toggleSnackbar = msg => {
         this.setState(prevState => ({
             isSnackbarOpen: !prevState.isSnackbarOpen,
             snackbarMessage: msg || prevState.snackbarMessage,
         }));
+    }
+
+    updateFilterText = filterText => {
+        this.setState(() => ({ filterText: filterText }));
     }
 
     updateGlobalContext = nextState => {
