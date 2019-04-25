@@ -36,7 +36,7 @@ export default function getFixtures(contents = [], filePath = DEFAULT_PATH) {
                     }
 
                     if (!fixture.hasOwnProperty('description')) {
-                        fixture.description = 'No description added.';
+                        fixture.description = '';
                     }
 
                     if (fixture.handler) {

@@ -15,7 +15,6 @@ export default function createFixture({
     status,
     validator,
 }) {
-    description = description || 'No description added.';
     method = (method && method.toUpperCase()) || 'GET';
     status = Number(status) || 200;
 

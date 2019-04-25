@@ -156,7 +156,13 @@ export class App extends React.PureComponent {
             return fixtures;
         }
 
-        return fixtures.filter(fixture => fixture.url.includes(filterText));
+        return fixtures.filter(fixture => {
+            const url = fixture.url.toLowerCase();
+            const description = fixture.description.toLowerCase();
+            const filter = filterText.toLowerCase();
+
+            return url.includes(filter) || description.includes(filter);
+        });
     }
 
     toggleSnackbar = msg => {
