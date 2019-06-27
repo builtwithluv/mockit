@@ -19,7 +19,7 @@ export default function start(argv) {
     }
 
     if (watch) {
-        startNodemon();
+        startNodemon(compiler);
         startWebsocket();
     } else {
         startServer();
