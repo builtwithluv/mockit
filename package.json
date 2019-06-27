@@ -8,8 +8,8 @@
     "prepublishOnly": "npx cleandir node_modules && npm i && npm run build",
     "start": "npx concurrently --kill-others --exec babel-node \"npm run start:server-dev\" \"npm run start:client\"",
     "start:client": "npx webpack-dev-server --config ./webpack.dev.js --mode development",
-    "start:server": "npx babel-node example/server/index.js",
-    "start:server-dev": "npx nodemon example/server/index.js --exec babel-node",
+    "start:server": "babel-node --extensions .js,.ts example/server/index.js",
+    "start:server-dev": "npx nodemon example/server/index.js --exec babel-node --extensions .js,.ts",
     "test": "npm run test:unit && npm run test:integration",
     "test:integration": "npx concurrently --kill-others \"npm run start:server\" \"npx cypress run\"",
     "test:unit": "jest"
@@ -77,9 +77,9 @@
     "ws": "^6.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
-    "@babel/node": "^7.0.0",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/node": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-decorators": "^7.1.2",
     "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
@@ -92,6 +92,8 @@
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.4.4",
     "@cypress/webpack-preprocessor": "^3.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.1.0",

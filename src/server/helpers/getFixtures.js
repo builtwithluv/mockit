@@ -15,13 +15,16 @@ export default function getFixtures(contents = [], filePath = DEFAULT_PATH) {
             if (fs.statSync(fullPath).isDirectory()) {
                 getFixtures(contents, fullPath);
             } else {
-                if (fileName.match(/(\.fixture.js)$/)) {
-                    const fixture = require(fullPath);
+                if (fileName.match(/(\.fixture\..+)$/)) {
+                    const ext = path.extname(fileName);
+                    const fixture = ext === '.js'
+                        ? require(fullPath)
+                        : require(fullPath).default;
 
                     if (!fixture.hasOwnProperty('id')) {
                         const id = fullPath
                             .replace(`${DEFAULT_PATH}/`, '')
-                            .replace(/\.fixture.js$/, '')
+                            .replace(/(\.fixture\..+)$/, '')
                             .replace('/', '-');
 
                         fixture.id = id;
@@ -50,6 +53,7 @@ export default function getFixtures(contents = [], filePath = DEFAULT_PATH) {
 
         return contents;
     } catch (err) {
+        console.error(err);
         return [];
     }
 }
