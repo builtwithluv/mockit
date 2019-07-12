@@ -11,6 +11,8 @@ import {
     setNextLatency,
 } from './helpers';
 
+import config from './config';
+
 export default function createMockit() {
     // Global state to be used throughout application
     let state = getDefaultState();
@@ -25,7 +27,7 @@ export default function createMockit() {
 
     function getDefaultState() {
         const fixtures = getFixtures();
-        const latency = 50;
+        const latency = config.latency || 0;
 
         return {
             fixtures,
