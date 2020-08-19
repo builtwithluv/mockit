@@ -1,6 +1,6 @@
 {
   "name": "@builtwithluv/mockit",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Tool for mocking services",
   "main": "lib/index.js",
   "scripts": {
