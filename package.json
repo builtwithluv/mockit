@@ -70,7 +70,6 @@
     "re-resizable": "^4.9.2",
     "react": "^16.6.0",
     "react-ace": "^6.2.0",
-    "react-code-prettify": "0.0.1",
     "react-dom": "^16.6.0",
     "typeface-roboto": "^0.0.54",
     "uuid": "^3.3.2",

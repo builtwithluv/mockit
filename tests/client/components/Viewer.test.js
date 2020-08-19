@@ -6,7 +6,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import HighlightOff from '@material-ui/icons/HighlightOff';
 import PanoramaFishEye from '@material-ui/icons/PanoramaFishEye';
 import Viewer from '@/src/client/components/Viewer';
-import Code from 'react-code-prettify';
+import Code from '@src/client/components/Code';
 
 // TODO Need to figure out how to handle global context
 xdescribe('<Viewer />', () => {
